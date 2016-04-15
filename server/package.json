@@ -1,11 +1,14 @@
 {
-  "name": "genesis-andromeda-frontend",
+  "name": "genesis-andromeda-backend",
   "version": "1.0.0",
   "description": "MMORTS Space Opera sur navigateur",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Solofeed",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
