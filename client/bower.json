@@ -1,0 +1,24 @@
+{
+  "name": "genesis-andromeda",
+  "description": "MMORTS Space Opera sur navigateur",
+  "main": "index.js",
+  "authors": [
+    "Solofeed"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "mmorts",
+    "space",
+    "browser"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
