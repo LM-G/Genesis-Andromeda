@@ -1,9 +1,9 @@
 console.log('Chargement des modules ...');
 
 // composants
-angular.module('funApp.views', [
-	'funApp.views.home',
+angular.module('genesis.views', [
+	'genesis.views.home',
 ]);
 
 // templates html
-angular.module('funApp.templates', []);
+angular.module('genesis.templates', []);

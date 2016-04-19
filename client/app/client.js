@@ -2,12 +2,12 @@
  * Point d'entrée de l'application cliente
  */
 angular
-  .module('funApp', [
+  .module('genesis', [
 	'ui.router',
     'ui.bootstrap',
-    'funApp.views',
+    'genesis.views',
     // templates HTML en cache
-    'funApp.templates'
+    'genesis.templates'
   ])
   /* routes et états */
   .config([

@@ -101,7 +101,7 @@ gulp.task('publish-css', function () {
 // copie les templates html
 gulp.task('publish-html', function () {
   var cacheOptions = {
-    module: 'funApp.templates',
+    module: 'genesis.templates',
     root: '/components/'
   };
 
