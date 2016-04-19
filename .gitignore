@@ -46,6 +46,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-/server/public/*
+# Libs
 /client/bower_components/*
+/client/node_modules/*
 /server/node_modules/*
+
+# Fichiers générés
+/server/public/*

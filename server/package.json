@@ -1,9 +1,9 @@
 {
-  "name": "server",
-  "version": "0.0.0",
+  "name": "genesis-andromeda",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "set DEBUG=genesis-andromeda:* & node ./bin/dev.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -11,7 +11,9 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "express-session": "^1.13.0",
+    "mongodb": "^2.1.16",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "^2.3.0"
   }
 }
