@@ -1,7 +1,7 @@
 /**
  *  Module home
  *
- * Gestion de la page d'accueil des visiteur du site
+ * Gestion de la page home des visiteurs du site
  */
 angular
   .module('genesis.views.home')

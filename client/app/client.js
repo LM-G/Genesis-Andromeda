@@ -3,7 +3,7 @@
  */
 angular
   .module('genesis', [
-	'ui.router',
+  'ui.router',
     'ui.bootstrap',
     'genesis.views',
     // templates HTML en cache
@@ -25,21 +25,22 @@ angular
 /**
  * Configuration des routes et des états de l'application
  */
-function routage($locationProvider, $urlRouterProvider, $stateProvider) {
-  // configuration des routes principales
-  $urlRouterProvider
-    .otherwise("/home");
-  // beautification de l'url
-  $locationProvider.html5Mode(true);
+function routage($locationProvider, $urlRouterProvider) {
+    // configuration des routes principales
+    $urlRouterProvider
+      .otherwise('/home');
+    // beautification de l'url
+    $locationProvider.html5Mode(true);
 } /* ! routage */
 
 /**
  * Boucle principale de l'application
  */
-function main($rootScope, $state) {
-  console.info('Client lancé');
+function main($rootScope) {
+    console.info('Client lancé');
 
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    console.warn('stateChangeStart : ' + toState.name);
-  });
-} /* ! main */
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
+        console.warn('stateChangeStart : ' + toState.name);
+    });
+}
+ /* ! main */

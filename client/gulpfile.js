@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 // Dépendances ====================================================================================
 var gulp = require('gulp');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var gulpSequence = require('gulp-sequence');
-var wrap = require("gulp-wrap");
+var wrap = require('gulp-wrap');
 var ngAnnotate = require('gulp-ng-annotate');
-var rename = require("gulp-rename");
+var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var mainBowerFiles = require('main-bower-files'); // a delete
 var angularFilesort = require('gulp-angular-filesort');
@@ -20,7 +20,7 @@ var PATH_SCRIPTS = './app/**/*.js';
 var PATH_INDEX = './app/index.html';
 var PATH_FAVICON = './app/assets/img/favicon.ico';
 var PATH_CSS = './app/**/*.css';
-var PATH_HTML = './app/components/**/*.html';
+var PATH_HTML = './app/**/*.html';
 var PATH_DIST = '../server/public/';
 var PATH_DIST_JS = PATH_DIST + 'js/';
 var PATH_DIST_CSS = PATH_DIST + 'css/';
@@ -31,7 +31,7 @@ var PATH_DIST_IMG = PATH_DIST + 'img/';
 // Tâches =========================================================================================
 
 // Suppression du dossier public
-gulp.task('clean', function () {
+gulp.task('clean', function() {
   return gulp
     .src(PATH_DIST)
     .pipe(clean({
@@ -40,18 +40,18 @@ gulp.task('clean', function () {
 });
 
 // concatenations des librairies bower
-gulp.task('publish-bower-components', function () {
+gulp.task('publish-bower-components', function() {
 
   var bower_components = [
-		"bower_components/angular/angular.js",
-		"bower_components/angular-resource/angular-resource.js",
-		"bower_components/angular-ui-router/release/angular-ui-router.js",
-		"bower_components/angular-translate/angular-translate.js",
-		"bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
-		"bower_components/angular-bootstrap/ui-bootstrap.js",
-		"bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
-		"bower_components/a0-angular-storage/dist/angular-storage.js"
-	];
+    'bower_components/angular/angular.js',
+    'bower_components/angular-resource/angular-resource.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.js',
+    'bower_components/angular-translate/angular-translate.js',
+    'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+    'bower_components/angular-bootstrap/ui-bootstrap.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+    'bower_components/a0-angular-storage/dist/angular-storage.js'
+  ];
 
   return gulp
     .src(bower_components)
@@ -62,7 +62,7 @@ gulp.task('publish-bower-components', function () {
 });
 
 // concaténation des scripts
-gulp.task('publish-components', function () {
+gulp.task('publish-components', function() {
   return gulp
     .src(PATH_SCRIPTS)
     .pipe(wrap('(function(){\n\'use strict\';\n<%= contents %>\n})();'))
@@ -83,13 +83,14 @@ gulp.task('iife', function () {
 });*/
 
 // concatene les css
-gulp.task('publish-css', function () {
+gulp.task('publish-css', function() {
   var cssFiles = [
-		PATH_CSS,
-		"bower_components/bootstrap-css-only/css/bootstrap-theme.css",
-		"bower_components/bootstrap-css-only/css/bootstrap.css",
-		"bower_components/animate.css/animate.min.css"
-	];
+    PATH_CSS,
+    '/client/bower_components/components-font-awesome/css/font-awesome.css',
+    'bower_components/bootstrap-css-only/css/bootstrap-theme.css',
+    'bower_components/bootstrap-css-only/css/bootstrap.css',
+    'bower_components/animate.css/animate.css'
+  ];
 
   return gulp
     .src(cssFiles)
@@ -98,22 +99,28 @@ gulp.task('publish-css', function () {
     .pipe(livereload());
 });
 
+gulp.task('publish-css-map', function() {
+  return gulp
+    .src('bower_components/bootstrap-css-only/css/bootstrap.css.map')
+    .pipe(gulp.dest(PATH_DIST_CSS));
+});
+
 // copie les templates html
-gulp.task('publish-html', function () {
+gulp.task('publish-html', function() {
   var cacheOptions = {
     module: 'genesis.templates',
-    root: '/components/'
+    root: '/'
   };
 
   return gulp
-    .src(PATH_HTML)
+    .src([PATH_HTML, '!index.html'])
     .pipe(templateCache(cacheOptions))
     .pipe(gulp.dest(PATH_DIST_HTML))
     .pipe(livereload());
 });
 
 // copie l'index html
-gulp.task('publish-entrypoint', function () {
+gulp.task('publish-entrypoint', function() {
   return gulp
     .src('app/index.html')
     .pipe(rename('index.html'))
@@ -122,7 +129,7 @@ gulp.task('publish-entrypoint', function () {
 });
 
 // copie du l'htaccess
-gulp.task('publish-htaccess', function () {
+gulp.task('publish-htaccess', function() {
   return gulp
     .src('.htaccess')
     .pipe(gulp.dest(PATH_DIST))
@@ -130,7 +137,7 @@ gulp.task('publish-htaccess', function () {
 });
 
 // traductions i18n angular
-gulp.task('publish-i18n-lang', function () {
+gulp.task('publish-i18n-lang', function() {
   return gulp
     .src([
       'bower_components/angular-i18n/angular-locale_fr*.js',
@@ -141,7 +148,7 @@ gulp.task('publish-i18n-lang', function () {
 });
 
 // traductions
-gulp.task('publish-lang', function () {
+gulp.task('publish-lang', function() {
   return gulp
     .src('app/assets/lang/locale*.json')
     .pipe(gulp.dest(PATH_DIST_LANG))
@@ -149,7 +156,7 @@ gulp.task('publish-lang', function () {
 });
 
 // mocks des données
-gulp.task('mocks', function () {
+gulp.task('mocks', function() {
   return gulp
     .src('app/assets/mock/*.json')
     .pipe(gulp.dest('dist/mock/'))
@@ -157,21 +164,21 @@ gulp.task('mocks', function () {
 });
 
 // images
-gulp.task('publish-images', function () {
+gulp.task('publish-images', function() {
   return gulp.src(['!' + PATH_FAVICON, 'app/assets/img/**'])
     .pipe(gulp.dest(PATH_DIST_IMG))
     .pipe(livereload());
 });
 
 // favicon
-gulp.task('publish-favicon', function () {
+gulp.task('publish-favicon', function() {
   return gulp.src(PATH_FAVICON)
     .pipe(gulp.dest(PATH_DIST))
     .pipe(livereload());
 });
 
 // Recompile automatiquement si changement sur un fichier
-gulp.task('watch', function () {
+gulp.task('watch', function() {
   livereload.listen();
   gulp.watch('app/**/*.js', ['publish-components']);
   gulp.watch('app/**/*.css', ['publish-css']);
@@ -183,18 +190,19 @@ gulp.task('watch', function () {
 // Tâche par défaut
 gulp.task('default',
   gulpSequence('clean', [
-		'publish-components',
-		'publish-bower-components',
-		'publish-html',
-		'publish-css',
-		'publish-images',
-        'publish-favicon',
-		'publish-entrypoint',
-		'publish-htaccess'
-		], [
-			'publish-i18n-lang',
-			'publish-lang'
-		],
+      'publish-components',
+      'publish-bower-components',
+      'publish-html',
+      'publish-css',
+      'publish-css-map',
+      'publish-images',
+      'publish-favicon',
+      'publish-entrypoint',
+      'publish-htaccess'
+    ], [
+      'publish-i18n-lang',
+      'publish-lang'
+    ],
     'mocks',
     'watch'
   )
