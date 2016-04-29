@@ -12,9 +12,11 @@
 		},
 		"home" : {
 			"title" : "Home",
+			"dashboard" : "Dashboard"
 		},
 		"login" : {
 			"title" : "Login",
+			"connexion": "Connexion",
 			"email" : "Adresse mail",
 			"password": "Mot de passe",
 			"rememberme": "Se souvenir de moi",

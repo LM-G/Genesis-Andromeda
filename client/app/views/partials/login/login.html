@@ -1,18 +1,18 @@
 <div class="modal-header">
 	<h1 class="modal-title" translate="app.title"></h1>
-	<h3 translate="app.connexion"></h3>
+	<h3 translate="views.login.title"></h3>
 </div>
 <div class="modal-body">
 <form name="loginForm">
   <div class="form-group">
   	<label for="email" translate="views.login.email"></label>
     <input type="email" class="form-control" ng-model="vm.email"
-    	placeholder="'views.login.placeholder.email' | translate" />
+    	placeholder="{{'views.login.placeholder.email' | translate}}" />
   </div>
   <div class="form-group">
   	<label for="password" translate="views.login.password"></label>
     <input type="password" class="form-control" ng-model="vm.password"
-    	placeholder="'views.login.placeholder.password' | translate" />
+    	placeholder="{{'views.login.placeholder.password' | translate}}" />
   </div>
   <div class="checkbox">
     <label>
@@ -24,9 +24,9 @@
 </div>
 <div class="modal-footer">
 	<button class="btn btn-primary" type="button" ng-click="vm.ok()">
-		<span translate="app.connexion"></span>
+		<span translate="views.login.connexion"></span>
 	</button>
-	<button class="btn btn-warning" type="button" ng-click="vm.cancel()">
+	<button class="btn btn-warning" type="button" ng-click="$dismiss()">
 		<span translate="app.cancel"></span>
 	</button>
 </div>

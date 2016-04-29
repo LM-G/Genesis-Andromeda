@@ -7,6 +7,7 @@ angular
     'ui.bootstrap',
     'genesis.traduction',
     'genesis.views',
+    'genesis.services',
     // templates HTML en cache
     'genesis.templates'
   ])

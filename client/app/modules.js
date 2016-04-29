@@ -7,5 +7,8 @@ angular.module('genesis.views', [
     'genesis.views.game'
 ]);
 
+// composants
+angular.module('genesis.services', []);
+
 // templates html
 angular.module('genesis.templates', []);

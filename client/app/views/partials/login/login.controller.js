@@ -1,3 +1,5 @@
+loginCtrl.$inject = ['$timeout', '$state', '$uibModalInstance'];
+
 angular
   .module('genesis.views.partials')
   .controller('loginCtrl', [
@@ -5,7 +7,7 @@ angular
     loginCtrl
   ]);
 
-function loginCtrl($timeout) {
+function loginCtrl($timeout, $state, $uibModalInstance) {
   console.log('controller login');
   var vm = this;
   /***********************************************************************************************/

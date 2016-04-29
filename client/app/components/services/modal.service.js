@@ -1,43 +1,31 @@
-homeCtrl.$inject = ['$timeout', '$state', 'genesisModalService'];
-
 angular
-  .module('genesis.views.home')
-  .controller('homeCtrl', homeCtrl);
+  .module('genesis.services')
+  .service('genesisModalService', [
+  	'$uibModal',
+  	'$log',
+		genesisModalService
+  ]);
 
-
-function homeCtrl($timeout, $state, modalService) {
-  console.log('controller home');
-  var vm = this;
+function genesisModalService($uibModal, $log) {
+  var service = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
-  /** @type {Boolean} indicateur de chargement du controleur */
-  vm.isLoaded = false;
-
-  /* Initialisation du controleur */
-  $timeout(init);
+  var loginModal = {
+  	size:'md',
+    templateUrl: '/views/partials/login/login.html',
+    controller: 'loginCtrl',
+    controllerAs: 'vm'
+  };
 
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  vm.login = function() {
-    var modal = modalService.openLogin();
-
-    modal.result.then(function(){});
-  };
-
-  vm.goGame = function(){
-    $state.go('protected.game');
+  service.openLogin = function(){
+  	return $uibModal.open(loginModal);
   };
 
   /***********************************************************************************************/
   /* API interne                                                                                 */
   /***********************************************************************************************/
-  /**
-   * Initialisation du controleur, recuperation des données, valorisation des variables
-   * @return {undefined}
-   */
-  function init() {
-    vm.isLoaded = true;
-  }
 }
