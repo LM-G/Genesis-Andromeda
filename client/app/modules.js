@@ -1,7 +1,8 @@
-console.log('Chargement des modules ...');
+console.log('Chargement des modules OK');
 
 // composants
 angular.module('genesis.views', [
+	'genesis.views.partials',
 	'genesis.views.home',
     'genesis.views.game'
 ]);

@@ -1,12 +1,12 @@
 angular
-  .module('genesis.views.home')
-  .controller('homeCtrl', [
+  .module('genesis.views.partials')
+  .controller('loginCtrl', [
   	'$timeout',
-    homeCtrl
+    loginCtrl
   ]);
 
-function homeCtrl($timeout) {
-  console.log('controller home');
+function loginCtrl($timeout) {
+  console.log('controller login');
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -20,9 +20,7 @@ function homeCtrl($timeout) {
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  vm.login = function() {
 
-  };
 
   /***********************************************************************************************/
   /* API interne                                                                                 */

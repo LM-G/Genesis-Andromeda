@@ -1,8 +1,8 @@
 angular
-  .module('genesis.views')
+  .module('genesis.views.partials')
   .controller('headerCtrl', [
     '$state',
-  headerCtrl
+    headerCtrl
   ]);
 
 function headerCtrl($state) {

@@ -1,4 +1,15 @@
 <div class="container">
-  <h1>Home</h1>
-  <p>Bienvenue</p>
+  <h1 translate="views.home.title"></h1>
+  <p translate="views.global.bienvenue"></p>
+
+  <div class="btn-group" ng-show="vm.isLoaded">
+  	<button type="button" class="btn btn-default" ng-click="vm.login()" 
+  		ng-if="!vm.user.isLogged">
+  		<span translate="app.login"></span>
+  	</button>
+  	<button type="button" class="btn btn-default" ng-click="vm.logout()" 
+  		ng-if="vm.user.isLogged">
+  		<span translate="app.logout"></span>
+  	</button>
+  </div>
 </div>

@@ -5,6 +5,7 @@ angular
   .module('genesis', [
   'ui.router',
     'ui.bootstrap',
+    'genesis.traduction',
     'genesis.views',
     // templates HTML en cache
     'genesis.templates'
@@ -14,7 +15,7 @@ angular
     '$locationProvider',
     '$urlRouterProvider',
     '$stateProvider',
-    routage
+    mainRoutage
   ])
   .run([
     '$rootScope',
@@ -25,22 +26,22 @@ angular
 /**
  * Configuration des routes et des états de l'application
  */
-function routage($locationProvider, $urlRouterProvider) {
-    // configuration des routes principales
-    $urlRouterProvider
-      .otherwise('/home');
-    // beautification de l'url
-    $locationProvider.html5Mode(true);
+function mainRoutage($locationProvider, $urlRouterProvider) {
+  // configuration des routes principales
+  $urlRouterProvider
+    .otherwise('/home');
+  // beautification de l'url
+  $locationProvider.html5Mode(true);
 } /* ! routage */
 
 /**
  * Boucle principale de l'application
  */
 function main($rootScope) {
-    console.info('Client lancé');
+  console.info('Client lancé');
 
-    $rootScope.$on('$stateChangeStart', function(event, toState) {
-        console.warn('stateChangeStart : ' + toState.name);
-    });
+  $rootScope.$on('$stateChangeStart', function(event, toState) {
+    console.warn('stateChangeStart : ' + toState.name);
+  });
 }
  /* ! main */

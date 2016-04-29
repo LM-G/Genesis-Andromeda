@@ -12,7 +12,7 @@ function configUnprotectedState($stateProvider) {
           template: '<div ui-view></div>'
         },
         'header': {
-          templateUrl: '/views/unprotected/header/header.html',
+          templateUrl: '/views/partials/header_unprotected/header.html',
           controller: 'headerCtrl',
           controllerAs: 'vm'
         }

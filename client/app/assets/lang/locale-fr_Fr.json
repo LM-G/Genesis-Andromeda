@@ -1,0 +1,27 @@
+{
+	"app":{
+		"title" : "Genesis",
+		"login" : "Connexion",
+		"logout" : "Deconnexion",
+		"cancel" : "Annuler"
+	},
+	"views": {
+		"global":{
+			"welcome" : "Bienvenue",
+			"title": "Genesis"
+		},
+		"home" : {
+			"title" : "Home",
+		},
+		"login" : {
+			"title" : "Login",
+			"email" : "Adresse mail",
+			"password": "Mot de passe",
+			"rememberme": "Se souvenir de moi",
+			"placeholder": {
+				"email" : "Email",
+				"password" : "Mot de passe"
+			}
+		}
+	}
+}

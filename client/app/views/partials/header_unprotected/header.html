@@ -1,12 +1,16 @@
 <nav class="navbar navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" ui-sref="unprotected.home">APP</a>
+      <a class="navbar-brand" ui-sref="unprotected.home"> 
+        <span translate="app.title"></span>
+      </a>
     </div>
     <!-- /.navbar-header -->
     <ul class="nav navbar-nav">
       <li ng-class="{'active': vm.isActive('home')}">
-        <a ui-sref="unprotected.home">Home</a>
+        <a ui-sref="unprotected.home">
+          <span translate="views.home.title"></span>
+        </a>
       </li>
     </ul>
     <!-- /.navbar-right -->
