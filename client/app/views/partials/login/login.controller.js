@@ -1,14 +1,11 @@
-loginCtrl.$inject = ['$timeout', '$state', '$uibModalInstance'];
+loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance'];
 
 angular
   .module('genesis.views.partials')
-  .controller('loginCtrl', [
-  	'$timeout',
-    loginCtrl
-  ]);
+  .controller('loginCtrl', loginCtrl);
 
-function loginCtrl($timeout, $state, $uibModalInstance) {
-  console.log('controller login');
+function loginCtrl($scope, $timeout, $state, $uibModalInstance) {
+  console.log('controller login', $scope);
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -23,6 +20,13 @@ function loginCtrl($timeout, $state, $uibModalInstance) {
   /* API publique                                                                                */
   /***********************************************************************************************/
 
+  /**
+   * Etablit la connexion de l'utilisateur à l'application
+   * @return {undefined}
+   */
+  vm.connect = function(){
+
+  };
 
   /***********************************************************************************************/
   /* API interne                                                                                 */

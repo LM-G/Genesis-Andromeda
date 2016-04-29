@@ -1,30 +1,28 @@
 angular
-  .module('genesis.services')
-  .service('genesisModalService', [
-  	'$uibModal',
-  	'$log',
-		genesisModalService
-  ]);
+  .module('genesis.services.auth')
+  .factory('User', User);
 
-function genesisModalService($uibModal, $log) {
-  var service = this;
+User.$inject = [];
+
+function User() {
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
-  var loginModal = {
-  	size:'md',
-    templateUrl: '/views/partials/login/login.html',
-    controller: 'loginCtrl',
-    controllerAs: 'vm'
+  var initValues = {
+  	isLogged : false,
+  	username : 'Anonymous'
   };
+
+  var user = {};
 
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  service.openLogin = function(){
-  	return $uibModal.open(loginModal);
+  user.init = function(values){
+  	angular.merge(user, values);
   };
-
+  
+  return user;
   /***********************************************************************************************/
   /* API interne                                                                                 */
   /***********************************************************************************************/

@@ -14,3 +14,5 @@ function configurationTranslation($translateProvider) {
     .determinePreferredLanguage()
     .fallbackLanguage('fr');
 }
+
+console.log('Chargement module traduction OK');

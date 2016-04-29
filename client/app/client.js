@@ -6,8 +6,8 @@ angular
   'ui.router',
     'ui.bootstrap',
     'genesis.traduction',
-    'genesis.views',
     'genesis.services',
+    'genesis.views',
     // templates HTML en cache
     'genesis.templates'
   ])
