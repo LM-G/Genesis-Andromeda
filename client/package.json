@@ -6,7 +6,10 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gulp-ng-config": "^1.2.1",
+    "gulp-rename": "^1.2.2"
+  },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",

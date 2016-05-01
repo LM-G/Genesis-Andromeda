@@ -5,7 +5,7 @@ genesisModalService.$inject = [
 
 angular
   .module('genesis.services.utils')
-  .service('genesisModalService', genesisModalService );
+  .service('genesisModalService', genesisModalService);
 
 function genesisModalService($uibModal, $log) {
   var service = this;
@@ -13,17 +13,30 @@ function genesisModalService($uibModal, $log) {
   /* Variables                                                                                   */
   /***********************************************************************************************/
   var loginModal = {
-  	size:'md',
+    size: 'md',
+    openedClass: 'login-modal',
     templateUrl: '/views/partials/login/login.html',
     controller: 'loginCtrl',
+    controllerAs: 'vm'
+  };
+
+  var registrationModal = {
+    size: 'md',
+    openedClass: 'register-modal',
+    templateUrl: '/views/partials/signup/signup.html',
+    controller: 'signUpCtrl',
     controllerAs: 'vm'
   };
 
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  service.openLogin = function(){
-  	return $uibModal.open(loginModal);
+  service.openRegistration = function() {
+    return $uibModal.open(registrationModal);
+  };
+
+  service.openLogin = function() {
+    return $uibModal.open(loginModal);
   };
 
   /***********************************************************************************************/

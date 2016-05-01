@@ -9,3 +9,9 @@ a {
 @media (min-width: 768px) .navbar {
   border-radius: 4px;
 }
+
+
+/* Modal */
+.modal-open .modal-footer .push-right{
+
+}

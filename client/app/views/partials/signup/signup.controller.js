@@ -1,11 +1,11 @@
 angular
-  .module('genesis.views.home')
-  .controller('homeCtrl', homeCtrl);
+  .module('genesis.views.partials')
+  .controller('signUpCtrl', signUpCtrl);
 
-homeCtrl.$inject = ['$timeout', '$state', 'genesisModalService'];
+signUpCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'signUpService'];
 
-function homeCtrl($timeout, $state, modalService) {
-  console.log('controller home');
+function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) {
+  console.log('controller inscription', $scope);
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -19,12 +19,13 @@ function homeCtrl($timeout, $state, modalService) {
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  vm.login = function() {
-    var modal = modalService.openLogin();
-  };
 
-  vm.goGame = function(){
-    $state.go('protected.game');
+  /**
+   * Enregistre l'utilisateur
+   * @return {undefined}
+   */
+  vm.register = function(form) {
+    console.log('register', form);
   };
 
   /***********************************************************************************************/

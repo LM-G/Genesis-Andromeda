@@ -1,40 +1,29 @@
 angular
-  .module('genesis.views.home')
-  .controller('homeCtrl', homeCtrl);
+  .module('genesis.views.partials')
+  .service('signUpService', signUpService);
 
-homeCtrl.$inject = ['$timeout', '$state', 'genesisModalService'];
+signUpService.$inject = ['$http', '$timeout', '$q', 'genesisCfg'];
 
-function homeCtrl($timeout, $state, modalService) {
-  console.log('controller home');
-  var vm = this;
+function signUpService($scope, $timeout, $q, genesisCfg) {
+  var service = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
-  /** @type {Boolean} indicateur de chargement du controleur */
-  vm.isLoaded = false;
 
-  /* Initialisation du controleur */
-  $timeout(init);
+  var url = genesisCfg.apiUrl + '/register';
 
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  vm.login = function() {
-    var modal = modalService.openLogin();
-  };
-
-  vm.goGame = function(){
-    $state.go('protected.game');
-  };
+  service.register = function(userParams) {
+    return $http.post(url, userParams).then(function(res) {
+      debugger;
+      return res;
+    })
+  }
 
   /***********************************************************************************************/
   /* API interne                                                                                 */
   /***********************************************************************************************/
-  /**
-   * Initialisation du controleur, recuperation des données, valorisation des variables
-   * @return {undefined}
-   */
-  function init() {
-    vm.isLoaded = true;
-  }
+
 }

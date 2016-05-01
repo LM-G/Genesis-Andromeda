@@ -1,29 +1,52 @@
 {
-	"app":{
-		"title" : "Genesis",
-		"login" : "Connexion",
-		"logout" : "Deconnexion",
-		"cancel" : "Annuler"
-	},
-	"views": {
-		"global":{
-			"welcome" : "Bienvenue",
-			"title": "Genesis"
-		},
-		"home" : {
-			"title" : "Home",
-			"dashboard" : "Dashboard"
-		},
-		"login" : {
-			"title" : "Login",
-			"connexion": "Connexion",
-			"email" : "Adresse mail",
-			"password": "Mot de passe",
-			"rememberme": "Se souvenir de moi",
-			"placeholder": {
-				"email" : "Email",
-				"password" : "Mot de passe"
-			}
-		}
-	}
+  "app": {
+    "title": "Genesis",
+    "validate": "Valider",
+    "login": "Connexion",
+    "logout": "Deconnexion",
+    "cancel": "Annuler"
+  },
+  "form": {
+    "required": "Champ obligatoire",
+    "not_available": "Non disponible"
+  },
+  "views": {
+    "global": {
+      "welcome": "Bienvenue",
+      "title": "Genesis"
+    },
+    "home": {
+      "title": "Home",
+      "dashboard": "Dashboard"
+    },
+    "login": {
+      "title": "Login",
+      "connexion": "Connexion",
+      "email": "Adresse mail",
+      "password": "Mot de passe",
+      "rememberme": "Se souvenir de moi",
+      "passwordforgotten": "Mot de passe oublié ?",
+      "register": "Créer un nouveau compte",
+      "placeholder": {
+        "email": "Email",
+        "password": "Mot de passe"
+      }
+    },
+    "signup": {
+      "title": "Inscription",
+      "connexion": "Connexion",
+      "username": "Pseudo",
+      "email": "Adresse mail",
+      "confemail": "Confirmation de l'adresse mail",
+      "password": "Mot de passe",
+      "confpassword": "Confirmation du mot de passe",
+      "placeholder": {
+        "username": "Nom d'utilisateur",
+        "email": "Email",
+        "password": "Mot de passe",
+        "confemail": "Confirmation email",
+        "confpassword": "Confirmation mot de passe"
+      }
+    }
+  }
 }

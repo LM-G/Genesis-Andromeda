@@ -19,10 +19,18 @@
       <input type="checkbox">
       <span translate="views.login.rememberme"></span>
     </label>
+    <label>
+      <a href="#" id="password-forgotten">
+        <span translate="views.login.passwordforgotten"></span>
+      </a>
+    </label>
   </div>
 </form>
 </div>
 <div class="modal-footer">
+  <a href="#" id="register" ng-click="vm.register()">
+    <span translate="views.login.register"></span>
+  </a>
 	<button class="btn btn-primary" type="button" ng-click="vm.connect()">
 		<span translate="views.login.connexion"></span>
 	</button>

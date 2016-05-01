@@ -12,7 +12,9 @@ var mainBowerFiles = require('main-bower-files'); // a delete
 var angularFilesort = require('gulp-angular-filesort');
 var filter = require('gulp-filter'); // a delete
 var templateCache = require('gulp-angular-templatecache');
+var gulpNgConfig = require('gulp-ng-config');
 var livereload = require('gulp-livereload');
+var rename = require("gulp-rename");
 
 // Variables =====================================================================================
 
@@ -24,6 +26,7 @@ var PATH_HTML = './app/**/*.html';
 var PATH_DIST = '../server/public/';
 var PATH_DIST_JS = PATH_DIST + 'js/';
 var PATH_DIST_CSS = PATH_DIST + 'css/';
+var PATH_DIST_FONTS = PATH_DIST + 'fonts/';
 var PATH_DIST_HTML = PATH_DIST + 'html/';
 var PATH_DIST_LANG = PATH_DIST + 'lang/';
 var PATH_DIST_IMG = PATH_DIST + 'img/';
@@ -73,20 +76,11 @@ gulp.task('publish-components', function() {
     .pipe(livereload());
 });
 
-// ajoute les IIFE
-/*
-gulp.task('iife', function () {
-  return gulp
-    .src(PATH_DIST_JS + 'app.js')
-    .pipe(wrap('(function(){\n\'use strict\';\n<%= contents %>\n})();'))
-    .pipe(gulp.dest(PATH_DIST_JS));
-});*/
-
 // concatene les css
 gulp.task('publish-css', function() {
   var cssFiles = [
     PATH_CSS,
-    '/client/bower_components/components-font-awesome/css/font-awesome.css',
+    'bower_components/components-font-awesome/css/font-awesome.css',
     'bower_components/bootstrap-css-only/css/bootstrap-theme.css',
     'bower_components/bootstrap-css-only/css/bootstrap.css',
     'bower_components/animate.css/animate.css'
@@ -97,6 +91,13 @@ gulp.task('publish-css', function() {
     .pipe(concat('styles.css'))
     .pipe(gulp.dest(PATH_DIST_CSS))
     .pipe(livereload());
+});
+
+// Suppression du dossier public
+gulp.task('publish-fonts', function() {
+  return gulp
+    .src(['bower_components/bootstrap-css-only/fonts/**'])
+    .pipe(gulp.dest(PATH_DIST_FONTS));
 });
 
 gulp.task('publish-css-map', function() {
@@ -177,6 +178,14 @@ gulp.task('publish-favicon', function() {
     .pipe(livereload());
 });
 
+
+gulp.task('publish-config-dev', function() {
+  return gulp.src(['./config/dev.json'])
+    .pipe(gulpNgConfig('genesis.config'))
+    .pipe(rename('config.js'))
+    .pipe(gulp.dest(PATH_DIST_JS))
+});
+
 // Recompile automatiquement si changement sur un fichier
 gulp.task('watch', function() {
   livereload.listen();
@@ -193,12 +202,14 @@ gulp.task('default',
       'publish-components',
       'publish-bower-components',
       'publish-html',
+      'publish-fonts',
       'publish-css',
       'publish-css-map',
       'publish-images',
       'publish-favicon',
       'publish-entrypoint',
-      'publish-htaccess'
+      'publish-htaccess',
+      'publish-config-dev'
     ], [
       'publish-i18n-lang',
       'publish-lang'

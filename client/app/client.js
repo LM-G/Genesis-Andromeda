@@ -3,21 +3,22 @@
  */
 angular
   .module('genesis', [
-  'ui.router',
+    'ui.router',
     'ui.bootstrap',
+    'genesis.config',
     'genesis.traduction',
     'genesis.services',
     'genesis.views',
     // templates HTML en cache
     'genesis.templates'
   ])
-  /* routes et états */
-  .config([
-    '$locationProvider',
-    '$urlRouterProvider',
-    '$stateProvider',
-    mainRoutage
-  ])
+/* routes et états */
+.config([
+  '$locationProvider',
+  '$urlRouterProvider',
+  '$stateProvider',
+  mainRoutage
+])
   .run([
     '$rootScope',
     '$state',
@@ -45,4 +46,4 @@ function main($rootScope) {
     console.warn('stateChangeStart : ' + toState.name);
   });
 }
- /* ! main */
+/* ! main */

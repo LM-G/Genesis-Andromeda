@@ -1,0 +1,11 @@
+.login-modal #register {
+    position: absolute;
+    left: 15px;
+    bottom: 20px;
+}
+
+.login-modal #password-forgotten {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
