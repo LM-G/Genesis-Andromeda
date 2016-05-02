@@ -53,7 +53,8 @@ gulp.task('publish-bower-components', function() {
     'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
     'bower_components/angular-bootstrap/ui-bootstrap.js',
     'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-    'bower_components/a0-angular-storage/dist/angular-storage.js'
+    'bower_components/a0-angular-storage/dist/angular-storage.js',
+    'bower_components/angular-messages/angular-messages.js'
   ];
 
   return gulp

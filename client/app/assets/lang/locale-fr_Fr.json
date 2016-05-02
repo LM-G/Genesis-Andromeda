@@ -7,8 +7,13 @@
     "cancel": "Annuler"
   },
   "form": {
-    "required": "Champ obligatoire",
-    "not_available": "Non disponible"
+    "error": {
+      "required": "Champ obligatoire",
+      "not_available": "Non disponible",
+      "email": "Adresse mail invalide",
+      "confemail": "Adresse mail différente",
+      "confpassword": "Mot de passe différent"
+    }
   },
   "views": {
     "global": {

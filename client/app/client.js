@@ -5,6 +5,7 @@ angular
   .module('genesis', [
     'ui.router',
     'ui.bootstrap',
+    'ngMessages',
     'genesis.config',
     'genesis.traduction',
     'genesis.services',

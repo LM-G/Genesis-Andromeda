@@ -6,12 +6,26 @@ a {
   color: #00B7FF;
 }
 
-@media (min-width: 768px) .navbar {
-  border-radius: 4px;
+/* navbar */
+.navbar.navbar-inverse {
+  border-radius: 0px;
 }
 
-
-/* Modal */
-.modal-open .modal-footer .push-right{
-
+/* Form */
+.form-genesis .form-group{
+  min-height: 5.5em;
+  margin-bottom: 5px;
 }
+.form-genesis .help-block{
+	margin-bottom: 0px;
+  margin-top: 0.2em;
+  font-size: 0.8em;
+}
+.form-genesis .help-block>p{
+  margin-bottom: 0px;
+}
+
+.has-error .form-control::-webkit-input-placeholder {
+  color: #a16363;
+}
+

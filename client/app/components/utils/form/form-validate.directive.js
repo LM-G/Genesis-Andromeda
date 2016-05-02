@@ -1,3 +1,6 @@
+/**
+ * Directive de validation de formulaire
+ */
 angular
   .module('genesis.services.utils')
   .directive('formValidate', function() {
@@ -8,8 +11,36 @@ angular
   });
 
 function link($scope, $element, $attrs, formCtrl) {
+  // nom de l'input
   var inputName = $element.find('input')[0].name;
-  var input = formCtrl[inputName];
+  // model de l'input ( au sens element du controller du formulaire)
+  var inputModel = formCtrl[inputName];
+  // element angular attaché
+  var inputElement = angular.element($element[0].querySelector('[name="' + inputName + '"]'));
+  // block des messages de warning
+  var helpBlock = angular.element($element[0].querySelector('.help-block'));
 
-  console.log('directive : ', input, helpBlock);
+  // listener sur le blur de l'input du form-group
+  inputElement.bind('blur', function(evt) {
+    toggleError(inputModel.$invalid);
+  });
+
+  // listener sur la validité du model du champ
+  $scope.$watch(function() {
+    return inputModel.$invalid;
+  }, function(invalid) {
+    // il faut en plus que l'utilisateur est interagit avec le champ
+    toggleError(invalid && inputModel.$dirty);
+  });
+
+  /**
+   * Si le champ du formulaire de la directive est en erreur, alors la classe has-error est ajouté
+   * sur l'input et le block des warning est affiché.
+   * @param  {boolean} invalid si il faut ou non activer le mode "erreur"
+   * @return {undefined}
+   */
+  function toggleError(invalid) {
+    $element.toggleClass('has-error', invalid);
+    helpBlock.toggleClass('ng-hide', !invalid);
+  }
 }
