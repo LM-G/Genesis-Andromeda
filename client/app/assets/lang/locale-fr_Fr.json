@@ -12,7 +12,8 @@
       "not_available": "Non disponible",
       "email": "Adresse mail invalide",
       "confemail": "Adresse mail différente",
-      "confpassword": "Mot de passe différent"
+      "confpassword": "Mot de passe différent",
+      "min": "Doit contenir au moins {{nombre}} caractères"
     }
   },
   "views": {

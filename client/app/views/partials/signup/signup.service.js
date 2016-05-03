@@ -4,7 +4,7 @@ angular
 
 signUpService.$inject = ['$http', '$timeout', '$q', 'genesisCfg'];
 
-function signUpService($scope, $timeout, $q, genesisCfg) {
+function signUpService($http, $timeout, $q, genesisCfg) {
   var service = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -15,8 +15,8 @@ function signUpService($scope, $timeout, $q, genesisCfg) {
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  service.register = function(userParams) {
-    return $http.post(url, userParams).then(function(res) {
+  service.register = function(credentials) {
+    return $http.post(url, credentials).then(function(res) {
       debugger;
       return res;
     })

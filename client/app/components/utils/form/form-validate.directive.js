@@ -22,7 +22,7 @@ function link($scope, $element, $attrs, formCtrl) {
 
   // listener sur le blur de l'input du form-group
   inputElement.bind('blur', function(evt) {
-    toggleError(inputModel.$invalid);
+    toggleError(inputModel.$invalid && inputModel.$dirty);
   });
 
   // listener sur la validité du model du champ
@@ -31,6 +31,16 @@ function link($scope, $element, $attrs, formCtrl) {
   }, function(invalid) {
     // il faut en plus que l'utilisateur est interagit avec le champ
     toggleError(invalid && inputModel.$dirty);
+  });
+
+  // listener sur l'event d'envoi du formaulaire
+  var deregisterSubmitListener = $scope.$watch(function() {
+    return formCtrl.$submitted;
+  }, function(submitted) {
+    if (submitted) {
+      toggleError(inputModel.$invalid);
+      deregisterSubmitListener();
+    }
   });
 
   /**

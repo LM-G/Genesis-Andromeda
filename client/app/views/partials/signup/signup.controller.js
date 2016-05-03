@@ -26,6 +26,19 @@ function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) 
    */
   vm.register = function(form) {
     console.log('register', form);
+    if (form.$valid) {
+      var credentials = {
+        username: vm.username,
+        email: vm.email,
+        password: vm.password
+      };
+      signUpService
+        .register(credentials)
+        .then(function(res) {
+          debugger;
+          // afficher le texte de succes qui dit qu'un mail de confirmation a ete envoyé :)
+        });
+    }
   };
 
   /***********************************************************************************************/

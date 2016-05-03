@@ -22,6 +22,7 @@ function genesisModalService($uibModal, $log) {
 
   var registrationModal = {
     size: 'md',
+    backdrop: 'static',
     openedClass: 'register-modal',
     templateUrl: '/views/partials/signup/signup.html',
     controller: 'signUpCtrl',
