@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var config = require('./app/config/config');
 
 var app = express();
+var controllers = require('./app/controllers');
 
 // config
 mongoose.connect(config.dbUrl, function(err) {
@@ -31,7 +32,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
-app.use('/api', require('./app/controllers'));
+app.use('/api', controllers);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', function(req, res) {
