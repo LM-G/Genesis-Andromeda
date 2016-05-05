@@ -7,19 +7,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
+
 var config = require('./app/config/config');
+var api = require('./app/controllers');
 
 var app = express();
-var controllers = require('./app/controllers');
-
-// config
-mongoose.connect(config.dbUrl, function(err) {
-  if (err) {
-    console.log('Failed to connect MongoDB');
-    throw err;
-  }
-  console.log('Successfully connected to MongoDB');
-});
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -30,9 +24,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
 app.use(cookieParser());
 
-app.use('/api', controllers);
+app.use(passport.initialize());
+
+// config
+mongoose.connect(config.dbUrl, function(err) {
+  if (err) {
+    console.log('Connection failed to the database');
+    throw err;
+  }
+  console.log('Successfully connected to the database');
+});
+
+// Bring in defined Passport Strategy
+require('./app/config/passport')(passport);
+
+app.use('/api', api);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', function(req, res) {

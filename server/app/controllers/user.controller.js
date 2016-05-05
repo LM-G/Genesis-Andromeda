@@ -34,7 +34,9 @@ function register(req, res) {
   userService
     .create(req.body)
     .then(function() {
-      res.sendStatus(200);
+      res.json({
+        message: 'Successfully created new user.'
+      });
     })
     .catch(function(err) {
       res.status(400).send(err);

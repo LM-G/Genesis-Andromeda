@@ -1,10 +1,13 @@
 var _ = require('lodash');
 var path = require('path');
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 var Q = require('q');
+
 
 var config = require(path.join(__base, 'app/config/config'));
 var User = require(path.join(__base, './app/models/User'));
+var validationUtils = require(path.join(__base, './app/utils/validation.utils'));
 
 module.exports = {
   authenticate: authenticate,
@@ -54,10 +57,34 @@ function getById(id) {
   return deferred.promise;
 }
 
+/**
+ * Création d'un utilisateur
+ * @param  {Object} userParams identifiants
+ * @return {Object} promesse de resolution de la creation d'un utilisateur
+ */
 function create(userParams) {
   var deferred = Q.defer();
-  var mssg = 'API CREATE :' + JSON.stringify(userParams)
-  console.log('API CREATE :', userParams);
-  deferred.resolve(userParams);
+  var fields = ['username', 'password', 'email'];
+  var user = new User(_.pick(userParams, fields));
+
+  user.save(function(err) {
+    if (err) {
+      if (err.errors) {
+        deferred.reject(err);
+      } else if (err.code == '11000') {
+        deferred.reject({
+          code: -2,
+          message: "Le nom d'utilisateur ou l'adresse email n'est pas disponible"
+        });
+      } else {
+        deferred.reject({
+          code: -1,
+          message: "Echec inscription utilisateur"
+        });
+      }
+    }
+    deferred.resolve();
+  });
+
   return deferred.promise;
 }

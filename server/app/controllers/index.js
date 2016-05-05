@@ -1,11 +1,19 @@
+/**
+ * root de l'API
+ */
+
 var express = require('express');
-var apiRouter = express.Router();
+var api = express.Router();
+
+var userAPI = require("./user.controller");
+
+api.use('/', userAPI);
+
+/*
+api.use('/', controllerA);
+api.use('/', controllerB);
+api.use('/', controllerC);
+*/
 
 
-
-
-
-exports.user = require("./user.controller");
-
-
-module.exports = apiRouter;
+module.exports = api;
