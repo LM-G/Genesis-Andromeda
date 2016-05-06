@@ -1,17 +1,20 @@
-loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'genesisModalService'];
+loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'genesisModalService',
+  'loginService'
+];
 
 angular
   .module('genesis.views.partials')
   .controller('loginCtrl', loginCtrl);
 
-function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService) {
-  console.log('controller login', $scope);
+function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, loginService) {
+  console.log('controller login');
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
   /** @type {Boolean} indicateur de chargement du controleur */
   vm.isLoaded = false;
+  vm.isLoading = false;
 
   /* Initialisation du controleur */
   $timeout(init);
@@ -24,8 +27,29 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService) {
    * Etablit la connexion de l'utilisateur à l'application
    * @return {undefined}
    */
-  vm.connect = function() {
-
+  vm.login = function(form) {
+    console.log('login', form);
+    if (form.$valid) {
+      vm.isLoading = true;
+      var credentials = {
+        username: vm.username,
+        password: vm.password
+      };
+      loginService
+        .auth(credentials)
+        .then(function(res) {
+          console.log('connexion réussie : ', res);
+          /* TODO : stockage token localstorage + initialisation utilisateur*/
+          $uibModalInstance.close('login successfull');
+          $state.go('protected.dashboard');
+        })
+        .catch(function(res) {
+          vm.loginFailed = true;
+        })
+        .finally(function() {
+          vm.isLoading = false;
+        });
+    }
   };
 
   /**

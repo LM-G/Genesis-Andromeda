@@ -29,13 +29,18 @@
       "title": "Login",
       "connexion": "Connexion",
       "email": "Adresse mail",
+      "username": "Nom d'utilisateur",
       "password": "Mot de passe",
       "rememberme": "Se souvenir de moi",
       "passwordforgotten": "Mot de passe oublié ?",
       "register": "Créer un nouveau compte",
       "placeholder": {
         "email": "Email",
+        "username": "Nom d'utilisateur",
         "password": "Mot de passe"
+      },
+      "error": {
+        "authentication": "Le nom d'utilisateur et/ou le mot de passe sont incorrects."
       }
     },
     "signup": {

@@ -11,6 +11,7 @@ angular
   });
 
 function link($scope, $element, $attrs, formCtrl) {
+  var validateOnSubmit = $attrs.formValidate == 'on-submit';
   // nom de l'input
   var inputName = $element.find('input')[0].name;
   // model de l'input ( au sens element du controller du formulaire)
@@ -19,18 +20,19 @@ function link($scope, $element, $attrs, formCtrl) {
   var inputElement = angular.element($element[0].querySelector('[name="' + inputName + '"]'));
   // block des messages de warning
   var helpBlock = angular.element($element[0].querySelector('.help-block'));
-
   // listener sur le blur de l'input du form-group
   inputElement.bind('blur', function(evt) {
-    toggleError(inputModel.$invalid && inputModel.$dirty);
+    var cond = inputModel.$invalid && inputModel.$dirty && (validateOnSubmit ? inputModel.$submitted : true);
+    toggleError(cond);
   });
 
   // listener sur la validité du model du champ
   $scope.$watch(function() {
     return inputModel.$invalid;
   }, function(invalid) {
+    var cond = invalid && inputModel.$dirty && (validateOnSubmit ? inputModel.$submitted : true);
     // il faut en plus que l'utilisateur est interagit avec le champ
-    toggleError(invalid && inputModel.$dirty);
+    toggleError(cond);
   });
 
   // listener sur l'event d'envoi du formaulaire

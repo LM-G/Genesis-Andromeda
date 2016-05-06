@@ -2,10 +2,12 @@ angular
   .module('genesis.views.game')
   .config(configGameState);
 
+configGameState.$inject = ['$stateProvider'];
+
 function configGameState($stateProvider) {
 
   $stateProvider
-    .state('game', {
+    .state('protected.game', {
       url: '/game',
       templateUrl: '/views/protected/game/game.html',
       controller: 'gameCtrl',

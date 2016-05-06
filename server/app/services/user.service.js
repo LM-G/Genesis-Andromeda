@@ -18,7 +18,9 @@ module.exports = {
 function authenticate(username, password) {
   var deferred = Q.defer();
 
-  User.findByName(username, userCallBack);
+  User.findOne({
+    username: username
+  }, userCallBack);
 
   function userCallBack(err, user) {
     if (err) deferred.reject(err);
@@ -26,7 +28,7 @@ function authenticate(username, password) {
     if (user && bcrypt.compareSync(password, user.password)) {
       // authentication successful
       deferred.resolve(jwt.sign({
-        sub: user._id
+        username: user.username
       }, config.secret));
     } else {
       // authentication failed
@@ -71,7 +73,7 @@ function create(userParams) {
     if (err) {
       if (err.errors) {
         deferred.reject(err);
-      } else if (err.code == '11000') {
+      } else if (err.code == 11000) {
         deferred.reject({
           code: -2,
           message: "Le nom d'utilisateur ou l'adresse email n'est pas disponible"

@@ -38,7 +38,8 @@ mongoose.connect(config.dbUrl, function(err) {
   console.log('Successfully connected to the database');
 });
 
-// Bring in defined Passport Strategy
+// Configuration de la strategie
+app.use(passport.initialize());
 require('./app/config/passport')(passport);
 
 app.use('/api', api);

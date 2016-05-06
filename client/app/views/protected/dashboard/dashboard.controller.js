@@ -1,11 +1,11 @@
 angular
-  .module('genesis.views.partials')
-  .controller('signUpCtrl', signUpCtrl);
+  .module('genesis.views.dashboard')
+  .controller('dashboardCtrl', dashboardCtrl);
 
-signUpCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'signUpService'];
+dashboardCtrl.$inject = ['$scope', '$timeout', '$state'];
 
-function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) {
-  console.log('controller inscription', $scope);
+function dashboardCtrl($scope, $timeout, $state) {
+  console.log('controller dashboard');
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -20,25 +20,6 @@ function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) 
   /* API publique                                                                                */
   /***********************************************************************************************/
 
-  /**
-   * Enregistre l'utilisateur
-   * @return {undefined}
-   */
-  vm.register = function(form) {
-    console.log('register', form);
-    if (form.$valid) {
-      var credentials = {
-        username: vm.username,
-        email: vm.email,
-        password: vm.password
-      };
-      signUpService
-        .register(credentials)
-        .then(function(res) {
-          debugger;
-        });
-    }
-  };
 
   /***********************************************************************************************/
   /* API interne                                                                                 */
