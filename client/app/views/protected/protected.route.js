@@ -12,7 +12,9 @@ function configProtectedState($stateProvider) {
           template: '<div ui-view></div>'
         },
         'header': {
-          templateUrl: '/views/partials/header_protected/header.html'
+          templateUrl: '/views/partials/header_protected/header.html',
+          controller: 'headerGameCtrl',
+          controllerAs: 'vm'
         }
       }
     });

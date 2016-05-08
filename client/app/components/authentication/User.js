@@ -9,8 +9,8 @@ function User() {
   /* Variables                                                                                   */
   /***********************************************************************************************/
   var initValues = {
-  	isLogged : false,
-  	username : 'Anonymous'
+    isLogged: false,
+    username: 'Anonymous'
   };
 
   var user = {};
@@ -18,10 +18,10 @@ function User() {
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  user.init = function(values){
-  	angular.merge(user, values);
+  user.update = function(values) {
+    angular.merge(user, values);
   };
-  
+
   return user;
   /***********************************************************************************************/
   /* API interne                                                                                 */

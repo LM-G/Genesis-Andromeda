@@ -1,12 +1,12 @@
-loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'genesisModalService',
-  'loginService'
-];
-
 angular
   .module('genesis.views.partials')
   .controller('loginCtrl', loginCtrl);
 
-function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, loginService) {
+loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'genesisModalService',
+  'loginService', 'authService'
+];
+
+function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, loginService, authService) {
   console.log('controller login');
   var vm = this;
   /***********************************************************************************************/
@@ -39,7 +39,10 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, lo
         .auth(credentials)
         .then(function(res) {
           console.log('connexion réussie : ', res);
-          /* TODO : stockage token localstorage + initialisation utilisateur*/
+          /* Mise à jour des informations utilsiateur */
+          authService.connectUser(res.username, res.token);
+
+
           $uibModalInstance.close('login successfull');
           $state.go('protected.dashboard');
         })

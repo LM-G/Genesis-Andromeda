@@ -58,6 +58,9 @@
         "confemail": "Confirmation email",
         "confpassword": "Confirmation mot de passe"
       }
+    },
+    "dashboard": {
+      "title": "Dashboard"
     }
   }
 }
