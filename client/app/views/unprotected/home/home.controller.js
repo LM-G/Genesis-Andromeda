@@ -2,9 +2,9 @@ angular
   .module('genesis.views.home')
   .controller('homeCtrl', homeCtrl);
 
-homeCtrl.$inject = ['$timeout', '$state', 'genesisModalService'];
+homeCtrl.$inject = ['$timeout', '$state', 'genesisModalService', 'User'];
 
-function homeCtrl($timeout, $state, modalService) {
+function homeCtrl($timeout, $state, modalService, User) {
   console.log('controller home');
   var vm = this;
   /***********************************************************************************************/
@@ -12,6 +12,8 @@ function homeCtrl($timeout, $state, modalService) {
   /***********************************************************************************************/
   /** @type {Boolean} indicateur de chargement du controleur */
   vm.isLoaded = false;
+
+  vm.user = User;
 
   /* Initialisation du controleur */
   $timeout(init);
@@ -23,8 +25,8 @@ function homeCtrl($timeout, $state, modalService) {
     var modal = modalService.openLogin();
   };
 
-  vm.goGame = function(){
-    $state.go('protected.game');
+  vm.goGame = function() {
+    $state.go('protected.dashboard');
   };
 
   /***********************************************************************************************/

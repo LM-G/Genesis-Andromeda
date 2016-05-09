@@ -14,8 +14,15 @@ function authService(commonStorage, User) {
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  service.connectUser = function(username, token) {
-    /* TODO */
+  /**
+   * Connexion de l'utilisateur OK, mise à jour de son statut, mise à jour du token JWT
+   */
+  service.connectUser = function(token) {
+    User.isLogged = true;
+    commonStorage.set('user', {
+      isLogged: true,
+      token: token
+    });
   };
 
 
