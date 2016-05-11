@@ -13,7 +13,8 @@ angular.module('genesis.services', [
   'angular-storage',
   'genesis.services.utils',
   'genesis.services.storage',
-  'genesis.services.auth'
+  'genesis.services.auth',
+  'genesis.services.error'
 ]);
 
 // templates html

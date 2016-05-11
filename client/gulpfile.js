@@ -55,7 +55,8 @@ gulp.task('publish-bower-components', function() {
     'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
     'bower_components/a0-angular-storage/dist/angular-storage.js',
     'bower_components/angular-messages/angular-messages.js',
-    'bower_components/angular-jwt/dist/angular-jwt.js'
+    'bower_components/angular-jwt/dist/angular-jwt.js',
+    'bower_components/lodash/dist/lodash.js'
   ];
 
   return gulp

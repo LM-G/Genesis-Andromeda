@@ -13,18 +13,12 @@ angular
     // templates HTML en cache
     'genesis.templates'
   ])
-/* routes et états */
-.config([
-  '$locationProvider',
-  '$urlRouterProvider',
-  '$stateProvider',
-  mainRoutage
-])
-  .run([
-    '$rootScope',
-    '$state',
-    main
-  ]);
+  .config(mainRoutage)
+  .constant('_', window._)
+  .run(main);
+
+mainRoutage.$inject = ['$locationProvider', '$urlRouterProvider'];
+main.$inject = ['$rootScope'];
 
 /**
  * Configuration des routes et des états de l'application

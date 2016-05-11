@@ -19,7 +19,7 @@ function User() {
   /* API publique                                                                                */
   /***********************************************************************************************/
   user.update = function(values) {
-    angular.merge(user, values);
+    angular.merge(user, values || initValues);
   };
 
   return user;

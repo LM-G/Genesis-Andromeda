@@ -41,7 +41,6 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, lo
           console.log('connexion réussie : ', res);
           /* Mise à jour des informations utilsiateur */
           authService.connectUser(res.token);
-          debugger;
           $uibModalInstance.close('login successfull');
           $state.go('protected.dashboard');
         })

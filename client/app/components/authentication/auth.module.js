@@ -9,7 +9,7 @@ angular
   .run(mainAuth);
 
 configAuth.$inject = ['$httpProvider', 'jwtInterceptorProvider'];
-mainAuth.$inject = ['$log', 'User', 'commonStorage'];
+mainAuth.$inject = ['$log', 'jwtHelper', '_', 'User', 'commonStorage'];
 jwtInterceptor.$inject = ['config', 'commonStorage'];
 
 /**
@@ -23,11 +23,19 @@ function configAuth($httpProvider, jwtInterceptorProvider) {
 /**
  * Initialisation du module d'authentification, chargement de l'utilisateur
  */
-function mainAuth($log, User, commonStorage) {
+function mainAuth($log, jwtHelper, _, User, commonStorage) {
   $log.info('Initialisation user');
-  debugger;
-  var user = commonStorage.get('user');
-  angular.merge(User, user);
+
+  /* recuperation des informations de l'utilsiateur stockée dans le local storage */
+  var user = commonStorage.get('user') || {};
+  angular.merge(User, _.omit(user, ['token']));
+
+  /* si l'utilisateur possède un token on extrait les informations cryptées qu'il contient */
+  if (_.isObject(user.token)) {
+    var infos = jwtHelper.decodeToken(user.token);
+    User.name = infos.username;
+  }
+
 }
 
 /**
@@ -37,5 +45,6 @@ function jwtInterceptor(config, commonStorage) {
   if (config.url.substr(config.url.length - 5) == '.html') {
     return null;
   }
-  return commonStorage.get('user').token;
+  var user = commonStorage.get('user') || {};
+  return user.token;
 }
