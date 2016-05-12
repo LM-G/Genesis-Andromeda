@@ -9,7 +9,7 @@ function configDashboardState($stateProvider) {
   $stateProvider
     .state('protected.dashboard', {
       url: '/dashboard',
-      templateUrl: '/views/protected/dashboard/dashboard.html',
+      templateUrl: '/components/dashboard/dashboard.html',
       controller: 'dashboardCtrl',
       controllerAs: 'vm'
     });

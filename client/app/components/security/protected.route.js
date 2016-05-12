@@ -14,31 +14,15 @@ function configProtectedState($stateProvider) {
           template: '<div ui-view></div>'
         },
         'header': {
-          templateUrl: '/views/partials/header_protected/header.html',
+          templateUrl: '/components/header/protected/header.html',
           controller: 'headerGameCtrl',
           controllerAs: 'vm'
         },
         'sidebar': {
-          templateUrl: '/views/partials/sidebar/sidebar.html',
+          templateUrl: '/components/sidebar/sidebar.html',
           controller: 'sidebarCtrl',
           controllerAs: 'vm'
         }
-      },
-      resolve: {
-        '_authorize': authenticate
       }
     });
-}
-
-/* Détermine si l'utilisateur est connecté et peut accèder à l'état */
-authenticate.$inject = ['$q', 'User', 'NotConnectedError'];
-
-function authenticate($q, User, NotConnectedError) {
-  var deffered = $q.defer();
-  if (User.isLogged) {
-    deffered.resolve(true);
-  } else {
-    deffered.reject(new NotConnectedError());
-  }
-  return deffered.promise;
 }

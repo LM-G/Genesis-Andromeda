@@ -2,6 +2,8 @@ angular
   .module('genesis.views')
   .config(configUnprotectedState);
 
+configUnprotectedState.$inject = ['$stateProvider'];
+
 function configUnprotectedState($stateProvider) {
 
   $stateProvider
@@ -12,7 +14,7 @@ function configUnprotectedState($stateProvider) {
           template: '<div ui-view></div>'
         },
         'header': {
-          templateUrl: '/views/partials/header_unprotected/header.html',
+          templateUrl: '/components/header/unprotected/header.html',
           controller: 'headerCtrl',
           controllerAs: 'vm'
         }
