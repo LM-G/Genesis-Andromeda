@@ -42,7 +42,13 @@ function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalSe
   function handleStateChangeStart(event, toState, toParams, fromState, fromParams) {
     /* vérification que l'utilisateur peut accèder aux routes */
     if (toState.authLevel != null) {
-      if (toState.authLevel > User.role) {
+      var user = commonStorage.get('user');
+      var isTokenExpired = true;
+      if (user.token) {
+        isTokenExpired = jwtHelper.isTokenExpired(user.token);
+      }
+      debugger;
+      if (toState.authLevel > User.role && isTokenExpired) {
         event.preventDefault();
         $state.go('unprotected.home');
         modalService.openLogin(toState.name, toParams);
