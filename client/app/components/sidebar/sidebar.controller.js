@@ -1,5 +1,5 @@
 angular
-  .module('genesis.views.partials')
+  .module('genesis.views.sidebar')
   .controller('sidebarCtrl', sidebarCtrl);
 
 sidebarCtrl.$inject = ['$scope', '$timeout', '$state', 'genesisModalService', 'User'];

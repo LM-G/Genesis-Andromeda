@@ -2,11 +2,13 @@ angular
   .module('genesis.views.home')
   .config(configHomeState);
 
+configHomeState.$inject = ['$stateProvider'];
+
 function configHomeState($stateProvider) {
 
   var config = {
     url: '/home',
-    templateUrl: '/views/unprotected/home/home.html',
+    templateUrl: '/components/home/home.html',
     controller: 'homeCtrl',
     controllerAs: 'vm'
   };

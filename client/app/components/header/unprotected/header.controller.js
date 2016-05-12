@@ -1,5 +1,5 @@
 angular
-  .module('genesis.views.partials')
+  .module('genesis.views.header')
   .controller('headerCtrl', headerCtrl);
 
 headerCtrl.$inject = ['$timeout', '$state', 'genesisModalService', 'User'];

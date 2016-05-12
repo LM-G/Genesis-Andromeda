@@ -1,11 +1,11 @@
 angular
-  .module('genesis.views.partials')
-  .controller('headerGameCtrl', headerGameCtrl);
+  .module('genesis.views.signup')
+  .controller('signUpCtrl', signUpCtrl);
 
-headerGameCtrl.$inject = ['$timeout', '$state', 'genesisModalService', 'authService', 'User'];
+signUpCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'signUpService'];
 
-function headerGameCtrl($timeout, $state, modalService, authService, User) {
-  console.log('controller header protected');
+function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) {
+  console.log('controller inscription', $scope);
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -13,18 +13,31 @@ function headerGameCtrl($timeout, $state, modalService, authService, User) {
   /** @type {Boolean} indicateur de chargement du controleur */
   vm.isLoaded = false;
 
-  vm.user = User;
+  /* Initialisation du controleur */
+  $timeout(init);
+
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
 
-  vm.isActive = function(state) {
-    return $state.includes(state);
-  };
-
-  vm.logout = function() {
-    authService.disconnectUser();
-    $state.go('unprotected.home');
+  /**
+   * Enregistre l'utilisateur
+   * @return {undefined}
+   */
+  vm.register = function(form) {
+    console.log('register', form);
+    if (form.$valid) {
+      var credentials = {
+        username: vm.username,
+        email: vm.email,
+        password: vm.password
+      };
+      signUpService
+        .register(credentials)
+        .then(function(res) {
+          /* faire quelquechose ici ?*/
+        });
+    }
   };
 
   /***********************************************************************************************/

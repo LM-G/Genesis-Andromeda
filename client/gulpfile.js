@@ -183,10 +183,10 @@ gulp.task('publish-favicon', function() {
 
 
 gulp.task('publish-config-dev', function() {
-  return gulp.src(['./config/dev.json'])
+  return gulp.src(['./app/config/dev.json'])
     .pipe(gulpNgConfig('genesis.config'))
     .pipe(rename('config.js'))
-    .pipe(gulp.dest(PATH_DIST_JS))
+    .pipe(gulp.dest(PATH_DIST_JS));
 });
 
 // Recompile automatiquement si changement sur un fichier

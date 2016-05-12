@@ -1,25 +1,32 @@
 angular
-  .module('genesis.views.partials')
-  .service('signUpService', signUpService);
+  .module('genesis.views.login')
+  .service('loginService', loginService);
 
-signUpService.$inject = ['$http', '$timeout', '$q', 'genesisCfg'];
+loginService.$inject = ['$http', '$timeout', '$q', 'genesisCfg'];
 
-function signUpService($http, $timeout, $q, genesisCfg) {
+function loginService($http, $timeout, $q, genesisCfg) {
   var service = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
 
-  var url = genesisCfg.apiUrl + '/register';
+  var url = genesisCfg.apiUrl + '/auth';
 
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  service.register = function(credentials) {
+  service.auth = function(credentials) {
     return $http.post(url, credentials).then(function(res) {
-      return res;
-    })
-  }
+      switch (res.status) {
+        case 200:
+          return res.data;
+        case 401:
+          return $q.reject();
+        default:
+          break;
+      }
+    });
+  };
 
   /***********************************************************************************************/
   /* API interne                                                                                 */

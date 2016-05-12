@@ -1,17 +1,20 @@
 angular
-  .module('genesis.views.partials')
-  .controller('signUpCtrl', signUpCtrl);
+  .module('genesis.views.login')
+  .controller('loginCtrl', loginCtrl);
 
-signUpCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'signUpService'];
+loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'genesisModalService',
+  'loginService', 'authService'
+];
 
-function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) {
-  console.log('controller inscription', $scope);
+function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, loginService, authService) {
+  console.log('controller login');
   var vm = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
   /** @type {Boolean} indicateur de chargement du controleur */
   vm.isLoaded = false;
+  vm.isLoading = false;
 
   /* Initialisation du controleur */
   $timeout(init);
@@ -21,23 +24,42 @@ function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) 
   /***********************************************************************************************/
 
   /**
-   * Enregistre l'utilisateur
+   * Etablit la connexion de l'utilisateur à l'application
    * @return {undefined}
    */
-  vm.register = function(form) {
-    console.log('register', form);
+  vm.login = function(form) {
+    console.log('login', form);
     if (form.$valid) {
+      vm.isLoading = true;
       var credentials = {
         username: vm.username,
-        email: vm.email,
         password: vm.password
       };
-      signUpService
-        .register(credentials)
+      loginService
+        .auth(credentials)
         .then(function(res) {
-          /* faire quelquechose ici ?*/
+          console.log('connexion réussie : ', res);
+          /* Mise à jour des informations utilsiateur */
+          authService.connectUser(res.token);
+          $uibModalInstance.close('login successfull');
+          $state.go('protected.dashboard');
+        })
+        .catch(function(res) {
+          vm.loginFailed = true;
+        })
+        .finally(function() {
+          vm.isLoading = false;
         });
     }
+  };
+
+  /**
+   * ouvre le formulaire d'inscription
+   * @return {undefined}
+   */
+  vm.register = function() {
+    modalService.openRegistration();
+    $uibModalInstance.dismiss();
   };
 
   /***********************************************************************************************/

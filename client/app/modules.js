@@ -2,7 +2,10 @@ console.log('Chargement des modules OK');
 
 // composants
 angular.module('genesis.views', [
-  'genesis.views.partials',
+  'genesis.views.login',
+  'genesis.views.signup',
+  'genesis.views.header',
+  'genesis.views.sidebar',
   'genesis.views.home',
   'genesis.views.game',
   'genesis.views.dashboard'
