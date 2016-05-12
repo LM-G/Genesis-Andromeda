@@ -2,9 +2,9 @@ angular
   .module('genesis.views.header')
   .controller('headerCtrl', headerCtrl);
 
-headerCtrl.$inject = ['$timeout', '$state', 'genesisModalService', 'User'];
+headerCtrl.$inject = ['$timeout', '$state', 'genesisModalService', 'User', 'authService'];
 
-function headerCtrl($timeout, $state, modalService, User) {
+function headerCtrl($timeout, $state, modalService, User, authService) {
   console.log('controller header');
   var vm = this;
 
@@ -19,7 +19,7 @@ function headerCtrl($timeout, $state, modalService, User) {
   };
 
   vm.logout = function() {
-
+    authService.disconnectUser();
   };
 
   /**

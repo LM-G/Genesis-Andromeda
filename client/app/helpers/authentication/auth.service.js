@@ -26,6 +26,7 @@ function authService(commonStorage, User, jwtHelper) {
 
     var infos = jwtHelper.decodeToken(token);
     User.name = infos.username;
+    User.role = infos.role;
     User.isLogged = true;
   };
 

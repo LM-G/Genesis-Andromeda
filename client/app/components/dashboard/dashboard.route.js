@@ -11,7 +11,8 @@ function configDashboardState($stateProvider) {
       url: '/dashboard',
       templateUrl: '/components/dashboard/dashboard.html',
       controller: 'dashboardCtrl',
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      authLevel: 0
     });
 
   console.log('[Route] dashboard OK');

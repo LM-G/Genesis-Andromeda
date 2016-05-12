@@ -1,3 +1,4 @@
+'use strict';
 var _ = require('lodash');
 var path = require('path');
 var jwt = require('jsonwebtoken');
@@ -13,7 +14,7 @@ module.exports = {
   authenticate: authenticate,
   getById: getById,
   create: create
-}
+};
 
 function authenticate(username, password) {
   var deferred = Q.defer();
@@ -23,12 +24,15 @@ function authenticate(username, password) {
   }, userCallBack);
 
   function userCallBack(err, user) {
-    if (err) deferred.reject(err);
+    if (err) {
+      deferred.reject(err);
+    }
 
     if (user && bcrypt.compareSync(password, user.password)) {
       // authentication successful
       deferred.resolve(jwt.sign({
-        username: user.username
+        username: user.username,
+        role: user.role == 'client' ? 0 : user.role == 'manager' ? 1 : user.role == 'admin' ? 2 : -1
       }, config.secret));
     } else {
       // authentication failed
@@ -45,7 +49,9 @@ function getById(id) {
   User.findById(id, userCallBack);
 
   function userCallBack(err, user) {
-    if (err) deferred.reject(err);
+    if (err) {
+      deferred.reject(err);
+    }
 
     if (user) {
       // return user (without hashed password)
@@ -54,7 +60,7 @@ function getById(id) {
       // user not found
       deferred.resolve();
     }
-  };
+  }
 
   return deferred.promise;
 }

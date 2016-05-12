@@ -2,9 +2,9 @@ angular
   .module('genesis.services.utils')
   .service('genesisModalService', genesisModalService);
 
-genesisModalService.$inject = ['$uibModal', '$log'];
+genesisModalService.$inject = ['$uibModal', '$log', '_'];
 
-function genesisModalService($uibModal, $log) {
+function genesisModalService($uibModal, $log, _) {
   var service = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -33,8 +33,20 @@ function genesisModalService($uibModal, $log) {
     return $uibModal.open(registrationModal);
   };
 
-  service.openLogin = function() {
-    return $uibModal.open(loginModal);
+  service.openLogin = function(state, params) {
+    var options = _.merge({}, loginModal);
+    options.resolve = {};
+
+    angular.extend(options.resolve, {
+      toState: function() {
+        return state || 'protected.dashboard';
+      },
+      toParams: function() {
+        return params || {};
+      }
+    });
+
+    return $uibModal.open(options);
   };
 
   /***********************************************************************************************/

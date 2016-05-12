@@ -10,7 +10,8 @@ function User() {
   /***********************************************************************************************/
   var initValues = {
     isLogged: false,
-    name: 'Anonymous'
+    name: 'Visitor',
+    role: -1
   };
 
   var user = {};
@@ -19,7 +20,7 @@ function User() {
   /* API publique                                                                                */
   /***********************************************************************************************/
   user.update = function(values) {
-    angular.merge(user, values || initValues);
+    angular.merge(user, initValues, values);
   };
 
   return user;

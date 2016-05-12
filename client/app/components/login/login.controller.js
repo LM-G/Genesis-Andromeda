@@ -3,10 +3,12 @@ angular
   .controller('loginCtrl', loginCtrl);
 
 loginCtrl.$inject = ['$scope', '$timeout', '$state', '$uibModalInstance', 'genesisModalService',
-  'loginService', 'authService'
+  'loginService', 'authService', 'toState', 'toParams'
 ];
 
-function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, loginService, authService) {
+function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, loginService, authService,
+  toState, toParams) {
+
   console.log('controller login');
   var vm = this;
   /***********************************************************************************************/
@@ -42,7 +44,11 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, lo
           /* Mise à jour des informations utilsiateur */
           authService.connectUser(res.token);
           $uibModalInstance.close('login successfull');
-          $state.go('protected.dashboard');
+          if (toState) {
+            $state.go(toState, toParams);
+          } else {
+            $state.go('protected.dashboard', toParams);
+          }
         })
         .catch(function(res) {
           vm.loginFailed = true;
