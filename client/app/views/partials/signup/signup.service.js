@@ -17,7 +17,6 @@ function signUpService($http, $timeout, $q, genesisCfg) {
   /***********************************************************************************************/
   service.register = function(credentials) {
     return $http.post(url, credentials).then(function(res) {
-      debugger;
       return res;
     })
   }

@@ -35,7 +35,7 @@ function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) 
       signUpService
         .register(credentials)
         .then(function(res) {
-          debugger;
+          /* faire quelquechose ici ?*/
         });
     }
   };

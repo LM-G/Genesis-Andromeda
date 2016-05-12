@@ -1,0 +1,28 @@
+.sidebar {
+  position: absolute;
+  width: 250px;
+  height: 100%;
+  top: 50px;
+  margin-top: 1px;
+}
+.sidebar .navbar {
+  height: inherit;
+}
+.sidebar .nav {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.sidebar .nav li a {
+  color: #a0a0a0;
+}
+.sidebar .nav li a:hover, .sidebar .nav li a:focus {
+  background-color: #2d2d2d;
+  color: #e7e7e7;
+}
+.sidebar .nav li.active {
+  background-color: #2d2d2d;
+}
+.sidebar .nav li.active a {
+  color: #e7e7e7;
+}

@@ -17,6 +17,11 @@ function configProtectedState($stateProvider) {
           templateUrl: '/views/partials/header_protected/header.html',
           controller: 'headerGameCtrl',
           controllerAs: 'vm'
+        },
+        'sidebar': {
+          templateUrl: '/views/partials/sidebar/sidebar.html',
+          controller: 'sidebarCtrl',
+          controllerAs: 'vm'
         }
       },
       resolve: {
