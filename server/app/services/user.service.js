@@ -31,7 +31,7 @@ function authenticate(username, password) {
     if (user && bcrypt.compareSync(password, user.password)) {
       // authentication successful
       deferred.resolve(jwt.sign({
-        exp: 30000,
+        exp: 10000,
         username: user.username,
         role: user.role == 'client' ? 0 : user.role == 'manager' ? 1 : user.role == 'admin' ? 2 : -1
       }, config.secret));

@@ -17,11 +17,11 @@
   color: #a0a0a0;
 }
 .sidebar .nav li a:hover, .sidebar .nav li a:focus {
-  background-color: #2d2d2d;
+  background-color: #565656;
   color: #e7e7e7;
 }
 .sidebar .nav li.active {
-  background-color: #2d2d2d;
+  background-color: #565656;
 }
 .sidebar .nav li.active a {
   color: #e7e7e7;

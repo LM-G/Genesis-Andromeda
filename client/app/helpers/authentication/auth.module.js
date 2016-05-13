@@ -44,10 +44,13 @@ function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalSe
     if (toState.authLevel != null) {
       var user = commonStorage.get('user');
       var isTokenExpired = true;
-      if (user.token) {
+      if (user && user.token) {
         isTokenExpired = jwtHelper.isTokenExpired(user.token);
+        var test = jwtHelper.decodeToken(user.token);
+        var date_expiration = test.iat + test.exp;
+
+        console.log(new Date(date_expiration*1000));
       }
-      debugger;
       if (toState.authLevel > User.role && isTokenExpired) {
         event.preventDefault();
         $state.go('unprotected.home');
