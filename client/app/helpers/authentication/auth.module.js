@@ -9,8 +9,8 @@ angular
   .run(mainAuth);
 
 configAuth.$inject = ['$httpProvider', 'jwtInterceptorProvider'];
-mainAuth.$inject = ['$rootScope', '$state', 'jwtHelper', '_', 'User', 'commonStorage', 'genesisModalService'];
-jwtInterceptor.$inject = ['config', 'commonStorage'];
+mainAuth.$inject = ['$rootScope', '$state', 'jwtHelper', '_', 'User', 'commonStorage', 'genesisModalService', 'moment'];
+jwtInterceptor.$inject = ['config', 'commonStorage', 'jwtHelper', 'authService'];
 
 /**
  * Gestion des tokens
@@ -23,7 +23,7 @@ function configAuth($httpProvider, jwtInterceptorProvider) {
 /**
  * Initialisation du module d'authentification, chargement de l'utilisateur
  */
-function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalService) {
+function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalService, moment) {
   console.info('Initialisation user');
 
   /* recuperation des informations de l'utilsiateur stockée dans le local storage */
@@ -42,16 +42,16 @@ function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalSe
   function handleStateChangeStart(event, toState, toParams, fromState, fromParams) {
     /* vérification que l'utilisateur peut accèder aux routes */
     if (toState.authLevel != null) {
+      /* partie de test (useless)*/
       var user = commonStorage.get('user');
-      var isTokenExpired = true;
+      var isTokenValid = false;
       if (user && user.token) {
-        isTokenExpired = jwtHelper.isTokenExpired(user.token);
+        isTokenValid = !jwtHelper.isTokenExpired(user.token);
         var test = jwtHelper.decodeToken(user.token);
         var date_expiration = test.iat + test.exp;
-
-        console.log(new Date(date_expiration*1000));
+        var date = moment.unix(date_expiration).format("YYYY-MM-DD HH:mm:ss");
       }
-      if (toState.authLevel > User.role && isTokenExpired) {
+      if (toState.authLevel > User.role) {
         event.preventDefault();
         $state.go('unprotected.home');
         modalService.openLogin(toState.name, toParams);
@@ -63,10 +63,23 @@ function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalSe
 /**
  * Ajout du token sur chaque requete qui ne concerne pas un fichier html
  */
-function jwtInterceptor(config, commonStorage) {
+function jwtInterceptor(config, commonStorage, jwtHelper, authService) {
   if (config.url.substr(config.url.length - 5) == '.html') {
     return null;
   }
   var user = commonStorage.get('user') || {};
+  /*
+  var token = user.token;
+  var refreshToken = user.refreshToken;
+  if (jwtHelper.isTokenExpired(token)) {
+    return authService.refreshToken(token, refreshToken).then(function(rep) {
+      var token = rep.data.token;
+      localStorage.setItem('id_token', token);
+      return token;
+    });
+  } else {
+    return user.token;
+  }
+  */
   return user.token;
 }

@@ -16,11 +16,17 @@
 .sidebar .nav li a {
   color: #a0a0a0;
 }
-.sidebar .nav li a:hover, .sidebar .nav li a:focus {
-  background-color: #565656;
+.sidebar .nav li a:hover {
+  background-color: #777777;
   color: #e7e7e7;
 }
+.sidebar .nav li a:focus:not(:hover){
+  background-color: transparent; 
+}
 .sidebar .nav li.active {
+  background-color: #565656;
+}
+.sidebar .nav li.active a:hover{
   background-color: #565656;
 }
 .sidebar .nav li.active a {

@@ -15,6 +15,7 @@ angular
   ])
   .config(mainRoutage)
   .constant('_', window._)
+  .constant('moment', window.moment)
   .run(main);
 
 mainRoutage.$inject = ['$locationProvider', '$urlRouterProvider'];
