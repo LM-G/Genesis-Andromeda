@@ -11,54 +11,35 @@ var User = require(path.join(__base, './app/models/User'));
 var validationUtils = require(path.join(__base, './app/utils/validation.utils'));
 
 module.exports = {
-  authenticate: authenticate,
-  getById: getById,
+  login: login,
   create: create
 };
 
-function authenticate(username, password) {
+function login(username, password) {
   var deferred = Q.defer();
-
+  console.info("chercher user :", username, password);
   User.findOne({
     username: username
   }, userCallBack);
 
   function userCallBack(err, user) {
+    console.info("user found ? " + (user != null ? "yes" : "no"));
     if (err) {
       deferred.reject(err);
     }
+
+
 
     if (user && bcrypt.compareSync(password, user.password)) {
+      console.info("user " + user.username + "logged : ", user._id);
       // authentication successful
       deferred.resolve(jwt.sign({
-        exp: 10,
-        username: user.username,
-        role: user.role == 'client' ? 0 : user.role == 'manager' ? 1 : user.role == 'admin' ? 2 : -1
-      }, config.secret));
+        _id: user._id
+      }, config.secret, {
+        expiresIn: 3600
+      }));
     } else {
       // authentication failed
-      deferred.resolve();
-    }
-  }
-
-  return deferred.promise;
-}
-
-function getById(id) {
-  var deferred = Q.defer();
-
-  User.findById(id, userCallBack);
-
-  function userCallBack(err, user) {
-    if (err) {
-      deferred.reject(err);
-    }
-
-    if (user) {
-      // return user (without hashed password)
-      deferred.resolve(_.omit(user, ['password']));
-    } else {
-      // user not found
       deferred.resolve();
     }
   }

@@ -10,7 +10,7 @@ function signUpService($http, $timeout, $q, genesisCfg) {
   /* Variables                                                                                   */
   /***********************************************************************************************/
 
-  var url = genesisCfg.apiUrl + '/register';
+  var url = genesisCfg.authUrl + '/register';
 
   /***********************************************************************************************/
   /* API publique                                                                                */

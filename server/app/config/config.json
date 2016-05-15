@@ -1,5 +1,5 @@
 {
-    "dbUrl": "mongodb://localhost:27017/test",
-    "apiUrl":  "http://localhost:3000/api",
-    "secret": "secr3t"
+  "dbUrl": "mongodb://localhost:27017/test",
+  "apiUrl": "http://localhost:3000/api",
+  "secret": "v2dCz6R9"
 }

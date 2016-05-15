@@ -16,6 +16,7 @@ jwtInterceptor.$inject = ['config', 'commonStorage', 'jwtHelper', 'authService']
  * Gestion des tokens
  */
 function configAuth($httpProvider, jwtInterceptorProvider) {
+  jwtInterceptorProvider.authPrefix = 'JWT ';
   jwtInterceptorProvider.tokenGetter = jwtInterceptor;
   $httpProvider.interceptors.push('jwtInterceptor');
 }
@@ -28,13 +29,11 @@ function mainAuth($rootScope, $state, jwtHelper, _, User, commonStorage, modalSe
 
   /* recuperation des informations de l'utilsiateur stockée dans le local storage */
   var user = commonStorage.get('user') || {};
-  User.update(_.omit(user, ['token']));
+  User.update(user);
 
   /* si l'utilisateur possède un token on extrait les informations cryptées qu'il contient */
-  if (user.token) {
-    var infos = jwtHelper.decodeToken(user.token);
-    User.name = infos.username;
-    User.role = infos.role;
+  if (user) {
+    User.isLogged = true;
   }
 
   $rootScope.$on('$stateChangeStart', handleStateChangeStart);
@@ -67,19 +66,6 @@ function jwtInterceptor(config, commonStorage, jwtHelper, authService) {
   if (config.url.substr(config.url.length - 5) == '.html') {
     return null;
   }
-  var user = commonStorage.get('user') || {};
-  /*
-  var token = user.token;
-  var refreshToken = user.refreshToken;
-  if (jwtHelper.isTokenExpired(token)) {
-    return authService.refreshToken(token, refreshToken).then(function(rep) {
-      var token = rep.data.token;
-      localStorage.setItem('id_token', token);
-      return token;
-    });
-  } else {
-    return user.token;
-  }
-  */
-  return user.token;
+  var accessToken = localStorage.getItem('access_token');
+  return accessToken;
 }

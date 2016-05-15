@@ -5,15 +5,22 @@
 var express = require('express');
 var api = express.Router();
 
+var authAPI = require("./auth.controller");
 var userAPI = require("./user.controller");
+var testAPI = require("./test.controller");
 
-api.use('/', userAPI);
+module.exports = function(passport) {
+  // Toutes les routes sont sousmises à la vérification du token jwt à l'exception des routes 
+  // pour se connecter et s'inscrire
+  api.use(passport.authenticate('jwt', {
+    session: false
+  }));
 
-/*
-api.use('/', controllerA);
-api.use('/', controllerB);
-api.use('/', controllerC);
-*/
+  api.use('/test', testAPI);
+  api.use('/user', userAPI);
 
-
-module.exports = api;
+  return {
+    api: api,
+    auth: authAPI
+  };
+};

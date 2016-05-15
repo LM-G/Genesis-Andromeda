@@ -10,7 +10,7 @@ function User() {
   /***********************************************************************************************/
   var initValues = {
     isLogged: false,
-    name: 'Visitor',
+    username: 'Visitor',
     role: -1
   };
 

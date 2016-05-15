@@ -38,11 +38,15 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, lo
         password: vm.password
       };
       loginService
-        .auth(credentials)
+        .login(credentials)
         .then(function(res) {
           console.log('connexion réussie : ', res);
-          /* Mise à jour des informations utilsiateur */
-          authService.connectUser(res.token);
+          authService.setTokens(res.token, null);
+          /* Récupération des informations utilisateur */
+          return authService.getUser();
+        })
+        .then(function(user) {
+          authService.setUser(user);
           $uibModalInstance.close('login successfull');
           if (toState) {
             $state.go(toState, toParams);

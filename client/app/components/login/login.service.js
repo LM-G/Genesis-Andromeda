@@ -10,12 +10,12 @@ function loginService($http, $timeout, $q, genesisCfg) {
   /* Variables                                                                                   */
   /***********************************************************************************************/
 
-  var url = genesisCfg.apiUrl + '/auth';
+  var url = genesisCfg.authUrl + '/login';
 
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  service.auth = function(credentials) {
+  service.login = function(credentials) {
     return $http.post(url, credentials).then(function(res) {
       switch (res.status) {
         case 200:
