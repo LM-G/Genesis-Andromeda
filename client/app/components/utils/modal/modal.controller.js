@@ -1,38 +1,39 @@
 angular
-  .module('genesis.services.auth')
-  .factory('User', User);
+  .module('genesis.services.utils.modal')
+  .controller('genesisModalController', genesisModalController);
 
-User.$inject = ['accessLevelCst', '_'];
+genesisModalController.$inject = ['$timeout', '$uibModalInstance', '$log', '$translate', '_', 'errorType'];
 
-function User(accessLevelCst, _) {
+function genesisModalController($timeout, $uibModalInstance, $log, $translate, _, errorType) {
+  var vm = this;
+
   /***********************************************************************************************/
   /* Variables                                                                                   */
   /***********************************************************************************************/
-  var initValues = {
-    isLogged: false,
-    username: 'Visitor',
-    role: 'visitor'
-  };
 
-  var user = {};
 
+  $timeout(init);
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
-  user.update = function(values) {
-    angular.merge(user, initValues, values);
+
+  vm.close = function() {
+    $uibModalInstance.close('ok');
   };
 
-  /**
-   * Récupère le niveau d'accès de l'utilisateur en fonction de son role
-   * @return {Number} niveau d'accès
-   */
-  user.getRoleAccess = function() {
-    return accessLevelCst[user.role];
-  };
-
-  return user;
   /***********************************************************************************************/
   /* API interne                                                                                 */
   /***********************************************************************************************/
+  function init() {
+    switch (errorType) {
+      case 'forbidden':
+        vm.title = 'modal.error.forbidden.title';
+        vm.body = 'modal.error.forbidden.body';
+        break;
+      default:
+        vm.title = 'modal.error.generic.title';
+        vm.body = 'modal.error.generic.body';
+        break;
+    }
+  }
 }

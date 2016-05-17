@@ -1,5 +1,5 @@
 angular
-  .module('genesis.services.utils')
+  .module('genesis.services.utils.modal')
   .service('genesisModalService', genesisModalService);
 
 genesisModalService.$inject = ['$uibModal', '$log', '_'];
@@ -26,6 +26,14 @@ function genesisModalService($uibModal, $log, _) {
     controllerAs: 'vm'
   };
 
+  var errorModal = {
+    size: 'sm',
+    openedClass: 'error-modal',
+    templateUrl: '/components/utils/modal/modal-error.html',
+    controller: 'genesisModalController',
+    controllerAs: 'vm'
+  };
+
   /***********************************************************************************************/
   /* API publique                                                                                */
   /***********************************************************************************************/
@@ -34,10 +42,10 @@ function genesisModalService($uibModal, $log, _) {
   };
 
   service.openLogin = function(state, params) {
-    var options = _.merge({}, loginModal);
-    options.resolve = {};
+    var optRegisterModal = _.merge({}, loginModal);
+    optRegisterModal.resolve = {};
 
-    angular.extend(options.resolve, {
+    angular.extend(optRegisterModal.resolve, {
       toState: function() {
         return state || 'protected.dashboard';
       },
@@ -46,7 +54,18 @@ function genesisModalService($uibModal, $log, _) {
       }
     });
 
-    return $uibModal.open(options);
+    return $uibModal.open(optRegisterModal);
+  };
+
+  service.openError = function(err) {
+    var optErrorModal = _.merge({}, errorModal);
+    optErrorModal.resolve = {};
+    angular.extend(optErrorModal.resolve, {
+      errorType: function() {
+        return err || null;
+      }
+    });
+    return $uibModal.open(optErrorModal);
   };
 
   /***********************************************************************************************/

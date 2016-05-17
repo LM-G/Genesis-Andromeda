@@ -12,7 +12,7 @@ function configGameState($stateProvider) {
       templateUrl: '/components/game/game.html',
       controller: 'gameCtrl',
       controllerAs: 'vm',
-      authLevel: 0
+      authLevel: 1
     });
 
   console.log('[Route] game OK');

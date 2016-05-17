@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var _ = require('lodash');
 var path = require('path');
 var jwt = require('jsonwebtoken');
@@ -27,16 +27,13 @@ function login(username, password) {
     if (err) {
       deferred.reject(err);
     }
-
-
-
     if (user && bcrypt.compareSync(password, user.password)) {
       console.info("user " + user.username + "logged : ", user._id);
       // authentication successful
       deferred.resolve(jwt.sign({
         _id: user._id
       }, config.secret, {
-        expiresIn: 3600
+        expiresIn: 15
       }));
     } else {
       // authentication failed

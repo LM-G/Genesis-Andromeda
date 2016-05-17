@@ -4,7 +4,8 @@
     "validate": "Valider",
     "login": "Connexion",
     "logout": "Deconnexion",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "ok": "OK"
   },
   "form": {
     "error": {
@@ -14,6 +15,18 @@
       "confemail": "Adresse mail différente",
       "confpassword": "Mot de passe différent",
       "min": "Doit contenir au moins {{nombre}} caractères"
+    }
+  },
+  "modal": {
+    "error": {
+      "fordidden": {
+        "title": "Accès interdit",
+        "body": "Vous ne disposez pas du niveau d'autorisation suffisant pour accèder à cette zone."
+      },
+      "generic": {
+        "title": "Erreur",
+        "body": "Une erreur est survenue."
+      }
     }
   },
   "views": {
