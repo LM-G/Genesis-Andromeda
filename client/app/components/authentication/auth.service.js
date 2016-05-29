@@ -29,7 +29,7 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
 
   /**
    * Récupération des tokens d'identification
-   * @return {Object} les access et refresh tokens
+   * @return {Object} les token d'identification
    */
   service.getTokens = function() {
     return {
@@ -38,9 +38,27 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
     };
   };
 
+  /**
+   * Récupération du token d'accès
+   * @return {Object} token d'accès
+   */
+  service.getAccessToken = function() {
+    return localStorage.getItem('access_token');
+  };
 
   /**
-   * Récupération des informations de l'utilisateur en fonction du token
+   * Récupération du token de prolongement de connexion
+   * @return {Object} refrtesh token
+   */
+  service.getRefreshToken = function() {
+    return localStorage.getItem('refresh_token');
+  };
+
+
+  /**
+   * Récupération des informations de l'utilisateur stockées sur le serveur en fonction
+   * du token.
+   * @return {Object} promesse de récupération des données
    */
   service.getUser = function() {
     var url = genesisCfg.apiUrl + '/user';
@@ -50,7 +68,10 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
   };
 
   /**
-   * Mise à jour du statut de l'utilisateur
+   * Mise à jour du statut de l'utilisateur en fonction des informations récupérées depuis le
+   * serveur.
+   * @param  {Object} user : informations de l'utilisateur
+   * @return {Undefined}
    */
   service.setUser = function(user) {
     /* mise à jour du local storage */
@@ -60,7 +81,8 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
   };
 
   /**
-   * Connexion de l'utilisateur OK, mise à jour de son statut, mise à jour du token JWT
+   * Deconnexion de l'utilisateur
+   * @return {Undefined}
    */
   service.disconnectUser = function() {
     commonStorage.remove('user');

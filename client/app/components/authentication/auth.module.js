@@ -42,18 +42,10 @@ function mainAuth($rootScope, $state, jwtHelper, _, authService, User, commonSto
   function handleStateChangeStart(event, toState, toParams, fromState, fromParams) {
     /* vérification que l'utilisateur peut accèder aux routes */
     if (toState.authLevel != null) {
-      /* partie de test (useless)*/
-      var accessToken = authService.getTokens().accessToken;
-      var isTokenExpired = true;
+      var accessToken = authService.getAccessToken();
+      var isTokenExpired = accessToken ? jwtHelper.isTokenExpired(accessToken) : true;
       var accessLevel = User.getRoleAccess();
-      if (accessToken) {
-        isTokenExpired = jwtHelper.isTokenExpired(accessToken);
-        var decodedToken = jwtHelper.decodeToken(accessToken);
 
-        decodedToken.iat = moment.unix(decodedToken.iat).format("DD-MM-YYYY HH:mm:ss");
-        decodedToken.exp = moment.unix(decodedToken.exp).format("DD-MM-YYYY HH:mm:ss");
-        console.log(decodedToken);
-      }
       if (isTokenExpired) {
         /* todo : refresh token */
         /* si refresh token fail :*/
@@ -76,6 +68,5 @@ function jwtInterceptor(config, commonStorage, jwtHelper, authService) {
   if (config.url.substr(config.url.length - 5) == '.html') {
     return null;
   }
-  var accessToken = authService.getTokens().accessToken;
-  return accessToken;
+  return authService.getAccessToken();
 }

@@ -1,9 +1,9 @@
-playerStorage.$inject = ['store'];
-
 angular
   .module('genesis.services.storage')
-  .factory('playerStorage', playerStorage);
+  .factory('tokenStorage', tokenStorage);
 
-function playerStorage(store) {
-  return store.getNamespacedStore('player');
+tokenStorage.$inject = ['store'];
+
+function tokenStorage(store) {
+  return store.getNamespacedStore('token');
 }
