@@ -42,10 +42,11 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, lo
         .then(function(res) {
           console.log('connexion réussie : ', res);
           authService.setTokens(res.token, null);
-          /* Récupération des informations utilisateur */
+          /* Récupération des informations utilisateur sur le serveur */
           return authService.getUser();
         })
         .then(function(user) {
+          /* Mise à jour de l'utilisateur local avec les données récupérées du serveur */
           authService.setUser(user);
           $uibModalInstance.close('login successfull');
           if (toState) {

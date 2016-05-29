@@ -19,7 +19,7 @@
   },
   "modal": {
     "error": {
-      "fordidden": {
+      "forbidden": {
         "title": "Accès interdit",
         "body": "Vous ne disposez pas du niveau d'autorisation suffisant pour accèder à cette zone."
       },

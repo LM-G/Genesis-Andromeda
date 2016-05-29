@@ -55,7 +55,8 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
   service.setUser = function(user) {
     /* mise à jour du local storage */
     commonStorage.set('user', user);
-    angular.extend(User, user);
+    user.isLogged = true; // variable utilitaire necessaire au client
+    User.update(user);
   };
 
   /**

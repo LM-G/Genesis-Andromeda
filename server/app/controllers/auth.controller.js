@@ -8,6 +8,7 @@ var userService = require(path.join(__base, 'app/services/user.service'));
 
 router.post('/login', login);
 router.post('/register', register);
+router.post('/refresh', refresh);
 
 module.exports = router;
 
@@ -48,4 +49,10 @@ function register(req, res) {
     .catch(function(err) {
       res.status(400).send(err);
     });
+}
+
+function refresh(req, res) {
+  res.json({
+    message: 'refresh not implemented yet'
+  });
 }

@@ -32,8 +32,8 @@ function login(username, password) {
       // authentication successful
       deferred.resolve(jwt.sign({
         _id: user._id
-      }, config.secret, {
-        expiresIn: 15
+      }, config.security.secret, {
+        expiresIn: config.security.tokenLife
       }));
     } else {
       // authentication failed

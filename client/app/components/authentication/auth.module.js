@@ -40,7 +40,6 @@ function mainAuth($rootScope, $state, jwtHelper, _, authService, User, commonSto
   $rootScope.$on('$stateChangeStart', handleStateChangeStart);
 
   function handleStateChangeStart(event, toState, toParams, fromState, fromParams) {
-
     /* vérification que l'utilisateur peut accèder aux routes */
     if (toState.authLevel != null) {
       /* partie de test (useless)*/

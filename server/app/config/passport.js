@@ -10,7 +10,7 @@ var config = require(path.join(__base, 'app/config/config'));
 module.exports = function(passport) {
   var options = {};
   options.jwtFromRequest = ExtractJwt.fromAuthHeader();
-  options.secretOrKey = config.secret;
+  options.secretOrKey = config.security.secret;
 
   passport.use(new JwtStrategy(options, verify));
 
