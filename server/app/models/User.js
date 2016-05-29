@@ -26,7 +26,7 @@ var User = new Schema({
     enum: ['client', 'manager', 'admin'],
     default: 'client'
   },
-  creation: {
+  dateCreation: {
     type: Date,
     default: Date.now
   }

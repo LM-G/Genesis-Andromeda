@@ -15,7 +15,7 @@ var RefreshToken = new Schema({
     unique: true,
     required: true
   },
-  created: {
+  dateCreation: {
     type: Date,
     default: Date.now
   }
