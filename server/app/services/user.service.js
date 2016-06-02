@@ -15,7 +15,7 @@ module.exports = {
   create: create
 };
 
-function login(username, password) {
+function login(username, password, rememberme) {
   var deferred = Q.defer();
   console.info("chercher user :", username, password);
   User.findOne({
@@ -23,17 +23,21 @@ function login(username, password) {
   }, userCallBack);
 
   function userCallBack(err, user) {
+    var tokenLifeSpan = config.security.tokenLifeShort;
     console.info("user found ? " + (user != null ? "yes" : "no"));
     if (err) {
       deferred.reject(err);
     }
     if (user && bcrypt.compareSync(password, user.password)) {
       console.info("user " + user.username + "logged : ", user._id);
+      if(rememberme){
+        tokenLifeSpan = config.security.tokenLifeLong;
+      }
       // authentication successful
       deferred.resolve(jwt.sign({
         _id: user._id
       }, config.security.secret, {
-        expiresIn: config.security.tokenLife
+        expiresIn: tokenLifeSpan
       }));
     } else {
       // authentication failed
