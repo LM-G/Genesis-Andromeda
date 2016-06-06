@@ -19,7 +19,7 @@ module.exports = router;
  */
 function login(req, res) {
   userService
-    .login(req.body.username, req.body.password)
+    .login(req.body.username, req.body.password, req.body.rememberme)
     .then(function(token) {
       if (token) {
         // authentication successful

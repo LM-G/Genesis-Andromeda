@@ -5,7 +5,6 @@
 var express = require('express');
 var api = express.Router();
 
-var authAPI = require("./auth.controller");
 var userAPI = require("./user.controller");
 var testAPI = require("./test.controller");
 
@@ -19,8 +18,5 @@ module.exports = function(passport) {
   api.use('/test', testAPI);
   api.use('/user', userAPI);
 
-  return {
-    api: api,
-    auth: authAPI
-  };
+  return api;
 };

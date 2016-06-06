@@ -3,6 +3,7 @@
   "apiUrl": "http://localhost:3000/api",
   "security": {
     "secret": "v2dCz6R9",
-    "tokenLife": 3600
+    "tokenLifeShort": 3600,
+    "tokenLifeLong": 1209600
   }
 }

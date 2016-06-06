@@ -1,24 +1,37 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
 /**
- * Refresh token
+ * RefreshToken
  * @type {Schema}
  */
 var RefreshToken = new Schema({
-  userId: {
-    type: String,
-    required: true
+  user: {
+    type: ObjectId,
+    required: true,
+    ref : 'User'
   },
   token: {
     type: String,
-    unique: true,
     required: true
+  }
+},{
+  toObject: {
+    virtuals: true
   },
-  dateCreation: {
-    type: Date,
-    default: Date.now
+  toJSON: {
+    virtuals: true
   }
 });
+
+/**
+ * Attributs virtuels
+ */
+RefreshToken
+  .virtual('userId')
+  .get(function() {
+    return this.id;
+  });
 
 module.exports = mongoose.model('RefreshToken', RefreshToken);

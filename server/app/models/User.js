@@ -26,11 +26,16 @@ var User = new Schema({
     enum: ['client', 'manager', 'admin'],
     default: 'client'
   },
-  dateCreation: {
-    type: Date,
-    default: Date.now
+  // ToDo : activation du profil
+  actif: {
+    type: Boolean,
+    default: true
   }
 }, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  },
   toObject: {
     virtuals: true
   },
