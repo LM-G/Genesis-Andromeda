@@ -4,7 +4,6 @@ var path = require('path');
 
 var config = require(path.join(__base, 'app/config/config'));
 var userService = require(path.join(__base, 'app/services/user.service'));
-var authService = require(path.join(__base, 'app/services/auth.service'));
 
 
 router.post('/login', login);

@@ -41,7 +41,7 @@ function loginCtrl($scope, $timeout, $state, $uibModalInstance, modalService, lo
         .login(credentials)
         .then(function(res) {
           console.log('connexion réussie : ', res);
-          authService.setTokens(res.token, null);
+          authService.setTokens(res.token.access_token, res.token.refresh_token);
           /* Récupération des informations utilisateur sur le serveur */
           return authService.getUser();
         })

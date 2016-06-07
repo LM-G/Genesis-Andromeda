@@ -37,8 +37,9 @@ app.use(bodyParser.urlencoded({
 app.use(passport.initialize());
 configurerStrategyJWT(passport);
 
-var api = require('./app/controllers')(passport);
-app.use('/api', api);
+var entries = require('./app/controllers')(passport);
+app.use('/api', entries.api);
+app.use('/auth', entries.auth);
 
 // configuration de l'acces aux fichiers du client
 app.use(express.static(path.join(__dirname, 'public')));
