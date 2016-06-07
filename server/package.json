@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "set DEBUG=genesis-andromeda:* & node ./bin/dev.js"
+    "start": "set DEBUG=genesis-andromeda:* & node --debug ./bin/dev.js"
   },
   "dependencies": {
     "bcryptjs": "^2.3.0",
