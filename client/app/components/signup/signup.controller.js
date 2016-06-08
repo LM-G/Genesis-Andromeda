@@ -34,8 +34,10 @@ function signUpCtrl($scope, $timeout, $state, $uibModalInstance, signUpService) 
       };
       signUpService
         .register(credentials)
-        .then(function(res) {
-          /* faire quelquechose ici ?*/
+        .then(function() {
+          /* TODO : gérer les cas du nom d'utilisateur déjà pris et du mail déjà pris*/
+          $uibModalInstance.close();
+          /* TODO : affichage succès inscription si pas d'erreur */
         });
     }
   };
