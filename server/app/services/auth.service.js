@@ -28,7 +28,8 @@ var bounds = {
 
 module.exports = {
   login: login,
-  create: create
+  create: create,
+  refresh: refresh
 };
 
 /**
@@ -163,5 +164,22 @@ function create(userParams) {
     });
   }
 
+  return deferred.promise;
+}
+
+/**
+ * Rafraichissement du token JWT
+ * @param  {Object} token : token de rafraichissement
+ * @return {Object} promesse de resolution du rafraichissement
+ */
+function refresh() {
+  var deferred = Q.defer();
+
+  // 1. decodage du token
+  // 2. recuperation utilisateur
+  // 3. generation nouveau access token si tout est ok
+  // 4. retourne le token
+  //
+  deferred.reject('not implemented yet');
   return deferred.promise;
 }
