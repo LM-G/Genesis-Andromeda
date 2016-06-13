@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 global.__base = __dirname + '/';
 var express = require('express');
 var path = require('path');
@@ -8,20 +8,22 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-
 var config = require('./app/config/config');
-var configurerStrategyJWT = require('./app/config/passport');
+var validateEnvVariables = require('./app/config/env.conf');
+var configPassport = require('./app/config/passport.conf');
+var configMongoose = require('./app/config/mongoose.conf');
 
+// Validation des variables d'environnement
+validateEnvVariables();
+
+// Configuration de la connexion à la base de données et connexion
+configMongoose(mongoose);
+
+// Configuration du module passport
+configPassport(passport);
+
+// Création de l'application Express
 var app = express();
-
-// config
-mongoose.connect(config.dbUrl, function(err) {
-  if (err) {
-    console.log('Connection failed to the database');
-    throw err;
-  }
-  console.log('Successfully connected to the database');
-});
 
 // view engine setup
 app.set('view engine', 'ejs');
@@ -35,7 +37,6 @@ app.use(bodyParser.urlencoded({
 
 // Configuration de la strategie d'authentification passport
 app.use(passport.initialize());
-configurerStrategyJWT(passport);
 
 var entries = require('./app/controllers')(passport);
 app.use('/api', entries.api);

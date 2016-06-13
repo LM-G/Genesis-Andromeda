@@ -10,6 +10,22 @@ var User = require(path.join(__base, './app/models/User'));
 var RefreshToken = require(path.join(__base, './app/models/RefreshToken'));
 var validationUtils = require(path.join(__base, './app/utils/validation.utils'));
 
+// Definition des limites de taille des paramètres d'authentification
+var bounds = {
+  username: {
+    minLength: 3,
+    maxLength: 16
+  },
+  password: {
+    minLength: 8,
+    maxLength: 128
+  },
+  email: {
+    minLength: 5,
+    maxLength: 256
+  }
+};
+
 module.exports = {
   login: login,
   create: create
@@ -24,9 +40,25 @@ module.exports = {
  */
 function login(username, password, rememberme) {
   var deferred = Q.defer();
+  var properties = {
+    username: username,
+    password: password
+  };
+  var fields = ['username', 'password'];
+
+  // Validation des paramètres
+  try {
+    validationUtils.checkProperties(properties, fields);
+  } catch (e) {
+    deferred.reject({ code: 0, loginMessage: 'Missing parameters', error: e });
+  }
+
   // on retrouve l'utilisateur
   User.findOne({
-    username: username
+    $or: [
+      { 'username': username },
+      { 'email': username }
+    ]
   }, handleLogin);
 
   function handleLogin(err, user) {
@@ -39,9 +71,10 @@ function login(username, password, rememberme) {
       // génération de l'access token
       var access_token = jwt.sign({
         _id: user._id
-      }, config.security.secret, {
+      }, process.env.SESSION_SECRET, {
         expiresIn: config.security.tokenLifeShort
       });
+
       result.access_token = access_token;
 
       // gestion du rememberme
@@ -49,7 +82,7 @@ function login(username, password, rememberme) {
         // génération du refresh token
         var refresh_token = jwt.sign({
           _id: user._id
-        }, config.security.secret, {
+        }, process.env.SESSION_SECRET, {
           expiresIn: config.security.tokenLifeLong
         });
 
@@ -62,7 +95,7 @@ function login(username, password, rememberme) {
       deferred.resolve(result);
     } else {
       // authentication failed
-      deferred.resolve();
+      deferred.reject({login});
     }
   }
 
@@ -92,24 +125,43 @@ function create(userParams) {
   var fields = ['username', 'password', 'email'];
   var user = new User(_.pick(userParams, fields));
 
-  user.save(function(err) {
-    if (err) {
-      if (err.errors) {
-        deferred.reject(err);
-      } else if (err.code == 11000) {
-        deferred.reject({
-          code: -2,
-          message: 'Le nom d\'utilisateur ou l\'adresse email n\'est pas disponible'
-        });
+  // Validation des paramètres
+  try {
+    validationUtils.checkProperties(user, fields);
+  } catch (e) {
+    deferred.reject({ code: 0, signupMessage: 'Missing parameters', error: e });
+  }
+  if (!validationUtils.checkLength(user.username, bounds.username.minLength, bounds.username.maxLength)) {
+    deferred.reject({ code: 1, signupMessage: 'Invalid username length.' });
+  } else if (!validationUtils.checkLength(user.password, bounds.password.minLength, bounds.password.maxLength)) {
+    deferred.reject({ code: 2, signupMessage: 'Invalid password length.' });
+  } else if (!validationUtils.checkLength(user.email, bounds.email.minLength, bounds.email.maxLength)) {
+    deferred.reject({ code: 3, signupMessage: 'Invalid email length.' });
+  } else if (!validationUtils.validateEmail(user.email)) {
+    deferred.reject({ code: 4, signupMessage: 'Invalid email address.' });
+  } else {
+    User.findOne({
+      $or: [
+        { 'username': user.username },
+        { 'email': user.email }
+      ]
+    }, function(err, user) {
+      if (err) {
+        throw err;
+      } else if (user) {
+        // utilisateur existe déja
+        deferred.reject({ code: 5, signupMessage: 'That username/email is already taken.' });
       } else {
-        deferred.reject({
-          code: -1,
-          message: 'Echec inscription utilisateur'
+        // Enregistrement de l'utilisateur
+        user.save(function(err) {
+          if (err) {
+            throw err;
+          }
+          deferred.resolve(user);
         });
       }
-    }
-    deferred.resolve();
-  });
+    });
+  }
 
   return deferred.promise;
 }
