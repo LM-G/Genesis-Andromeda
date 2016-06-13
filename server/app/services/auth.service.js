@@ -49,7 +49,7 @@ function login(username, password, rememberme) {
 
   // Validation des paramètres
   try {
-    validationUtils.checkProperties(properties, fields);
+    validationUtils.check(properties, fields);
   } catch (e) {
     deferred.reject({ code: 0, loginMessage: 'Missing parameters', error: e });
   }
@@ -96,7 +96,7 @@ function login(username, password, rememberme) {
       deferred.resolve(result);
     } else {
       // authentication failed
-      deferred.reject({login});
+      deferred.reject({ code: 2, loginMessage: 'Login failed, wrong credentials' });
     }
   }
 
@@ -128,7 +128,7 @@ function create(userParams) {
 
   // Validation des paramètres
   try {
-    validationUtils.checkProperties(user, fields);
+    validationUtils.check(user, fields);
   } catch (e) {
     deferred.reject({ code: 0, signupMessage: 'Missing parameters', error: e });
   }
@@ -146,10 +146,10 @@ function create(userParams) {
         { 'username': user.username },
         { 'email': user.email }
       ]
-    }, function(err, user) {
+    }, function(err, found) {
       if (err) {
         throw err;
-      } else if (user) {
+      } else if (found) {
         // utilisateur existe déja
         deferred.reject({ code: 5, signupMessage: 'That username/email is already taken.' });
       } else {

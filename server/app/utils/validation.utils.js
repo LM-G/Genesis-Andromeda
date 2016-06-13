@@ -21,7 +21,9 @@ function checkProperties(obj, properties) {
       properties.push(property);
     }
   });
-  throw new MissingArgumentError(missingProperties);
+  if (missingProperties.length) {
+    throw new MissingArgumentError(missingProperties);
+  }
 }
 
 /**

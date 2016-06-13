@@ -24,8 +24,7 @@ function configAuth($httpProvider, jwtInterceptorProvider) {
 /**
  * Initialisation du module d'authentification, chargement de l'utilisateur
  */
-function mainAuth($rootScope, $state, jwtHelper, _, authService, User, commonStorage, modalService,
-  moment) {
+function mainAuth($rootScope, $state, jwtHelper, _, authService, User, commonStorage, modalService) {
 
   console.info('Initialisation user');
   /* recuperation des informations de l'utilsiateur stockée dans le local storage */
@@ -39,7 +38,7 @@ function mainAuth($rootScope, $state, jwtHelper, _, authService, User, commonSto
 
   $rootScope.$on('$stateChangeStart', handleStateChangeStart);
 
-  function handleStateChangeStart(event, toState, toParams, fromState, fromParams) {
+  function handleStateChangeStart(event, toState, toParams) {
     /* vérification que l'utilisateur peut accèder aux routes */
     if (toState.authLevel != null) {
       var accessToken = authService.getAccessToken();
@@ -68,5 +67,6 @@ function jwtInterceptor(config, commonStorage, jwtHelper, authService) {
   if (config.url.substr(config.url.length - 5) == '.html') {
     return null;
   }
+  debugger;
   return authService.getAccessToken();
 }

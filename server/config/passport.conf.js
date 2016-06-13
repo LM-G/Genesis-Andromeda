@@ -12,7 +12,7 @@ var User = require(path.join(__base, 'app/models/User'));
  */
 module.exports = function(passport) {
   // Utilisation d'une stratégie JWT.
-  passport.use('local-login', newJwtStrategy());
+  passport.use('jwt', newJwtStrategy());
 };
 
 /**
