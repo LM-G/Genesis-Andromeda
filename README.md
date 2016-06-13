@@ -58,10 +58,13 @@ $ mongod
 
 ### Lancement du serveur
 ```javascript
+$ npm i -g nodemon
+```
+```javascript
 $ cd server
 ```
 ```javascript
-$ npm start
+$ nodemon
 ```
 
 ### Livereload
@@ -83,3 +86,15 @@ Plugins :
 - JSHint Gutter
 
 Configurer Javascript Beautify et JSHint Gutter pour beautify et lint à la sauvegarde de chaque fichier.
+
+## Debugging
+```javascript
+$ npm i -g node-inspector
+```
+Dans un nouveau terminal :
+
+```javascript
+$ node-inspector
+```
+
+Puis coller dans Chrome l'url fournie par node-inspector

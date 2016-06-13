@@ -2,10 +2,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 
-var config = require(path.join(__base, 'app/config/config'));
-var userService = require(path.join(__base, 'app/services/user.service'));
 var authService = require(path.join(__base, 'app/services/auth.service'));
-
 
 router.post('/login', login);
 router.post('/register', register);
@@ -18,21 +15,14 @@ module.exports = router;
  * Identification d'un utilisateur grace a son nom et son mot de passe
  */
 function login(req, res) {
-  userService
+  authService
     .login(req.body.username, req.body.password, req.body.rememberme)
     .then(function(token) {
-      if (token) {
-        // authentication successful
-        res.json({
-          message: 'Login successful',
-          token: token
-        });
-      } else {
-        // authentication failed
-        res.status(400).json({
-          message: "Echec identification utilisateur"
-        });
-      }
+      // authentication successful
+      res.json({
+        message: 'Login successful',
+        token: token
+      });
     })
     .catch(function(err) {
       res.status(400).send(err);
@@ -40,7 +30,7 @@ function login(req, res) {
 }
 
 function register(req, res) {
-  userService
+  authService
     .create(req.body)
     .then(function() {
       res.json({
@@ -54,7 +44,7 @@ function register(req, res) {
 
 function refresh(req, res) {
   authService
-    .refresh(req.body)
+    .refresh(req.body.token)
     .then(function(result) {
       res.json({
         message: 'Successfully renewed access token',
@@ -64,4 +54,5 @@ function refresh(req, res) {
     .catch(function(err) {
       res.status(400).send(err);
     });
+  res.status(400);
 }

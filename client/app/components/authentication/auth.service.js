@@ -2,9 +2,9 @@ angular
   .module('genesis.services.auth')
   .service('authService', authService);
 
-authService.$inject = ['commonStorage', 'User', 'jwtHelper', '$http', 'genesisCfg'];
+authService.$inject = ['commonStorage', 'tokenStorage', 'User', 'jwtHelper', '$http', 'genesisCfg'];
 
-function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
+function authService(commonStorage, tokenStorage, User, jwtHelper, $http, genesisCfg) {
   var service = this;
   /***********************************************************************************************/
   /* Variables                                                                                   */
@@ -20,10 +20,10 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
    */
   service.setTokens = function(accessToken, refreshToken) {
     if (accessToken) {
-      localStorage.setItem('access_token', accessToken);
+      tokenStorage.set('access_token', accessToken);
     }
     if (refreshToken) {
-      localStorage.setItem('refresh_token', refreshToken);
+      tokenStorage.set('refresh_token', refreshToken);
     }
   };
 
@@ -33,8 +33,8 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
    */
   service.getTokens = function() {
     return {
-      accessToken: localStorage.getItem('access_token'),
-      refreshToken: localStorage.getItem('refresh_token')
+      accessToken: tokenStorage.get('access_token'),
+      refreshToken: tokenStorage.get('refresh_token')
     };
   };
 
@@ -43,7 +43,7 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
    * @return {Object} token d'accès
    */
   service.getAccessToken = function() {
-    return localStorage.getItem('access_token');
+    return tokenStorage.get('access_token');
   };
 
   /**
@@ -51,7 +51,7 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
    * @return {Object} refrtesh token
    */
   service.getRefreshToken = function() {
-    return localStorage.getItem('refresh_token');
+    return tokenStorage.get('refresh_token');
   };
 
 
@@ -86,8 +86,8 @@ function authService(commonStorage, User, jwtHelper, $http, genesisCfg) {
    */
   service.disconnectUser = function() {
     commonStorage.remove('user');
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    tokenStorage.remove('access_token');
+    tokenStorage.remove('refresh_token');
     User.update();
   };
 

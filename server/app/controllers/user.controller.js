@@ -3,9 +3,7 @@ var router = express.Router();
 var path = require('path');
 var _ = require('lodash');
 
-var config = require(path.join(__base, 'app/config/config'));
 var userService = require(path.join(__base, 'app/services/user.service'));
-
 
 router.get('/', getUser);
 
