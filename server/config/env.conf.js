@@ -24,15 +24,11 @@ module.exports = function() {
 function validateNodeEnvironment() {
   switch (process.env.NODE_ENV) {
     case 'development':
-      console.log(`Node environment set for ${process.env.NODE_ENV}`);
-      break;
 
     case 'production':
-      console.log(`Node environment set for ${process.env.NODE_ENV}`);
-      break;
 
     case 'test':
-      console.log(`Node environment set for ${process.env.NODE_ENV}`);
+      console.log('Node environment set for ', process.env.NODE_ENV);
       break;
 
     default:
@@ -56,17 +52,17 @@ function validateMongoUri() {
 
       case 'development':
         process.env.MONGO_URI = config.MONGO_URI.DEVELOPMENT;
-        console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
+        console.log('MONGO_URI set for ', process.env.NODE_ENV);
         break;
 
       case 'production':
         process.env.MONGO_URI = config.MONGO_URI.PRODUCTION;
-        console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
+        console.log('MONGO_URI set for ', process.env.NODE_ENV);
         break;
 
       case 'test':
         process.env.MONGO_URI = config.MONGO_URI.TEST;
-        console.log(`MONGO_URI set for ${process.env.NODE_ENV}`);
+        console.log('MONGO_URI set for ', process.env.NODE_ENV);
         break;
 
       default:
