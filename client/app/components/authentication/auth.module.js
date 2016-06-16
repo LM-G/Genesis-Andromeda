@@ -67,6 +67,5 @@ function jwtInterceptor(config, commonStorage, jwtHelper, authService) {
   if (config.url.substr(config.url.length - 5) == '.html') {
     return null;
   }
-  debugger;
   return authService.getAccessToken();
 }
