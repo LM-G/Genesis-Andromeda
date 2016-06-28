@@ -1,0 +1,53 @@
+<!--suppress XmlInvalidId -->
+<div class="modal-header">
+  <h1 class="modal-title" translate="app.title"></h1>
+  <h3 translate="views.login.title"></h3>
+</div>
+<div class="modal-body">
+  <form name="loginForm" id="loginForm" class="form-genesis" ng-submit="$ctrl.login(loginForm)" novalidate>
+    <!-- Username -->
+    <div class="form-group" form-validate="on-submit">
+      <label class="control-label" for="username" translate="views.login.username"></label>
+      <input type="text" class="form-control" name="username" ng-model="$ctrl.username"
+             placeholder="{{'views.login.placeholder.username' | translate}}" required/>
+      <div class="help-block" ng-messages="loginForm.username.$error">
+        <p ng-message="required"><span translate="form.error.required"></span></p>
+      </div>
+    </div>
+    <!-- Password -->
+    <div class="form-group" form-validate="on-submit">
+      <label class="control-label" for="password" translate="views.login.password"></label>
+      <input type="password" class="form-control" name="password" ng-model="$ctrl.password"
+             placeholder="{{'views.login.placeholder.password' | translate}}" required/>
+      <div class="help-block" ng-messages="loginForm.password.$error">
+        <p ng-message="required"><span translate="form.error.required"></span></p>
+      </div>
+    </div>
+    <uib-alert type="danger" close="$ctrl.loginFailed = false" ng-show="$ctrl.loginFailed">
+      <span translate="views.login.error.authentication"></span>
+    </uib-alert>
+    <!-- Rememberme -->
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="$ctrl.rememberme">
+        <span translate="views.login.rememberme"></span>
+      </label>
+      <label>
+        <a href="#" id="password-forgotten">
+          <span translate="views.login.passwordforgotten"></span>
+        </a>
+      </label>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <a href="#" id="register" ng-click="$ctrl.register()">
+    <span translate="views.login.register"></span>
+  </a>
+  <button class="btn btn-primary" type="submit" form="loginForm" ng-disabled="$ctrl.isLoading">
+    <span translate="views.login.connexion"></span>
+  </button>
+  <button class="btn btn-warning" type="button" ng-click="$dismiss()" ng-disabled="$ctrl.isLoading">
+    <span translate="app.cancel"></span>
+  </button>
+</div>

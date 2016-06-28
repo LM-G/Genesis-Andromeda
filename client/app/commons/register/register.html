@@ -1,0 +1,71 @@
+<form name="signUpForm" class="form-genesis" ng-submit="$ctrl.register(signUpForm)" novalidate>
+  <div class="modal-header">
+    <h1 class="modal-title" translate="app.title"></h1>
+    <h3 translate="views.signup.title"></h3>
+  </div>
+  <div class="modal-body">
+    <!-- PSEUDO -->
+    <div class="form-group" form-validate>
+      <label class="control-label" for="username" translate="views.signup.username"></label>
+      <input type="text" class="form-control" name="username"
+             ng-model="$ctrl.username"	placeholder="{{'views.signup.placeholder.username' | translate}}"
+             maxlength="24" required />
+      <div class="help-block" ng-messages="signUpForm.username.$error">
+        <p ng-message="required"><span translate="form.error.required"></span></p>
+      </div>
+    </div>
+    <!-- EMAIL -->
+    <div class="form-group" form-validate>
+      <label class="control-label" for="email" translate="views.signup.email"></label>
+      <input type="email" class="form-control" name="email"
+             ng-model="$ctrl.email"	placeholder="{{'views.signup.placeholder.email' | translate}}"
+             required />
+      <div class="help-block" ng-messages="signUpForm.email.$error">
+        <span ng-message="required" translate="form.error.required"></span>
+        <span ng-message="email" translate="form.error.email"></span>
+      </div>
+    </div>
+    <!-- EMAIL VALIDATION -->
+    <div class="form-group" form-validate>
+      <label class="control-label" for="confemail" translate="views.signup.confemail"></label>
+      <input type="text" class="form-control" name="confemail"
+             ng-model="$ctrl.confemail"
+             placeholder="{{'views.signup.placeholder.confemail' | translate}}" required
+             input-match="email"/>
+      <div class="help-block" ng-messages="signUpForm.confemail.$error">
+        <span ng-message="required" translate="form.error.required"></span>
+        <span ng-message="match" translate="form.error.confemail"></span>
+      </div>
+    </div>
+    <!-- PASSWORD -->
+    <div class="form-group" form-validate>
+      <label class="control-label" for="password" translate="views.signup.password"></label>
+      <input type="password" class="form-control" name="password" minlength="6"
+             ng-model="$ctrl.password" placeholder="{{'views.signup.placeholder.password' | translate}}" required/>
+      <div class="help-block" ng-messages="signUpForm.password.$error">
+        <span ng-message="required" translate="form.error.required"></span>
+        <span ng-message="minlength" translate="form.error.min" translate-values="{nombre: 6}"></span>
+      </div>
+    </div>
+    <!-- PASSWORD VALIDATION-->
+    <div class="form-group" form-validate>
+      <label class="control-label" for="confpassword" translate="views.signup.confpassword"></label>
+      <input type="password" class="form-control" name="confpassword"
+             ng-model="$ctrl.confpassword" ng-model-options="{ updateOn: 'blur' }"
+             placeholder="{{'views.signup.placeholder.confpassword' | translate}}" required
+             input-match="password"/>
+      <div class="help-block" ng-messages="signUpForm.confpassword.$error">
+        <span ng-message="required" translate="form.error.required"></span>
+        <span ng-message="match" translate="form.error.confpassword"></span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">
+      <span translate="app.validate"></span>
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="$dismiss()">
+      <span translate="app.cancel"></span>
+    </button>
+  </div>
+</form>

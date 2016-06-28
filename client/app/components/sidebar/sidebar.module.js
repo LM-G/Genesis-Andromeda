@@ -1,1 +1,0 @@
-angular.module('genesis.views.sidebar', []);

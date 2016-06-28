@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 translate="views.home.title"></h1>
+  <p translate="views.global.welcome"></p>
+
+  <div class="btn-group" ng-show="$ctrl.isLoaded">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.login()"
+            ng-if="!$ctrl.User.isLogged">
+      <span translate="app.login"></span>
+    </button>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.$state.go('dashboard')"
+            ng-if="$ctrl.User.isLogged">
+      <span translate="views.dashboard.title"></span>
+    </button>
+  </div>
+</div>

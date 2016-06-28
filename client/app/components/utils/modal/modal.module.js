@@ -1,1 +1,0 @@
-angular.module('genesis.services.utils.modal', []);
