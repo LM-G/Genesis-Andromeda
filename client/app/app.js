@@ -9,7 +9,6 @@ import {appRun} from './config/app.config';
 import appComponent from './app.component';
 import components from './components';
 import commons from './commons';
-import modules from './modules';
 
 /* dépendances nécessaires au bootstrap de l'application */
 const requires = [
@@ -21,11 +20,9 @@ const requires = [
   'genesis.config',
   /* nom du module des templates en cache angular générés par gulp-angular-templatecache*/
   'genesis.templates',
-  /* modules de services de l'application */
-  modules,
   /* composants réutilisables */
   components,
-  /* composants spécifiques de l'applicaiton */
+  /* composants spécifiques de l'application */
   commons
 ];
 
