@@ -1,5 +1,6 @@
 export default class LoginController {
-  constructor($state, loginService, authService, $uibModalInstance, toState, toParams) {
+
+  constructor($state, loginService, authService, $uibModalInstance, toState, toParams, registerModalService) {
     this.$state = $state;
     this.loginService = loginService;
     this.authService = authService;
@@ -7,6 +8,7 @@ export default class LoginController {
     /* Resolved before instanciating the controller */
     this.toState = toState;
     this.toParams = toParams;
+    this.registerModalService = registerModalService;
   }
 
   $onInit() {
@@ -44,20 +46,28 @@ export default class LoginController {
             this.$state.go('dashboard', this.toParams);
           }
         })
-        .catch(function () {
+        .catch((err) => {
+          debugger;
           this.loginFailed = true;
         })
-        .finally(function () {
+        .finally(() => {
           this.isLoading = false;
         });
     }
   }
+
+  register(){
+    this.$uibModalInstance.close('resgister');
+    this.registerModalService.open();
+  }
 }
+
 LoginController.$inject = [
   '$state',
   'loginService',
   'authService',
   '$uibModalInstance',
   'toState',
-  'toParams'
+  'toParams',
+  'registerModalService'
 ];

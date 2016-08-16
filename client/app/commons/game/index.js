@@ -15,6 +15,6 @@ function Router($stateProvider) {
     name: 'game',
     url: '/game',
     template: `<game></game>`,
-    authLevel: 1
+    authLevel: 0
   });
 }

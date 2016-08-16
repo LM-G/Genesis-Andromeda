@@ -3,8 +3,8 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 /* config*/
-import {appRouter} from './config/app.config';
-import {appRun} from './config/app.config';
+import {appRouter} from './app.config';
+import {appRun} from './app.config';
 /* fonctionnalités de l'application */
 import appComponent from './app.component';
 import components from './components';

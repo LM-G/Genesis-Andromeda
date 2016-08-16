@@ -5,10 +5,6 @@ var config = require(path.join(__base, 'config/config'));
  * Validation des variables d'environnement
  */
 module.exports = function() {
-  if (!process.env.NODE_ENV) {
-    process.env.NODE_ENV = config.ENV;
-  }
-
   validateNodeEnvironment();
 
   if (!process.env.SESSION_SECRET) {
@@ -23,14 +19,11 @@ module.exports = function() {
 
 function validateNodeEnvironment() {
   switch (process.env.NODE_ENV) {
-    case 'development':
-
-    case 'production':
-
+    case 'development': break;
+    case 'production': break;
     case 'test':
       console.log('Node environment set for ', process.env.NODE_ENV);
       break;
-
     default:
       console.log('Error: process.env.NODE_ENV should be set to a valid ' +
         ' value such as \'production\', \'development\', or \'test\'.');

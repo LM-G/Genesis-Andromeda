@@ -6,7 +6,11 @@
     "tokenLifeShort": 3600,
     "tokenLifeLong": 1209600
   },
-  "ENV" : "development",
+  "ENV" : {
+    "DEVELOPMENT" : "development",
+    "PRODUCTION" : "production",
+    "TEST" : "test"
+  },
   "PORT" : 3000,
   "MONGO_URI" : {
     "DEVELOPMENT" : "mongodb://localhost:27017/genesis-dev",

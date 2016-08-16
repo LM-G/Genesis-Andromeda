@@ -99,14 +99,6 @@ gulp.task('publish-entrypoint', function() {
     .pipe(livereload());
 });
 
-// copie du l'htaccess
-gulp.task('publish-htaccess', function() {
-  return gulp
-    .src('.htaccess')
-    .pipe(gulp.dest(PATH_DIST))
-    .pipe(livereload());
-});
-
 // traductions i18n angular
 gulp.task('publish-i18n-lang', function() {
   return gulp
@@ -150,7 +142,7 @@ gulp.task('publish-favicon', function() {
 
 
 gulp.task('publish-config-dev', function() {
-  return gulp.src(['./app/config/config-dev.json'])
+  return gulp.src(['./config/config-dev.json'])
     .pipe(gulpNgConfig('genesis.config'))
     .pipe(rename('config.js'))
     .pipe(gulp.dest(PATH_DIST_JS));
@@ -159,7 +151,7 @@ gulp.task('publish-config-dev', function() {
 // Recompile automatiquement si changement sur un fichier
 gulp.task('watch', function() {
   livereload.listen();
-  gulp.watch('app/**/*.js', ['webpack: build']);
+  gulp.watch(['app/**/*.js', '!app/**/*test.js'], ['webpack: build']);
   gulp.watch('app/**/*.css', ['publish-css']);
   gulp.watch('app/**/*.html', ['publish-html', 'publish-entrypoint']);
   gulp.watch('app/assets/img/**', ['publish-images', 'publish-favicon']);
@@ -177,7 +169,6 @@ gulp.task('default',
       'publish-images',
       'publish-favicon',
       'publish-entrypoint',
-      'publish-htaccess',
       'publish-config-dev'
     ], [
       'publish-i18n-lang',
