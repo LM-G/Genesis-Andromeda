@@ -7,6 +7,13 @@ import sidebar from './sidebar';
 import register from './register';
 import game from './game';
 
+/**
+ * @ngdoc overview
+ * @name genesis.commons
+ *
+ * @description
+ * Container reference for all application specific components.
+ */
 const commons = angular
   .module('genesis.commons', [
     header,

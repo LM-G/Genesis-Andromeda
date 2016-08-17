@@ -26,6 +26,13 @@ const requires = [
   commons
 ];
 
+/**
+ * @ngdoc overview
+ * @name genesis
+ *
+ * @description
+ * Main module, entry point
+ */
 const root = angular
   .module('genesis', requires)
   .component('app', appComponent)

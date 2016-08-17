@@ -55,6 +55,7 @@ Temporary Items
 /server/node_modules/*
 
 # Fichiers générés
+/client/doc/*
 /server/public/*
 
 # IntelliJ

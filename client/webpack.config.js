@@ -2,10 +2,15 @@
 
 var webpack = require("webpack");
 
+/* TODO : créer plusieurs mode de déploiement : DEV, PROD */
+console.log('env : ', process.env.BUILD_ENV);
+
 module.exports = {
+  /* generate sourcemaps */
   devtool: 'source-map',
   entry: {
     app: "./app/app.js",
+    /* all the vendors to include */
     vendor: [
       "angular",
       "angular-ui-router",

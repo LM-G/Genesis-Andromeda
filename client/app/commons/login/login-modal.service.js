@@ -2,7 +2,13 @@ import _merge from 'lodash/merge';
 import _extend from 'lodash/extend';
 
 /**
- * Gestion de la modal de login
+ * @ngdoc service
+ * @name genesis.commons.login:LoginModalService
+ *
+ * @requires $uibModal
+ *
+ * @description
+ * Service de gestion de la pop-in de login
  */
 export default class LoginModalService{
   constructor($uibModal){
@@ -15,7 +21,7 @@ export default class LoginModalService{
       controllerAs: '$ctrl'
     };
   }
-  
+
   open(state, params){
     let optLoginModal = _merge({}, this.loginModal);
     optLoginModal.resolve = {};

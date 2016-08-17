@@ -11,6 +11,8 @@ var gulpNgConfig = require('gulp-ng-config');
 var livereload = require('gulp-livereload');
 var rename = require('gulp-rename');
 var webpack = require('webpack-stream');
+var gulpDocs = require('gulp-ngdocs');
+var webserver = require('gulp-webserver');
 
 // Variables =====================================================================================
 
@@ -25,6 +27,7 @@ var PATH_DIST_FONTS = PATH_DIST + 'fonts/';
 var PATH_DIST_HTML = PATH_DIST + 'html/';
 var PATH_DIST_LANG = PATH_DIST + 'lang/';
 var PATH_DIST_IMG = PATH_DIST + 'img/';
+var PATH_DIST_DOC = PATH_DIST + 'doc/';
 
 // Tâches =========================================================================================
 
@@ -157,6 +160,32 @@ gulp.task('watch', function() {
   gulp.watch('app/assets/img/**', ['publish-images', 'publish-favicon']);
   gulp.watch('app/assets/lang/**', ['publish-lang']);
 });
+
+// construction de la documentation
+gulp.task('documentation: build', function() {
+  var options = {
+    title: 'Genesis Andromeda Docs',
+    html5Mode: false,
+    startPage: '/api',
+    titleLink: '/api'
+  };
+  return gulp.src(PATH_SCRIPTS)
+    .pipe(gulpDocs.process(options))
+    .pipe(gulp.dest('./doc'));
+});
+
+// lancement d'un serveur pour afficher la documentation
+gulp.task('documentation: webserver', function() {
+  gulp.src('./doc')
+    .pipe(webserver({
+      port: 3002,
+      open: false
+    }));
+});
+
+gulp.task('documentation',
+  gulpSequence('documentation: build', 'documentation: webserver')
+);
 
 // Tâche par défaut
 gulp.task('default',
