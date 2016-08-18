@@ -6,7 +6,7 @@ import TokenStorage from './token.storage';
 
 
 const config = angular
-  .module('genesis.modules.storage', [
+  .module('genesis.components.storage', [
     angularStorage
   ])
   .service('commonStorage', CommonStorage)

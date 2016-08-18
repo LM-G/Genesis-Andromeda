@@ -7,6 +7,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
+var cors = require('cors');
 
 var validateEnvVariables = require('./config/env.conf');
 var configPassport = require('./config/passport.conf');
@@ -23,6 +24,8 @@ configPassport(passport);
 
 // Création de l'application Express
 var app = express();
+// autorisation CORS
+app.use(cors());
 
 // view engine setup
 app.set('view engine', 'ejs');

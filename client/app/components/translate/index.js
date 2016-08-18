@@ -5,7 +5,7 @@ import confTraduction from './translate.config';
 
 
 const translate = angular
-  .module('genesis.modules.translate', [
+  .module('genesis.components.translate', [
     ngTranslate
   ])
   .config(confTraduction)

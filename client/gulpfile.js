@@ -151,6 +151,13 @@ gulp.task('publish-config-dev', function() {
     .pipe(gulp.dest(PATH_DIST_JS));
 });
 
+gulp.task('publish-config-demo', function() {
+  return gulp.src(['./config/config-prod.json'])
+    .pipe(gulpNgConfig('genesis.config'))
+    .pipe(rename('config.js'))
+    .pipe(gulp.dest(PATH_DIST_JS));
+});
+
 // Recompile automatiquement si changement sur un fichier
 gulp.task('watch', function() {
   livereload.listen();
@@ -204,6 +211,26 @@ gulp.task('default',
       'publish-lang'
     ],
     'mocks',
+    'watch'
+  )
+);
+
+// pour test d'acces avec ip differente de localhost
+gulp.task('demo',
+  gulpSequence('clean', [
+      'publish-html',
+      'webpack: build',
+      'publish-fonts',
+      'publish-css',
+      'publish-css-map',
+      'publish-images',
+      'publish-favicon',
+      'publish-entrypoint',
+      'publish-config-demo'
+    ], [
+      'publish-i18n-lang',
+      'publish-lang'
+    ],
     'watch'
   )
 );

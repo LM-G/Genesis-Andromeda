@@ -1,0 +1,6 @@
+{
+  "genesisCfg": {
+    "apiUrl": "http://10.17.1.17:3000/api",
+    "authUrl": "http://10.17.1.17:3000/auth"
+  }
+}

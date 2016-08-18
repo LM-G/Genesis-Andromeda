@@ -4,7 +4,7 @@ import User from './User';
 
 
 const config = angular
-  .module('genesis.modules.models', [])
+  .module('genesis.components.models', [])
   .service('User', User)
   .name;
 

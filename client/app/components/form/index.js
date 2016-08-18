@@ -3,7 +3,7 @@ import FormValidate from './form-validate.directive';
 import InputMatch from './input-match.directive';
 
 const form = angular
-  .module('genesis.commons.form', [])
+  .module('genesis.components.form', [])
   .directive('formValidate', FormValidate)
   .directive('inputMatch', InputMatch)
   .name;

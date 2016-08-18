@@ -7,7 +7,7 @@ import AuthService from './auth.service';
 import accessLevel from './auth-access';
 
 const config = angular
-  .module('genesis.modules.auth', [
+  .module('genesis.components.auth', [
     angularJWT
   ])
   .config(confAuthentication)

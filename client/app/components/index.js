@@ -6,6 +6,7 @@ import storage from './storage';
 import auth from './authentication';
 import models from './models';
 import nav from './navigation';
+import clock from './clock';
 
 const components = angular
   .module('genesis.components', [
@@ -15,7 +16,8 @@ const components = angular
     storage,
     auth,
     models,
-    nav
+    nav,
+    clock
   ])
   .name;
 

@@ -17,7 +17,9 @@ module.exports = {
       "angular-translate",
       "angular-translate-loader-static-files",
       "angular-storage",
-      "angular-jwt"
+      "angular-jwt",
+      "moment",
+      "angular-moment"
     ]
   },
   output: {
