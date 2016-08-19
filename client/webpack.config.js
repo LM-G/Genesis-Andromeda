@@ -19,7 +19,8 @@ module.exports = {
       "angular-storage",
       "angular-jwt",
       "moment",
-      "angular-moment"
+      "angular-moment",
+      "angular-ui-bootstrap"
     ]
   },
   output: {

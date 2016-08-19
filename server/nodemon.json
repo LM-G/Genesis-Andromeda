@@ -1,3 +1,3 @@
 {
-  "ignore": ["/node_modules/*.js", "/public/*.js"]
+  "ignore": ["/node_modules/*.js", "/public/**"]
 }
