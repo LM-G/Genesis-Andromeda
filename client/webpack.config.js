@@ -18,9 +18,10 @@ module.exports = {
       "angular-translate-loader-static-files",
       "angular-storage",
       "angular-jwt",
-      "moment",
       "angular-moment",
-      "angular-ui-bootstrap"
+      "angular-ui-bootstrap",
+      "angular-dynamic-locale",
+      "moment"
     ]
   },
   output: {

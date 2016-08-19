@@ -1,8 +1,14 @@
 /**
- * Configuration du module de traduction de l'application
+ * @ngdoc overview
+ *
+ * @description
+ * Configurates the translate module
+ *
  * @param $translateProvider
+ * @param tmhDynamicLocaleProvider
  */
-function confTraduction($translateProvider) {
+function confTraduction($translateProvider, tmhDynamicLocaleProvider) {
+  /* configurates the app specific translations */
   $translateProvider.useStaticFilesLoader({
     prefix: '/lang/locale-',
     suffix: '.json'
@@ -11,7 +17,10 @@ function confTraduction($translateProvider) {
     .useSanitizeValueStrategy(null)
     .determinePreferredLanguage()
     .fallbackLanguage('fr');
+
+  /* enable the i18n internationalization */
+  tmhDynamicLocaleProvider.localeLocationPattern('/lang/i18n/angular-locale_{{locale}}.js');
 }
-confTraduction.$inject = ['$translateProvider'];
+confTraduction.$inject = ['$translateProvider', 'tmhDynamicLocaleProvider'];
 
 export default confTraduction;

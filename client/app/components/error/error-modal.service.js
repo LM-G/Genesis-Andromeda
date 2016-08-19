@@ -20,7 +20,7 @@ export default class ErrorService{
       errorType: () =>  err || null
     });
     this.opened = this.$uibModal.open(optErrorModal);
-    return this.opened;
+    return this.opened.result;
   }
 
 }

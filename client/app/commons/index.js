@@ -6,6 +6,7 @@ import dashboard from './dashboard';
 import sidebar from './sidebar';
 import register from './register';
 import game from './game';
+import map from './map';
 
 /**
  * @ngdoc overview
@@ -22,7 +23,8 @@ const commons = angular
     dashboard,
     sidebar,
     register,
-    game
+    game,
+    map
   ])
   .name;
 

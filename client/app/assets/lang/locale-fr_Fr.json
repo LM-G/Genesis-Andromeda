@@ -29,6 +29,11 @@
       }
     }
   },
+  "widgets": {
+    "clock": {
+      "year": "an"
+    }
+  },
   "views": {
     "global": {
       "welcome": "Bienvenue",
@@ -78,6 +83,9 @@
     },
     "game": {
       "title": "Game"
+    },
+    "map": {
+      "title": "Carte galactique"
     }
   }
 }

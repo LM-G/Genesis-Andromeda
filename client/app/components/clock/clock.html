@@ -1,6 +1,6 @@
-<div>
-  <span ></span>
-  <uib-progressbar max="max" value="$ctrl.completion">
-    <span style="color:white; white-space:nowrap;" ng-bind="$ctrl.date | date : 'dd MMM yyyy - H:mm' "></span>
-  </uib-progressbar>
+<div class="genesis-clock">
+  <div class="display">
+    <span ng-bind="$ctrl.date | date : 'dd MMM y' "></span>
+  </div>
+  <uib-progressbar max="max" value="$ctrl.completion" class="progress"></uib-progressbar>
 </div>

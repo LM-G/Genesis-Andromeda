@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+.spacer{
+  clear: both;
+}
+
 /* navbar */
 .navbar.navbar-inverse {
   border-radius: 0px;
@@ -21,7 +25,7 @@ a {
   margin-bottom: 5px;
 }
 .form-genesis .help-block{
-	margin-bottom: 0px;
+  margin-bottom: 0px;
   margin-top: 0.2em;
   font-size: 0.8em;
 }

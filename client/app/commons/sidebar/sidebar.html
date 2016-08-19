@@ -6,6 +6,11 @@
                     <span translate="views.dashboard.title"></span>
                 </a>
             </li>
+            <li ui-sref-active="active" ng-show="$ctrl.User.getRoleAccess() == 1">
+                <a ui-sref="map">
+                    <span translate="views.map.title"></span>
+                </a>
+            </li>
             <li ui-sref-active="active">
                 <a ui-sref="game">
                     <span translate="views.game.title"></span>

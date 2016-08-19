@@ -35,7 +35,15 @@ function handleAuth($rootScope, $state, jwtHelper, authService, User, commonStor
         loginModalService.open(toState.name, toParams);
       } else if (!isTokenExpired && toState.authLevel > accessLevel) {
         event.preventDefault();
-        errorService.openModal('forbidden');
+        errorService
+          .openModal('forbidden')
+          .then(() => {
+            debugger;
+            /* redirection vers le dashboard si le chemin est forcé depuis l'url */
+            if($state.current.name === ''){
+              $state.go('dashboard');
+            }
+          });
       }
     }
   }

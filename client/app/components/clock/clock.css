@@ -1,0 +1,27 @@
+.genesis-clock{
+    display: flex;
+}
+
+.genesis-clock .progress{
+    width: 250px;
+    height: 25px;
+    margin: 0 20px 0 20px;
+}
+
+.genesis-clock .display{
+    padding: 2px 10px 2px 10px;
+    border: 1px solid #e7e7e7;
+    color: #565656;
+    font-weight: bold;
+    border-radius: 4px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.genesis-clock .progress-bar{
+    background-color: #337ab7;
+    background-image: none !important;
+}
+
+
