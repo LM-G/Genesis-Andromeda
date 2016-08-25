@@ -29,7 +29,8 @@ var bounds = {
 module.exports = {
   login: login,
   create: create,
-  refresh: refresh
+  refresh: refresh,
+  checkRoleIsAdmin: checkRoleIsAdmin
 };
 
 /**
@@ -182,4 +183,12 @@ function refresh() {
   //
   deferred.reject('not implemented yet');
   return deferred.promise;
+}
+
+function checkRoleIsAdmin(req, res, next){
+  if(req.user && req.user.role == 'admin'){
+    next();
+  } else {
+    res.end();
+  }
 }

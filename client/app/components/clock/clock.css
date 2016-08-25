@@ -1,7 +1,18 @@
 .genesis-clock .progress{
-    width: 250px;
     height: 25px;
     margin: 0 20px 0 20px;
+}
+
+.genesis-clock.g-clock-lg .progress{
+    width: 200px;
+}
+
+.genesis-clock.g-clock-md .progress{
+    width: 125px;
+}
+
+.genesis-clock.g-clock-sm .progress{
+    width: 50px;
 }
 
 .genesis-clock .display{

@@ -8,6 +8,7 @@ var api = express.Router();
 var userAPI = require("./user.controller");
 var testAPI = require("./test.controller");
 var authAPI = require("./auth.controller");
+var galaxyAPI = require("./galaxy.controller");
 
 
 module.exports = function(passport) {
@@ -19,6 +20,7 @@ module.exports = function(passport) {
 
   api.use('/test', testAPI);
   api.use('/user', userAPI);
+  api.use('/galaxy', galaxyAPI);
 
   return {
     api: api,

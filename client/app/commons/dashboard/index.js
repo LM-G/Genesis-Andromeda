@@ -1,4 +1,5 @@
 import angular from 'angular';
+
 import DashboardComponent from './dashboard.component';
 
 const home = angular

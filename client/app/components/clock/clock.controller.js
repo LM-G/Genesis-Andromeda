@@ -1,8 +1,11 @@
 export default class ClockController {
-  constructor($interval){
+  constructor($interval, $timeout){
     this.$interval = $interval;
+    this.$timeout = $timeout;
     /* taux de completion de la barre de progression de l'heure */
     this.completion = 0;
+    this.gClockWidth = this.gClockWidth || 'md';
+
   }
 
   $onInit() {
@@ -23,9 +26,9 @@ export default class ClockController {
 
       this.date = new Date(result);
       this.completion = (this.date.getHours() * 60 + this.date.getMinutes()) * 100 / 1440 ;
-    },  100);
+    },  500);
   }
 }
 
-ClockController.$inject = ['$interval'];
+ClockController.$inject = ['$interval', '$timeout'];
 
