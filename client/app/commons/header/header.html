@@ -1,0 +1,27 @@
+<div id="header">
+    <md-toolbar class="md-toolbar-tools md-hue-3" layout="row">
+        <div layout="row" layout-margin layout-align="center center">
+            <a ui-sref="home">
+                <span class="md-display-1" translate="app.title"></span>
+            </a>
+        </div>
+        <span flex></span>
+        <div layout="row">
+            <div ng-if="!$ctrl.User.isLogged" class="navigation" flex>
+                <md-button ng-click="$ctrl.register($event)" aria-label="header_open_singup">
+                    <i class="fa fa-check-square-o"></i>
+                    <span translate="views.signup.title"></span>
+                </md-button>
+                &nbsp;
+                <md-button ng-click="$ctrl.login($event)" aria-label="header_open_signin" class="test">
+                    <i class="fa fa-sign-in"></i>
+                    <span translate="views.login.title"></span>
+                </md-button>
+            </div>
+            <md-button ng-click="$ctrl.logout()" ng-if="$ctrl.User.isLogged" aria-label="header_open_signout">
+                <i class="fa fa-sign-out"></i>&nbsp;
+                <span translate="app.logout"></span>
+            </md-button>
+        </div>
+    </md-toolbar>
+</div>

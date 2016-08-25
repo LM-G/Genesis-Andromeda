@@ -1,0 +1,18 @@
+<div>
+    <md-button flex class="md-button-toggle" ng-click="$ctrl.toggle()" aria-label="side-menu-{{$ctrl.section.name}}"
+               layout="row" aria-expanded="{{$ctrl.section.isOpen}}" >
+        <span class="g-link">
+            &nbsp;
+            <span ng-bind="$ctrl.section.name | translate"></span>
+            <i aria-hidden="true" class="pull-right fa fa-chevron-down md-toggle-icon"
+               ng-class="{'toggled' : $ctrl.section.isOpen}"></i>
+        </span>
+    </md-button>
+
+    <ul ng-show="$ctrl.section.isOpen" id="side-menu-{{$ctrl.section.name}}" class="menu-toggle-list">
+        <li ng-repeat="page in $ctrl.section.pages">
+            <sidebar-link section="page"></sidebar-link>
+        </li>
+    </ul>
+</div>
+

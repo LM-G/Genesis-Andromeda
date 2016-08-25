@@ -1,7 +1,3 @@
-.genesis-clock{
-    display: flex;
-}
-
 .genesis-clock .progress{
     width: 250px;
     height: 25px;
@@ -14,14 +10,19 @@
     color: #565656;
     font-weight: bold;
     border-radius: 4px;
-    position: relative;
-    top: 0;
-    left: 0;
 }
 
-.genesis-clock .progress-bar{
-    background-color: #337ab7;
-    background-image: none !important;
+.genesis-clock md-progress-linear{
+    height: 20px !important;
+    margin: 0 !important;
+}
+
+.genesis-clock .md-mode-determinate{
+    height: 20px !important;
+}
+
+.genesis-clock .md-bar{
+    height: 20px !important;
 }
 
 

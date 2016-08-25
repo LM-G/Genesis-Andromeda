@@ -14,7 +14,8 @@
       "email": "Adresse mail invalide",
       "confemail": "Adresse mail différente",
       "confpassword": "Mot de passe différent",
-      "min": "Doit contenir au moins {{nombre}} caractères"
+      "min": "Doit contenir au moins {{nombre}} caractères",
+      "max": "Doit contenir au maximum {{nombre}} caractères"
     }
   },
   "modal": {
@@ -51,7 +52,7 @@
       "password": "Mot de passe",
       "rememberme": "Se souvenir de moi",
       "passwordforgotten": "Mot de passe oublié ?",
-      "register": "Créer un nouveau compte",
+      "register": "Nouveau compte",
       "placeholder": {
         "email": "Email",
         "username": "Nom d'utilisateur",

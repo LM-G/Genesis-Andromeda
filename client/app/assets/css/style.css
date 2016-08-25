@@ -1,51 +1,78 @@
-/* TODO : mettre des media query partout :D */
-body {
+/* layout */
+html, body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
 }
 
-a {
-  color: #00B7FF;
+[id="wrapper"]{
+  box-sizing: border-box;
+  height: 100%;
 }
 
-.spacer{
-  clear: both;
+[id="content"]{
+  box-sizing: border-box;
+  height: 100%;
 }
 
-/* navbar */
-.navbar.navbar-inverse {
-  border-radius: 0px;
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
-.navbar.navbar-default {
-  border-radius: 0px;
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* buttons */
+.md-button {
+  font-size: 12px !important;
 }
 
 /* Form */
-.form-genesis .form-group{
-  min-height: 5.5em;
-  margin-bottom: 5px;
-}
-.form-genesis .help-block{
-  margin-bottom: 0px;
-  margin-top: 0.2em;
-  font-size: 0.8em;
-}
-.form-genesis .help-block>p{
-  margin-bottom: 0px;
+.control-label{
+  font-weight: bold;
+  font-size: 14px;
 }
 
-.has-error .form-control::-webkit-input-placeholder {
-  color: #a16363;
+/* modal */
+.g-modal {
+  max-width: 90%;
+  width: 50%;
 }
 
-/* In game */
-/* main container */
-.container-main{
-  margin-left: 250px;
-  padding-left: 15px;
-  margin-right: 15px;
+.close-modal{
+  cursor: pointer;
 }
-/* sidebar */
-.sidebar-main{
-  width: 250px;
+
+.g-modal .md-block{
+  width: 80% !important;
+}
+
+.g-modal .form-genesis{
+  width: 100%;
+}
+
+.g-modal .md-content{
+  background-color: white !important;
+}
+
+.g-modal .control-label{
+  padding-bottom: 5px;
 }
 

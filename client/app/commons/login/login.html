@@ -1,53 +1,62 @@
 <!--suppress XmlInvalidId -->
-<div class="modal-header">
-  <h1 class="modal-title" translate="app.title"></h1>
-  <h3 translate="views.login.title"></h3>
-</div>
-<div class="modal-body">
-  <form name="loginForm" id="loginForm" class="form-genesis" ng-submit="$ctrl.login(loginForm)" novalidate>
-    <!-- Username -->
-    <div class="form-group" form-validate="on-submit">
-      <label class="control-label" for="username" translate="views.login.username"></label>
-      <input type="text" class="form-control" name="username" ng-model="$ctrl.username"
-             placeholder="{{'views.login.placeholder.username' | translate}}" required/>
-      <div class="help-block" ng-messages="loginForm.username.$error">
-        <p ng-message="required"><span translate="form.error.required"></span></p>
-      </div>
+<md-dialog aria-label="login_modal" class="g-modal g-login-modal">
+  <md-toolbar class="md-primary md-hue-3">
+    <div class="md-toolbar-tools modal-header" layout="row" layout-align="space-between center">
+      <h1 class="md-flex" translate="views.login.title"></h1>
+      <i class="close-modal fa fa-times-circle" aria-label="login_cancel" ng-click="$ctrl.$mdDialog.cancel()" ng-disabled="$ctrl.isLoading"></i>
     </div>
-    <!-- Password -->
-    <div class="form-group" form-validate="on-submit">
-      <label class="control-label" for="password" translate="views.login.password"></label>
-      <input type="password" class="form-control" name="password" ng-model="$ctrl.password"
-             placeholder="{{'views.login.placeholder.password' | translate}}" required/>
-      <div class="help-block" ng-messages="loginForm.password.$error">
-        <p ng-message="required"><span translate="form.error.required"></span></p>
-      </div>
-    </div>
-    <uib-alert type="danger" close="$ctrl.loginFailed = false" ng-show="$ctrl.loginFailed">
-      <span translate="views.login.error.authentication"></span>
-    </uib-alert>
-    <!-- Rememberme -->
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="$ctrl.rememberme">
-        <span translate="views.login.rememberme"></span>
-      </label>
-      <label>
-        <a href="#" id="password-forgotten">
+  </md-toolbar>
+
+  <md-dialog-content>
+    <form name="loginForm" id="login-form" class="form-genesis" ng-submit="$ctrl.login(loginForm)" novalidate
+          layout="column" layout-align="center center" layout-padding>
+      <br>
+      <span id="alert" class="md-block md-icon-left animated fadeIn" translate="views.login.error.authentication"
+            ng-click="$ctrl.loginFailed = false" ng-if="$ctrl.loginFailed" flex></span>
+      <!-- Username -->
+      <md-input-container class="md-block" form-validate>
+        <label class="control-label" for="username" translate="views.login.username"></label>
+        <md-icon class="fa fa-user"></md-icon>
+        <input type="text" class="md-accent" name="username" ng-model="$ctrl.username" required/>
+        <div class="help-block" ng-messages="loginForm.username.$error" role="alert">
+          <p ng-message="required"><span translate="form.error.required"></span></p>
+        </div>
+      </md-input-container>
+
+      <!-- Password -->
+      <md-input-container class="md-block" form-validate>
+        <label class="control-label" for="password" translate="views.login.password"></label>
+        <md-icon class="fa fa-user-secret"></md-icon>
+        <input type="password" class="form-control" name="password" ng-model="$ctrl.password" required/>
+        <div class="help-block" ng-messages="loginForm.password.$error" role="alert">
+          <p ng-message="required"><span translate="form.error.required"></span></p>
+        </div>
+      </md-input-container>
+
+
+      <div class="md-block" layout="row" layout-align="space-between center" style="margin:0 0 20px 0; width: 100%">
+        <!-- Rememberme -->
+        <md-input-container class="md-icon-left">
+          <md-checkbox ng-model="$ctrl.rememberme" aria-label="login_rememberme" id="rememberme">
+            <span translate="views.login.rememberme"></span>
+          </md-checkbox>
+        </md-input-container>
+        <span flex></span>
+        <!-- Mdp oublie -->
+        <md-button href="#" id="password-forgotten" md-no-ink aria-label="login_password_forgotten">
           <span translate="views.login.passwordforgotten"></span>
-        </a>
-      </label>
-    </div>
-  </form>
-</div>
-<div class="modal-footer">
-  <a href="#" id="register" ng-click="$ctrl.register()">
-    <span translate="views.login.register"></span>
-  </a>
-  <button class="btn btn-primary" type="submit" form="loginForm" ng-disabled="$ctrl.isLoading">
-    <span translate="views.login.connexion"></span>
-  </button>
-  <button class="btn btn-warning" type="button" ng-click="$dismiss()" ng-disabled="$ctrl.isLoading">
-    <span translate="app.cancel"></span>
-  </button>
-</div>
+        </md-button>
+      </div>
+
+    </form>
+  </md-dialog-content>
+  <md-dialog-actions layout="row" layout-align="space-between">
+    <md-button md-no-ink class="md-primary" ng-click="$ctrl.register()" aria-label="login_signup">
+      <span translate="views.login.register"></span>
+    </md-button>
+    <md-button type="submit" class="md-raised" form="login-form" ng-disabled="$ctrl.isLoading" aria-label="login_signin">
+      <span translate="views.login.connexion"></span>
+    </md-button>
+  </md-dialog-actions>
+  <span flex></span>
+</md-dialog>

@@ -1,9 +1,11 @@
 import angular from 'angular';
 /* librairies Angularjs */
 import uiRouter from 'angular-ui-router';
-import uiBootstrap from 'angular-ui-bootstrap';
+import materialDesign from 'angular-material';
+import ngAnimate from 'angular-animate';
+import ngMessages from 'angular-messages';
 /* config*/
-import {appRouter} from './app.config';
+import {appConfig} from './app.config';
 import {appRun} from './app.config';
 /* fonctionnalités de l'application */
 import appComponent from './app.component';
@@ -14,8 +16,12 @@ import commons from './commons';
 const requires = [
   /* gestion des routes et des états */
   uiRouter,
-  /* interface graphique bootstrap en angular */
-  uiBootstrap,
+  /* interface graphique material design */
+  materialDesign,
+  /* animations */
+  ngAnimate,
+  /* *validation de form */
+  ngMessages,
   /* configuration globale de l'application générée par gulp-ng-config */
   'genesis.config',
   /* nom du module des templates en cache angular générés par gulp-angular-templatecache*/
@@ -36,7 +42,7 @@ const requires = [
 const root = angular
   .module('genesis', requires)
   .component('app', appComponent)
-  .config(appRouter)
+  .config(appConfig)
   .run(appRun)
   .name;
 

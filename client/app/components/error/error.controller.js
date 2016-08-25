@@ -2,16 +2,13 @@
  * Controls the error modal
  */
 export default class ErrorController {
-  constructor($state, $uibModalInstance, errorType) {
+  constructor($state, $mdDialog, errorType) {
     this.$state = $state;
-    this.$uibModalInstance = $uibModalInstance;
-    this.errorType = errorType;
-  }
+    this.$mdDialog = $mdDialog;
 
-  $onInit() {
     this.isLoaded = true;
-    console.log('error-modal controller chargé !');
-    switch (this.errorType) {
+
+    switch (errorType) {
       case 'forbidden':
         this.title = 'modal.error.forbidden.title';
         this.body = 'modal.error.forbidden.body';
@@ -21,15 +18,17 @@ export default class ErrorController {
         this.body = 'modal.error.generic.body';
         break;
     }
+
+    console.log('error-modal controller chargé !');
   }
 
   close(){
-    this.$uibModalInstance.close();
+    this.$mdDialog.hide();
   }
 }
 /* Dependency injection *************************************************/
 ErrorController.$inject = [
   '$state',
-  '$uibModalInstance',
+  '$mdDialog',
   'errorType'
 ];

@@ -1,11 +1,12 @@
+"use strict";
 /**
  * Controls registration modal
  */
 export default class RegisterController {
-  constructor($state, registerService, $uibModalInstance) {
+  constructor($state, registerService, $mdDialog) {
     this.$state = $state;
     this.registerService = registerService;
-    this.$uibModalInstance = $uibModalInstance;
+    this.$mdDialog = $mdDialog;
   }
 
   $onInit() {
@@ -26,12 +27,17 @@ export default class RegisterController {
         email: this.email,
         password: this.password
       };
+      this.isLoading = true;
       this.registerService
         .register(credentials)
         .then((res) => {
           /* TODO : gérer les cas du nom d'utilisateur déjà pris et du mail déjà pris*/
-          this.$uibModalInstance.close();
+          this.$mdDialog.hide();
           /* TODO : affichage succès inscription si pas d'erreur */
+        })
+        .catch(handleError)
+        .finally(() => {
+          this.isLoading = false
         });
     }
   }
@@ -40,5 +46,9 @@ export default class RegisterController {
 RegisterController.$inject = [
   '$state',
   'registerService',
-  '$uibModalInstance'
+  '$mdDialog'
 ];
+
+function handleError(err){
+  /* TODO : gestion des erreurs de validation renvoyées par le backend */
+}

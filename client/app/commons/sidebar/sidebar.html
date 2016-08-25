@@ -1,21 +1,14 @@
-<div class="sidebar">
-    <nav class="navbar navbar-inverse" role="navigation">
-        <ul class="nav">
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard">
-                    <span translate="views.dashboard.title"></span>
-                </a>
-            </li>
-            <li ui-sref-active="active" ng-show="$ctrl.User.getRoleAccess() == 1">
-                <a ui-sref="map">
-                    <span translate="views.map.title"></span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="game">
-                    <span translate="views.game.title"></span>
-                </a>
+<md-sidenav class="g-sidebar" md-is-locked-open='true'
+            ng-if="!$ctrl.isHome()" g-show-authed="client">
+    <md-content class="g-nav" role="navigation" layout="column" layout-fill>
+        <ul>
+            <li ng-repeat="section in $ctrl.content.sections" class="parent-list-item" g-show-authed="{{section.auth}}">
+                <h2 class="menu-heading" ng-if="section.type === 'heading'"
+                    id="heading_{{ section.name }}" ng-bind="section.name">
+                </h2>
+                <sidebar-link section="section" ng-if="section.type === 'link'" layout-fill></sidebar-link>
+                <sidebar-toggle-menu section="section" ng-if="section.type === 'toggle'"></sidebar-toggle-menu>
             </li>
         </ul>
-    </nav>
-</div>
+    </md-content>
+</md-sidenav>

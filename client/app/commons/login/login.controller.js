@@ -1,10 +1,10 @@
 export default class LoginController {
 
-  constructor($state, loginService, authService, $uibModalInstance, toState, toParams, registerModalService) {
+  constructor($state, loginService, authService, $mdDialog, toState, toParams, registerModalService) {
     this.$state = $state;
     this.loginService = loginService;
     this.authService = authService;
-    this.$uibModalInstance = $uibModalInstance;
+    this.$mdDialog = $mdDialog;
     /* Resolved before instanciating the controller */
     this.toState = toState;
     this.toParams = toParams;
@@ -39,7 +39,7 @@ export default class LoginController {
         .then((user) => {
           /* local user is updated */
           this.authService.setUser(user);
-          this.$uibModalInstance.close('login successfull');
+          this.$mdDialog.hide('login successfull');
           if (this.toState != null) {
             this.$state.go(this.toState, this.toParams);
           } else {
@@ -47,7 +47,6 @@ export default class LoginController {
           }
         })
         .catch((err) => {
-          debugger;
           this.loginFailed = true;
         })
         .finally(() => {
@@ -57,7 +56,7 @@ export default class LoginController {
   }
 
   register(){
-    this.$uibModalInstance.close('resgister');
+    this.$mdDialog.hide('go to register');
     this.registerModalService.open();
   }
 }
@@ -66,7 +65,7 @@ LoginController.$inject = [
   '$state',
   'loginService',
   'authService',
-  '$uibModalInstance',
+  '$mdDialog',
   'toState',
   'toParams',
   'registerModalService'

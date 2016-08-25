@@ -8,8 +8,8 @@ export default class HomeController{
     this.isLoaded = true;
     console.log('Home controller chargé !');
   }
-  login(){
-    this.loginModalService.open();
+  login(evt){
+    this.loginModalService.open(null, null, evt);
   }
 }
 HomeController.$inject = ['$state','loginModalService', 'User'];

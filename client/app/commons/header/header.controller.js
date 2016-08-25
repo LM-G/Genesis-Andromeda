@@ -3,9 +3,12 @@
  */
 export default class HeaderController {
 
-  constructor($state, User, navService) {
-    this.User = User;
+  constructor($state, loginModalService, registerModalService, authService, User) {
     this.$state = $state;
+    this.loginModalService = loginModalService;
+    this.registerModalService = registerModalService;
+    this.authService = authService;
+    this.User = User;
   }
 
   $onInit() {
@@ -16,5 +19,18 @@ export default class HeaderController {
   isHome(){
     return this.$state.is('home');
   }
+
+  login(evt){
+    this.loginModalService.open(null, null, evt);
+  }
+
+  register(){
+    this.registerModalService.open();
+  }
+
+  logout(){
+    this.authService.disconnect();
+    this.$state.go('home');
+  }
 }
-HeaderController.$inject = ['$state', 'User', 'navService'];
+HeaderController.$inject = ['$state', 'loginModalService', 'registerModalService', 'authService', 'User'];

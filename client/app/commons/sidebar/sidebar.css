@@ -1,34 +1,60 @@
-.sidebar {
-    position: absolute;
-    width: 250px;
+.g-sidebar {
     height: 100%;
-    top: 50px;
-    margin-top: 1px;
 }
-.sidebar .navbar {
-    height: inherit;
+
+.g-sidebar .g-nav{
+    background-color: #616161;
 }
-.sidebar .nav {
-    margin-top: 20px;
-    margin-left: 10px;
+
+.g-sidebar ul{
+    padding: 0;
+}
+.g-sidebar li{
+    margin: 0;
+}
+
+.g-sidebar .md-button{
+    display: block;
+    margin: 0;
+    border-radius: 0;
+    text-align: start;
+    color: #e5e5e5;
+    font-weight: 300;
+}
+
+.g-sidebar .md-button.active {
+    color: white;
+    background-color: #454545;
+}
+
+.g-sidebar .md-button-toggle{
+    width: 100%;
+}
+
+.g-sidebar .md-button-toggle .md-toggle-icon.toggled {
+    transform: rotateZ(180deg);
+    -webkit-transform: rotateZ(180deg);
+}
+
+.g-sidebar .md-button-toggle .md-toggle-icon {
     margin-right: 10px;
+    margin-top: 12px;
+    transition: transform .3s ease-in-out;
+    -webkit-transition: -webkit-transform .3s ease-in-out;
 }
-.sidebar .nav li a {
-    color: #a0a0a0;
+
+.g-sidebar .g-link{
+    margin-left: 10px;
 }
-.sidebar .nav li a:hover {
-    background-color: #777777;
-    color: #e7e7e7;
+
+.g-sidebar .md-button-toggle .g-link{
+    margin-left: 22px;
 }
-.sidebar .nav li a:focus:not(:hover){
-    background-color: transparent;
+
+.g-sidebar .md-button-toggle .g-link{
+    margin-left: 22px;
 }
-.sidebar .nav li.active {
-    background-color: #565656;
-}
-.sidebar .nav li.active a:hover{
-    background-color: #565656;
-}
-.sidebar .nav li.active a {
-    color: #e7e7e7;
+
+.g-sidebar .menu-toggle-list .g-link{
+    margin-left: 42px;
 }

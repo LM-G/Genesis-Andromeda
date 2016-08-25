@@ -5,54 +5,55 @@ import _extend from 'lodash/extend';
  * @ngdoc service
  * @name genesis.commons.login:LoginModalService
  *
- * @requires $uibModal
+ * @requires $mdDialog
  *
  * @description
  * Service de gestion de la pop-in de login
  */
 export default class LoginModalService{
-  constructor($uibModal){
-    this.$uibModal = $uibModal;
+  constructor($mdDialog){
+    this.$mdDialog = $mdDialog;
     this.loginModal = {
-      size: 'md',
-      openedClass: 'login-modal',
       templateUrl: '/commons/login/login.html',
       controller: 'loginController',
-      controllerAs: '$ctrl'
+      controllerAs: '$ctrl',
+      locals : {
+        toState : null,
+        toParams : null
+      }
     };
   }
 
-  open(state, params){
+  open(state, params, evt){
     let optLoginModal = _merge({}, this.loginModal);
     optLoginModal.resolve = {};
-    _extend(optLoginModal.resolve, {
-      toState: function() {
-        return state || 'dashboard';
-      },
-      toParams: function() {
-        return params || {};
-      }
-    });
-    this.opened = this.$uibModal.open(optLoginModal);
-    return this.opened;
+    optLoginModal.toState = state || 'dashboard';
+    optLoginModal.toParams = params || {};
+    if(evt != null){
+      optLoginModal.targetEvent = evt;
+    }
+
+    return this.$mdDialog.show(optLoginModal);
   }
   
   cancel(){
+    debugger;
+    /*
     if(this.opened) {
       this.$uibModal.cancel(this.opened, (reason) => {
         console.warn(`Modal de login fermée : ${reason}`);
       });
-    }
+    }*/
   }
 
-  close(){
+  close(){/*
     if(this.opened) {
       this.$uibModal.close(this.opened, (result) => {
         console.log(`Modal de login fermée : ${result}`);
         return result;
       });
-    }
+    }*/
   }
 }
-LoginModalService.$inject = ['$uibModal'];
+LoginModalService.$inject = ['$mdDialog'];
 

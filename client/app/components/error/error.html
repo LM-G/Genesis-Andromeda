@@ -1,9 +1,20 @@
-<div class="modal-header">
-    <h3 class="modal-title" ng-bind="$ctrl.title | translate"></h3>
-</div>
-<div class="modal-body">
-    <p ng-bind="$ctrl.body | translate"></p>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.close()" translate="app.ok"></button>
-</div>
+<md-dialog aria-label="error_modal" class="g-modal g-error-modal">
+    <md-toolbar class="md-primary md-hue-3">
+        <div class="md-toolbar-tools modal-header" layout="row" layout-align="space-between center">
+            <h1 class="md-flex" ng-bind="$ctrl.title | translate"></h1>
+            <i class="close-modal fa fa-times-circle" aria-label="login_cancel" ng-click="$ctrl.$mdDialog.cancel()" ng-disabled="$ctrl.isLoading"></i>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <p ng-bind="$ctrl.body | translate"></p>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <md-button md-no-ink class="md-primary" ng-click="$ctrl.close()" aria-label="error_ok">
+            <span translate="app.ok"></span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

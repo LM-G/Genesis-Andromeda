@@ -14,12 +14,14 @@ module.exports = {
     vendor: [
       "angular",
       "angular-ui-router",
+      "angular-animate",
+      "angular-aria",
+      "angular-material",
       "angular-translate",
       "angular-translate-loader-static-files",
       "angular-storage",
       "angular-jwt",
       "angular-moment",
-      "angular-ui-bootstrap",
       "angular-dynamic-locale",
       "moment"
     ]

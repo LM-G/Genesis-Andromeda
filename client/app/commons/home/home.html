@@ -2,14 +2,12 @@
   <h1 translate="views.home.title"></h1>
   <p translate="views.global.welcome"></p>
 
-  <div class="btn-group" ng-show="$ctrl.isLoaded">
-    <button type="button" class="btn btn-default" ng-click="$ctrl.login()"
-            ng-if="!$ctrl.User.isLogged">
+  <div ng-show="$ctrl.isLoaded">
+    <md-button class="md-raised" ng-click="$ctrl.login($event)" ng-if="!$ctrl.User.isLogged" aria-label="openLogin">
       <span translate="app.login"></span>
-    </button>
-    <button type="button" class="btn btn-default" ng-click="$ctrl.$state.go('dashboard')"
-            ng-if="$ctrl.User.isLogged">
+    </md-button>
+    <md-button class="md-raised" ng-click="$ctrl.$state.go('dashboard')" ng-if="$ctrl.User.isLogged" aria-label="openDashboard">
       <span translate="views.dashboard.title"></span>
-    </button>
+    </md-button>
   </div>
 </div>

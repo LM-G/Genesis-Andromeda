@@ -1,11 +1,16 @@
-.login-modal #register {
-    position: absolute;
-    left: 15px;
-    bottom: 20px;
+.g-login-modal [id="rememberme"]{
+    margin-bottom: 0;
 }
 
-.login-modal #password-forgotten {
-    position: absolute;
-    right: 5px;
-    top: 5px;
+.g-login-modal [id="password-forgotten"]{
+    margin: 0;
 }
+
+.g-login-modal [id="alert"] {
+    margin-bottom: 20px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    background-color: #dd2c00;
+}
+

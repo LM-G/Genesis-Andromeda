@@ -37,8 +37,7 @@ function handleAuth($rootScope, $state, jwtHelper, authService, User, commonStor
         event.preventDefault();
         errorService
           .openModal('forbidden')
-          .then(() => {
-            debugger;
+          .finally(() => {
             /* redirection vers le dashboard si le chemin est forcé depuis l'url */
             if($state.current.name === ''){
               $state.go('dashboard');

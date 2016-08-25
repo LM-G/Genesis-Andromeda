@@ -1,71 +1,86 @@
-<form name="signUpForm" class="form-genesis" ng-submit="$ctrl.register(signUpForm)" novalidate>
-  <div class="modal-header">
-    <h1 class="modal-title" translate="app.title"></h1>
-    <h3 translate="views.signup.title"></h3>
-  </div>
-  <div class="modal-body">
-    <!-- PSEUDO -->
-    <div class="form-group" form-validate>
-      <label class="control-label" for="username" translate="views.signup.username"></label>
-      <input type="text" class="form-control" name="username"
-             ng-model="$ctrl.username"	placeholder="{{'views.signup.placeholder.username' | translate}}"
-             maxlength="24" required />
-      <div class="help-block" ng-messages="signUpForm.username.$error">
-        <p ng-message="required"><span translate="form.error.required"></span></p>
-      </div>
+<!--suppress XmlInvalidId -->
+<md-dialog aria-label="register_modal" class="g-modal g-register-modal">
+  <md-toolbar class="md-primary md-hue-3">
+    <div class="md-toolbar-tools modal-header" layout="row" layout-align="space-between center">
+      <h1 class="md-flex" translate="views.signup.title"></h1>
+      <i class="close-modal fa fa-times-circle" aria-label="login_cancel" ng-click="$ctrl.$mdDialog.cancel()" ng-disabled="$ctrl.isLoading"></i>
     </div>
-    <!-- EMAIL -->
-    <div class="form-group" form-validate>
-      <label class="control-label" for="email" translate="views.signup.email"></label>
-      <input type="email" class="form-control" name="email"
-             ng-model="$ctrl.email"	placeholder="{{'views.signup.placeholder.email' | translate}}"
-             required />
-      <div class="help-block" ng-messages="signUpForm.email.$error">
-        <span ng-message="required" translate="form.error.required"></span>
-        <span ng-message="email" translate="form.error.email"></span>
-      </div>
-    </div>
-    <!-- EMAIL VALIDATION -->
-    <div class="form-group" form-validate>
-      <label class="control-label" for="confemail" translate="views.signup.confemail"></label>
-      <input type="text" class="form-control" name="confemail"
-             ng-model="$ctrl.confemail"
-             placeholder="{{'views.signup.placeholder.confemail' | translate}}" required
-             input-match="email"/>
-      <div class="help-block" ng-messages="signUpForm.confemail.$error">
-        <span ng-message="required" translate="form.error.required"></span>
-        <span ng-message="match" translate="form.error.confemail"></span>
-      </div>
-    </div>
-    <!-- PASSWORD -->
-    <div class="form-group" form-validate>
-      <label class="control-label" for="password" translate="views.signup.password"></label>
-      <input type="password" class="form-control" name="password" minlength="6"
-             ng-model="$ctrl.password" placeholder="{{'views.signup.placeholder.password' | translate}}" required/>
-      <div class="help-block" ng-messages="signUpForm.password.$error">
-        <span ng-message="required" translate="form.error.required"></span>
-        <span ng-message="minlength" translate="form.error.min" translate-values="{nombre: 6}"></span>
-      </div>
-    </div>
-    <!-- PASSWORD VALIDATION-->
-    <div class="form-group" form-validate>
-      <label class="control-label" for="confpassword" translate="views.signup.confpassword"></label>
-      <input type="password" class="form-control" name="confpassword"
-             ng-model="$ctrl.confpassword" ng-model-options="{ updateOn: 'blur' }"
-             placeholder="{{'views.signup.placeholder.confpassword' | translate}}" required
-             input-match="password"/>
-      <div class="help-block" ng-messages="signUpForm.confpassword.$error">
-        <span ng-message="required" translate="form.error.required"></span>
-        <span ng-message="match" translate="form.error.confpassword"></span>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" type="submit">
-      <span translate="app.validate"></span>
-    </button>
-    <button class="btn btn-warning" type="button" ng-click="$dismiss()">
-      <span translate="app.cancel"></span>
-    </button>
-  </div>
-</form>
+  </md-toolbar>
+
+  <md-dialog-content>
+    <form id="register-form" name="signUpForm" class="form-genesis" ng-submit="$ctrl.register(signUpForm)" novalidate
+          layout="column" layout-align="center center" layout-padding>
+      <br>
+      <span id="alert" class="md-block md-icon-left animated fadeIn"
+            ng-click="$ctrl.registerFailed = false" ng-if="$ctrl.registerFailed" flex>label d'erreur WIP</span>
+
+      <!-- Username -->
+      <md-input-container class="md-block" form-validate>
+        <label class="control-label" translate="views.signup.username"></label>
+        <md-icon class="fa fa-user"></md-icon>
+        <input type="text" class="md-accent" name="username" ng-model="$ctrl.username"
+               minlength="3" maxlength="16" aria-valuemin="3" aria-valuemax="16" required/>
+        <div class="help-block" ng-messages="signUpForm.username.$error" role="alert">
+          <p ng-message="required"><span translate="form.error.required"></span></p>
+          <p ng-message="minlength"><span translate="form.error.min" translate-values="{nombre: 3}"></span></p>
+          <p ng-message="maxlength"><span translate="form.error.max" translate-values="{nombre: 16}"></span></p>
+        </div>
+      </md-input-container>
+
+      <!-- Email -->
+      <md-input-container class="md-block" form-validate>
+        <label class="control-label" translate="views.signup.email"></label>
+        <md-icon class="fa fa-envelope"></md-icon>
+        <input type="email" class="md-accent" name="email" ng-model="$ctrl.email"
+               minlength="5" maxlength="256" aria-valuemin="5" aria-valuemax="256" required/>
+        <div class="help-block" ng-messages="signUpForm.email.$error" role="alert">
+          <p ng-message-exp="['required', 'email', 'minlength', 'maxlength']"><span translate="form.error.email"></span></p>
+        </div>
+      </md-input-container>
+
+      <!-- Email confirmation -->
+      <md-input-container class="md-block md-icon-left" form-validate>
+        <label class="control-label" translate="views.signup.confemail"></label>
+        <input type="confemail" class="md-accent" name="confemail" ng-model="$ctrl.confemail" input-match="email" required/>
+        <div class="help-block" ng-messages="signUpForm.confemail.$error" role="alert">
+          <p ng-message-exp="['required', 'match']"><span translate="form.error.confemail"></span></p>
+        </div>
+      </md-input-container>
+
+      <!-- paswword -->
+      <md-input-container class="md-block" form-validate">
+        <label class="control-label" translate="views.signup.password"></label>
+        <md-icon class="fa fa-user-secret"></md-icon>
+        <input type="password" class="md-accent" name="password" ng-model="$ctrl.password"
+               minlength="8" maxlength="128" aria-valuemin="8" aria-valuemax="128" required/>
+        <div class="help-block" ng-messages="signUpForm.password.$error" role="alert">
+          <p ng-message-exp="['required', 'minlength']">
+            <span translate="form.error.min" translate-values="{nombre: 8}"></span>
+          </p>
+          <p ng-message="maxlength"><span translate="form.error.max" translate-values="{nombre: 128}"></span></p>
+        </div>
+      </md-input-container>
+
+      <!-- paswword confirmation -->
+      <md-input-container class="md-block  md-icon-left" form-validate>
+        <label class="control-label" translate="views.signup.confpassword"></label>
+        <input type="password" class="md-accent" name="confpassword" ng-model="$ctrl.confpassword"
+               input-match="confpassword" ng-model-options="{ updateOn: 'blur' }" required/>
+        <div class="help-block" ng-messages="signUpForm.confpassword.$error" role="alert">
+          <p ng-message-exp="['required', 'match']">
+            <span translate="form.error.confpassword"></span>
+          </p>
+        </div>
+      </md-input-container>
+    </form>
+  </md-dialog-content>
+
+  <md-dialog-actions>
+      <md-button type="submit" form="register-form" class="md-raised md-warn" aria-label="signup_validate">
+        <span translate="app.validate"></span>
+      </md-button>
+      <md-button class="md-raised"  ng-disabled="$ctrl.isLoading" aria-label="signup_cancel" ng-click="$ctrl.$mdDialog.hide()">
+        <span translate="app.cancel"></span>
+      </md-button>
+  </md-dialog-actions>
+</md-dialog>

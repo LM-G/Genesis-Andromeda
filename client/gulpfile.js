@@ -54,8 +54,8 @@ gulp.task('publish-css', function() {
   var cssFiles = [
     PATH_CSS,
     'node_modules/font-awesome/css/font-awesome.css',
-    'node_modules/bootstrap-css-only/css/bootstrap-theme.css',
-    'node_modules/bootstrap-css-only/css/bootstrap.css'
+    'node_modules/angular-material/angular-material.css',
+    'node_modules/animate.css/animate.css'
   ];
 
   return gulp
@@ -65,17 +65,9 @@ gulp.task('publish-css', function() {
     .pipe(livereload());
 });
 
-// Suppression du dossier public
-gulp.task('publish-fonts', function() {
-  return gulp
-    .src(['node_modules/bootstrap-css-only/fonts/**'])
+gulp.task('publish-icons', function() {
+  return gulp.src('node_modules/font-awesome/fonts/**')
     .pipe(gulp.dest(PATH_DIST_FONTS));
-});
-
-gulp.task('publish-css-map', function() {
-  return gulp
-    .src('node_modules/bootstrap-css-only/css/bootstrap.css.map')
-    .pipe(gulp.dest(PATH_DIST_CSS));
 });
 
 // copie les templates html
@@ -199,9 +191,8 @@ gulp.task('default',
   gulpSequence('clean', [
       'publish-html',
       'webpack: build',
-      'publish-fonts',
       'publish-css',
-      'publish-css-map',
+      'publish-icons',
       'publish-images',
       'publish-favicon',
       'publish-entrypoint',
@@ -220,9 +211,8 @@ gulp.task('demo',
   gulpSequence('clean', [
       'publish-html',
       'webpack: build',
-      'publish-fonts',
       'publish-css',
-      'publish-css-map',
+      'publish-icons',
       'publish-images',
       'publish-favicon',
       'publish-entrypoint',

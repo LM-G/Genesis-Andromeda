@@ -1,6 +1,6 @@
-<div class="genesis-clock">
-  <div class="display">
-    <span ng-bind="$ctrl.date | date : 'dd MMM y' "></span>
-  </div>
-  <uib-progressbar max="max" value="$ctrl.completion" class="progress"></uib-progressbar>
+<div class="genesis-clock md-container" layout="row" layout-align="start center" layout-margin>
+    <div class="display">
+      <span ng-bind="$ctrl.date | date : 'dd MMM y' "></span>
+    </div>
+    <md-progress-linear class="md-accent" md-mode="determinate" value="{{$ctrl.completion}}" flex="50"></md-progress-linear>
 </div>
