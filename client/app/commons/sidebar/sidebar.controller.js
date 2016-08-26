@@ -44,5 +44,7 @@ function refresh(event, toState, toParams, fromState, fromParams){
       return section;
     }
   });
-  this.content.focusSection(sectionToFocus.id);
+  if(sectionToFocus){
+    this.content.focusSection(sectionToFocus.id);
+  }
 }
