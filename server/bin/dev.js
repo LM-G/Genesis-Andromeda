@@ -5,7 +5,8 @@
  * Module dependencies.
  */
 
-var app = require('../server');
+var app = require('../app');
+var initSocket  = require('../socket');
 var debug = require('debug')('genesis-andromeda:server');
 var http = require('http');
 
@@ -23,9 +24,13 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Start the web socket
+ */
+initSocket(server);
+
+/**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

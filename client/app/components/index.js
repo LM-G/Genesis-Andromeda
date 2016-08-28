@@ -7,6 +7,7 @@ import auth from './authentication';
 import models from './models';
 import nav from './navigation';
 import clock from './clock';
+import socket from './socket';
 
 const components = angular
   .module('genesis.components', [
@@ -17,7 +18,8 @@ const components = angular
     auth,
     models,
     nav,
-    clock
+    clock,
+    socket
   ])
   .name;
 

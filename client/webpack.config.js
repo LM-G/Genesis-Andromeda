@@ -23,7 +23,8 @@ module.exports = {
       "angular-jwt",
       "angular-moment",
       "angular-dynamic-locale",
-      "moment"
+      "moment",
+      "socket.io-client"
     ]
   },
   output: {

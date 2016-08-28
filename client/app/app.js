@@ -4,6 +4,8 @@ import uiRouter from 'angular-ui-router';
 import materialDesign from 'angular-material';
 import ngAnimate from 'angular-animate';
 import ngMessages from 'angular-messages';
+/* external librairies */
+import * as io from 'socket.io-client';
 /* config*/
 import {appConfig} from './app.config';
 import {appRun} from './app.config';
@@ -44,6 +46,8 @@ const root = angular
   .component('app', appComponent)
   .config(appConfig)
   .run(appRun)
+  /* socket io is now accesible in all the app through dependency injection */
+  .constant('io', io)
   .name;
 
 export default root;

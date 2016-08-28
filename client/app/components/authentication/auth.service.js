@@ -1,10 +1,11 @@
 export default class AuthService {
-  constructor($http, genesisCfg, tokenStorage, commonStorage, User) {
+  constructor($http, genesisCfg, tokenStorage, commonStorage, User, webSocketService) {
     this.$http = $http;
     this.genesisCfg = genesisCfg;
     this.tokenStorage = tokenStorage;
     this.commonStorage = commonStorage;
     this.User = User;
+    this.webSocketService = webSocketService;
   }
 
   /**
@@ -68,6 +69,7 @@ export default class AuthService {
     this.commonStorage.set('user', user);
     user.isLogged = true;
     this.User.update(user);
+    this.webSocketService.connect();
   };
 
   /**
@@ -81,4 +83,4 @@ export default class AuthService {
     this.User.update();
   };
 }
-AuthService.$inject = ['$http', 'genesisCfg', 'tokenStorage', 'commonStorage', 'User'];
+AuthService.$inject = ['$http', 'genesisCfg', 'tokenStorage', 'commonStorage', 'User', 'webSocketService'];
