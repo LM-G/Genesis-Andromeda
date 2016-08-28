@@ -69,7 +69,7 @@ export default class AuthService {
     this.commonStorage.set('user', user);
     user.isLogged = true;
     this.User.update(user);
-    this.webSocketService.connect();
+    this.webSocketService.connect(this.getAccessToken());
   };
 
   /**
@@ -81,6 +81,7 @@ export default class AuthService {
     this.tokenStorage.remove('access_token');
     this.tokenStorage.remove('refresh_token');
     this.User.update();
+    this.webSocketService.disconnect();
   };
 }
 AuthService.$inject = ['$http', 'genesisCfg', 'tokenStorage', 'commonStorage', 'User', 'webSocketService'];

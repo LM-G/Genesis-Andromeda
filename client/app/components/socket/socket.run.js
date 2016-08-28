@@ -1,10 +1,10 @@
 /**
  * Handles socket mechanisms
  */
-function handleSocket($rootScope, User, webSocketService, errorService) {
+function handleSocket($rootScope, User, webSocketService, authService) {
   /* inialize the socket connection */
   if(User.isLogged){
-    webSocketService.connect();
+    webSocketService.connect(authService.getAccessToken());
   }
 }
 
@@ -12,7 +12,7 @@ handleSocket.$inject = [
   '$rootScope',
   'User',
   'webSocketService',
-  'errorService'
+  'authService'
 ];
 
 export default handleSocket;

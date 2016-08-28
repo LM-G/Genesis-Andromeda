@@ -1,12 +1,22 @@
 'use strict';
 var socketio = require('socket.io');
-var sockets = require('./sockets');
+var socketioJwt   = require("socketio-jwt");
 
 module.exports = function(server) {
   // socket.io setup
   var io = socketio.listen(server);
-  io.sockets.on('connection', function (socket) {
-    console.log('socket connected');
-    // other logic
-  });
+
+  /* needs a valid jwt token to establish the connexion */
+  io.use(socketioJwt.authorize({
+    secret: process.env.SESSION_SECRET,
+    handshake: true
+  }));
+
+
+  io.on('connection', function(socket){
+    console.log('hello! ', socket.decoded_token._id);
+    socket.on('disconnect', function(){
+      console.log('User ', socket.decoded_token._id,  ' disconnected.');
+    });
+  })
 };
