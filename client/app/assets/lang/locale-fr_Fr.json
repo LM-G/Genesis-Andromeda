@@ -87,6 +87,9 @@
     },
     "map": {
       "title": "Carte galactique"
+    },
+    "chat": {
+      "title": "Chat"
     }
   }
 }

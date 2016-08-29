@@ -2,6 +2,7 @@
 html, body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   height: 100vh;
+  min-height: 100vh;
   margin: 0px;
   padding: 0px;
 }
@@ -13,7 +14,7 @@ html, body {
 
 [id="content"]{
   box-sizing: border-box;
-  height: 100%;
+  flex: 1;
 }
 
 

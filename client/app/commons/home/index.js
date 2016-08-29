@@ -14,6 +14,6 @@ function HomeRouter($stateProvider) {
   $stateProvider.state({
       name: 'home',
       url: '/home',
-      template: `<home></home>`
+      template: `<home layout flex></home>`
     });
 }

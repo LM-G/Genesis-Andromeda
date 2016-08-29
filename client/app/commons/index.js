@@ -7,6 +7,7 @@ import sidebar from './sidebar';
 import register from './register';
 import game from './game';
 import map from './map';
+import chat from './chat';
 
 /**
  * @ngdoc overview
@@ -24,7 +25,8 @@ const commons = angular
     sidebar,
     register,
     game,
-    map
+    map,
+    chat
   ])
   .name;
 

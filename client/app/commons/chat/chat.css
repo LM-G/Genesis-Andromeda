@@ -1,0 +1,9 @@
+.g-chat [id="messages"]{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.g-chat chat-footer{
+    /*align-self: flex-end;*/
+    flex: none;
+}

@@ -16,7 +16,7 @@ function Router($stateProvider) {
   $stateProvider.state({
     name: 'map',
     url: '/map',
-    template: `<map></map>`,
+    template: `<map layout flex></map>`,
     authLevel: 1
   });
 }

@@ -1,0 +1,42 @@
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: .875em;
+    height: .875em;
+}
+
+/* vertical scrollbar background */
+::-webkit-scrollbar-track-piece {
+    background: transparent none;
+    border: solid .25em transparent;
+    border-right-width: .5em;
+    margin: .25em;
+    -webkit-box-shadow: inset .0625em .0625em 0 0 #E0E0E0, inset -.0625em -.0625em 0 0 #EEEEEE;
+}
+/* horizontal scrollbar background */
+::-webkit-scrollbar-track-piece:horizontal {
+    border-right-width: .25em;
+    border-bottom-width: .5em;
+}
+
+/* moving scroll element */
+::-webkit-scrollbar-thumb {
+    border: solid 0 transparent;
+    border-right-width: .25em;
+    -webkit-box-shadow: inset 0 0 0 .375em #BDBDBD;
+}
+::-webkit-scrollbar-thumb:hover {
+    -webkit-box-shadow: inset 0 0 0 .375em #E0E0E0;
+}
+/* Barre du bas */
+::-webkit-scrollbar-thumb:horizontal {
+    border-right-width: 0;
+    border-bottom-width: .25em;
+}
+
+body ::-webkit-scrollbar {
+    background: transparent none;
+}
+
+
+
+

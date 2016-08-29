@@ -24,15 +24,17 @@ SideBarContent.$inject = [];
 
 function init(sections){
   let section1 = new SideBarSection('views.dashboard.title', 'dashboard', 'fa fa-tachometer', 'link');
+  let section2 = new SideBarSection('views.chat.title', 'chat', 'fa fa-comments', 'link');
+  let section3 = new SideBarSection('ADMIN', null, null, 'toggle');
+  section3.addPage(new SideBarSection('views.game.title', 'game', 'fa fa-gamepad', 'link'));
+  section3.addPage(new SideBarSection('views.map.title', 'map', 'fa fa-globe', 'link'));
+
   section1.id = 0;
-  sections.push(section1);
-
-  let section2 = new SideBarSection('ADMIN', null, null, 'toggle');
   section2.id = 1;
-  section2.auth = 'admin';
+  section3.id = 2;
+  section3.auth = 'admin';
 
-  section2.addPage(new SideBarSection('views.game.title', 'game', 'fa fa-gamepad', 'link'));
-  section2.addPage(new SideBarSection('views.map.title', 'map', 'fa fa-globe', 'link'));
-
+  sections.push(section1);
   sections.push(section2);
+  sections.push(section3);
 }

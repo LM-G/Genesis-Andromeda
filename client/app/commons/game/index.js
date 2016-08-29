@@ -14,7 +14,7 @@ function Router($stateProvider) {
   $stateProvider.state({
     name: 'game',
     url: '/game',
-    template: `<game></game>`,
+    template: `<game layout flex></game>`,
     authLevel: 0
   });
 }
