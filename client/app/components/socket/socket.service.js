@@ -1,15 +1,15 @@
 export default class WebSocketService {
-  constructor(io, genesisCfg, authService){
+  constructor(io, genesisCfg, commonStorage){
     this.io = io;
     this.genesisCfg = genesisCfg;
+    this.commonStorage = commonStorage;
   }
 
   connect(token){
     const io = this.io;
     const config = this.genesisCfg;
     this.socket = io.connect(config.url, {
-      'query': 'token=' + token,
-      'forceNew': true
+      'query': 'token=' + token
     });
 
     this.socket.on('connect', () => {
@@ -32,7 +32,7 @@ export default class WebSocketService {
 
   disconnect(){
     if(this.socket) {
-      this.socket.disconnect();
+      this.socket.disconnect(true);
     }
   }
 
@@ -49,4 +49,4 @@ export default class WebSocketService {
   }
 }
 
-WebSocketService.$inject = ['io','genesisCfg'];
+WebSocketService.$inject = ['io','genesisCfg', 'commonStorage'];

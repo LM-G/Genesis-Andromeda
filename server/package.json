@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npm i && set DEBUG=genesis-andromeda:* & nodemon --debug ./bin/dev.js",
+    "start": "npm i && set DEBUG=genesis-andromeda,socket.io:* & nodemon --debug ./bin/dev.js",
     "test": "set NODE_ENV=test&& mocha -w"
   },
   "dependencies": {
