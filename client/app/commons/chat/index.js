@@ -1,10 +1,15 @@
 import angular from 'angular';
 
+import ChatService from './chat.service';
+import ChatContenu from './chat-contenu.service';
 import ChatComponent from './chat.component';
 import ChatFooterComponent from './footer';
 
+
 const chat = angular
   .module('genesis.commons.chat', [])
+  .service('chatService', ChatService)
+  .service('chatContenu', ChatContenu)
   .component('chat', ChatComponent)
   .component('chatFooter', ChatFooterComponent)
   .config(Router)

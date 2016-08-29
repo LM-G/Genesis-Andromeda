@@ -1,6 +1,7 @@
 'use strict';
 var socketio = require('socket.io');
 var socketioJwt   = require("socketio-jwt");
+var sockets = require("./app/sockets");
 
 module.exports = function(server) {
   // socket.io setup
@@ -18,5 +19,9 @@ module.exports = function(server) {
     socket.on('disconnect', function(){
       console.log('User ', socket.decoded_token._id,  ' disconnected.');
     });
-  })
+
+    sockets.handleChat(io, socket);
+  });
+
+
 };

@@ -24,6 +24,10 @@ export default class WebSocketService {
         console.log("User's token has expired");
       }
     });
+
+    this.socket.on("message", function(res) {
+      debugger;
+    });
   }
 
   disconnect(){
@@ -32,6 +36,17 @@ export default class WebSocketService {
     }
   }
 
+  enterRoom(name){
+    if(this.socket) {
+      this.socket.emit('join room', name);
+    }
+  }
+
+  leaveRoom(name){
+    if(this.socket) {
+      this.socket.emit('leave room', name);
+    }
+  }
 }
 
 WebSocketService.$inject = ['io','genesisCfg'];

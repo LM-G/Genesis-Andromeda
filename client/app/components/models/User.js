@@ -1,5 +1,5 @@
 export default class User {
-  constructor(accessLevelCst){
+  constructor(accessLevelCst) {
     this.accessLevelCst = accessLevelCst;
     this.initValues = {
       isLogged: false,
@@ -8,11 +8,13 @@ export default class User {
     };
   }
 
-  update(values){
+  update(values) {
     angular.merge(this, this.initValues, values);
   }
 
-  getRoleAccess(){
+  getRoleAccess() {
     return this.accessLevelCst[this.role];
   }
 }
+
+User.$inject = ['accessLevelCst'];
