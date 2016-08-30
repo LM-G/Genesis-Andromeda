@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 
+
 var users = [];
 var rooms = [{name : 'chat', users : []}];
 
@@ -15,13 +16,11 @@ module.exports = {
   addUserToRoom : addUserToRoom,
   removeUserFromRoom : removeUserFromRoom,
   getRoom : getRoom,
-  removeUserFromAllRooms :removeUserFromAllRooms
+  removeUserFromAllRooms : removeUserFromAllRooms
 };
 
-function addUser(id){
-  var user = {id : id};
+function addUser(user){
   users.push(user);
-  return user;
 }
 
 function getUser(id){
@@ -46,7 +45,7 @@ function removeUserFromRoom(user, name){
 }
 
 function removeUserFromAllRooms(user, cb){
-  _forEach(rooms, function(room){
+  _.forEach(rooms, function(room){
     var userRemoved = _.remove(room.users, {'id' : user.id});
     if(userRemoved){
       cb(room.name);
@@ -61,7 +60,7 @@ function getRoom(name){
 }
 
 function isRoomValid(name){
-   return rooms.some(function(room){
+  return rooms.some(function(room){
     return name == room.name;
   });
 }
@@ -73,16 +72,17 @@ function isUserInRoom(userToTest, name) {
   });
 }
 
-function handleRooms(io, socket, user){
-
-  socket.on('join room', function (name) {
+function handleRooms(socket, user){
+  socket.on('join room', function (name, cb) {
     if(isRoomValid(name)){
       if(!isUserInRoom(user, name)){
         socket.join(name);
         addUserToRoom(user, name);
-        socket.emit('room joined ' + name, getRoom(name));
         socket.broadcast.to(name).emit('new user', user);
         console.log('User ', user.id,' joins room ', name);
+      }
+      if(cb){
+        cb(getRoom(name));
       }
     } else {
       console.log('User ', user.id,' cannot join room ', name, ' : not existing');
@@ -90,16 +90,18 @@ function handleRooms(io, socket, user){
     }
   });
 
-  socket.on('leave room', function (name) {
+  socket.on('leave room', function (name, cb) {
     if(isRoomValid(name)){
       socket.leave(name);
       removeUserFromRoom(user, name);
-      socket.emit('room left ' + name, name);
       socket.broadcast.to(name).emit('user left', user);
       console.log('User ', user.id,' left room ', name);
     } else {
       console.log('User ', user.id,' cannot leave room ', name, ' : not existing');
       socket.emit('room not existing', name);
+    }
+    if(cb){
+      cb();
     }
   });
 }

@@ -6,7 +6,7 @@
  */
 
 var app = require('../app');
-var initSocket  = require('../socket');
+var initSocket  = require('../ws');
 var debug = require('debug')('genesis-andromeda:server');
 var http = require('http');
 

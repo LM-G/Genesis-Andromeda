@@ -24,19 +24,6 @@ export default class WebSocketService {
         console.log("User's token has expired");
       }
     });
-
-    this.socket.on('message', function(res) {
-      debugger;
-    });
-
-    this.socket.on('room joined', function(data){
-      debugger;
-    });
-
-
-    this.socket.on('room left', function(name){
-      debugger;
-    });
   }
 
   disconnect(){
@@ -47,15 +34,13 @@ export default class WebSocketService {
 
   enterRoom(name, cb){
     if(this.socket) {
-      this.socket.emit('join room', name);
-      this.socket.on('room joined ' + name, cb);
+      this.socket.emit('join room', name, cb);
     }
   }
 
   leaveRoom(name, cb){
     if(this.socket) {
-      this.socket.emit('leave room', name);
-      this.socket.on('room joined ' + name, cb);
+      this.socket.emit('leave room', name, cb);
     }
   }
 }
