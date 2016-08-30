@@ -1,14 +1,19 @@
 export default class ChatService {
-  constructor(webSocketService) {
+  constructor(webSocketService, $q) {
     this.channelName = 'chat';
     this.webSocketService = webSocketService;
     this.messages = [];
+    this.$q = $q;
   }
 
   enterChat(){
-    this.webSocketService.enterRoom(this.channelName, function(data){
-      debugger;
-    });
+    var deferred = this.$q.defer();
+    if(this.webSocketService.isConnected()){
+      this.webSocketService.enterRoom(this.channelName, function(data){
+        deferred.resolve(data);
+      });
+    }
+    return deferred.promise;
   }
 
   leaveChat(){
@@ -18,4 +23,4 @@ export default class ChatService {
   }
 }
 
-ChatService.$inject = ['webSocketService'];
+ChatService.$inject = ['webSocketService', '$q'];

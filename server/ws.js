@@ -18,11 +18,12 @@ module.exports = function(server) {
   }));
 
   io.on('connection', function(socket){
+    var init = Q.defer();
     var id = socket.decoded_token._id;
-
     var user = sockets.getUser(id);
     if(user){
       user.disconnected = false;
+      init.resolve();
     } else {
       userService
         .getById(id)
@@ -30,10 +31,14 @@ module.exports = function(server) {
           user = {id : data.id, username: data.username};
           sockets.addUser(user);
           console.log('User ', id, ' connected');
-          /* handles navigation between rooms */
-          sockets.handleRooms(socket, user);
+          init.resolve();
         });
     }
+
+    init.promise.then(function(){
+      /* handles navigation between rooms */
+      sockets.handleRooms(socket, user);
+    });
 
     /* handles disconnection event */
     socket.on('disconnect', function(data){

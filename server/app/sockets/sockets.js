@@ -4,11 +4,10 @@ var _ = require('lodash');
 
 
 var users = [];
-var rooms = [{name : 'chat', users : []}];
+var rooms = [require('./chat')];
 
 module.exports = {
   handleRooms : handleRooms,
-  handleChat : require('./chat'),
   users : users,
   getUser: getUser,
   removeUser : removeUser,
@@ -75,14 +74,23 @@ function isUserInRoom(userToTest, name) {
 function handleRooms(socket, user){
   socket.on('join room', function (name, cb) {
     if(isRoomValid(name)){
+      var room = getRoom(name);
       if(!isUserInRoom(user, name)){
         socket.join(name);
         addUserToRoom(user, name);
         socket.broadcast.to(name).emit('new user', user);
         console.log('User ', user.id,' joins room ', name);
       }
+      /* ajout de listener sur des events customs */
+      _.forEach(room.events, function(event){
+        socket.on(event.name, event.handler);
+      });
       if(cb){
-        cb(getRoom(name));
+        var response;
+        if(_.isFunction(room.onJoin)){
+          response = room.onJoin();
+        }
+        cb(response);
       }
     } else {
       console.log('User ', user.id,' cannot join room ', name, ' : not existing');

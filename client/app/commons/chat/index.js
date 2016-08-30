@@ -4,6 +4,7 @@ import ChatService from './chat.service';
 import ChatContenu from './chat-contenu.service';
 import ChatComponent from './chat.component';
 import ChatFooterComponent from './footer';
+import ChatMessageComponent from './message';
 
 
 const chat = angular
@@ -12,6 +13,7 @@ const chat = angular
   .service('chatContenu', ChatContenu)
   .component('chat', ChatComponent)
   .component('chatFooter', ChatFooterComponent)
+  .component('chatMessage', ChatMessageComponent)
   .config(Router)
   .name;
 

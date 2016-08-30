@@ -1,8 +1,9 @@
 export default class WebSocketService {
-  constructor(io, genesisCfg, commonStorage){
+  constructor(io, genesisCfg, commonStorage, $rootScope){
     this.io = io;
     this.genesisCfg = genesisCfg;
     this.commonStorage = commonStorage;
+    this.$rootScope = $rootScope;
   }
 
   connect(token){
@@ -14,8 +15,8 @@ export default class WebSocketService {
 
     this.socket.on('connect', () => {
       let sessionId = this.socket.io.engine.id;
-
       console.log("WEBSOCKET connected with session id", sessionId);
+      this.$rootScope.$broadcast('SOCKET_CONNECTED');
     });
 
     this.socket.on('unauthorized', function(error) {
@@ -24,6 +25,10 @@ export default class WebSocketService {
         console.log("User's token has expired");
       }
     });
+  }
+
+  isConnected(){
+    return this.socket.connected;
   }
 
   disconnect(){
@@ -45,4 +50,4 @@ export default class WebSocketService {
   }
 }
 
-WebSocketService.$inject = ['io','genesisCfg', 'commonStorage'];
+WebSocketService.$inject = ['io','genesisCfg', 'commonStorage', '$rootScope'];

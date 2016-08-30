@@ -1,0 +1,7 @@
+<div layout="column">
+  <div flex="20" class="g-chat-message-header">
+    <span ng-bind="$ctrl.username"></span>
+    <span ng-bind="$ctrl.date | date : 'dd/MM/yyyy'"></span>
+  </div>
+  <p class="g-chat-message-content" flex ng-bind="$ctrl.content"></p>
+</div>
