@@ -1,4 +1,5 @@
 'use strict';
+var Q = require('q');
 var path = require('path');
 var socketio = require('socket.io');
 var socketioJwt   = require("socketio-jwt");
@@ -29,20 +30,30 @@ module.exports = function(server) {
 
     /* handles disconnection event */
     socket.on('disconnect', function(data){
+      var deferred = Q.defer();
+      var userRemoved;
       if(data == 'client namespace disconnect'){
-        sockets.removeUser(id);
+        Q.resolve(sockets.removeUser(id));
       } else {
         user.disconnected = true;
         setTimeout(function () {
           if (user.disconnected) {
-            sockets.removeUser(id);
+            Q.resolve(sockets.removeUser(id));
           }
         }, 5000);
       }
+
+      /* removes user from all rooms in which he was registered */
+      deferred.promise.then(function(userRemoved){
+        sockets.removeUserFromAllRooms(userRemoved, function(name){
+          io.sockets.in(name).emit('user left', userRemoved);
+          console.log('User ', userRemoved.id,' left room ', name);
+        });
+      });
     });
 
     /* handles navigation between rooms */
-    sockets.handleRooms(io, socket);
+    sockets.handleRooms(io, socket, user);
 
     /* handles navigation between rooms */
     sockets.handleChat(io, socket);

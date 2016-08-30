@@ -6,11 +6,15 @@ export default class ChatService {
   }
 
   enterChat(){
-    this.webSocketService.enterRoom(this.channelName);
+    this.webSocketService.enterRoom(this.channelName, function(data){
+      debugger;
+    });
   }
 
   leaveChat(){
-    this.webSocketService.leaveRoom(this.channelName);
+    this.webSocketService.leaveRoom(this.channelName, function(data){
+      debugger;
+    });
   }
 }
 

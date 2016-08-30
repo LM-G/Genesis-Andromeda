@@ -18,14 +18,23 @@ export default class WebSocketService {
       console.log("WEBSOCKET connected with session id", sessionId);
     });
 
-    this.socket.on("unauthorized", function(error) {
+    this.socket.on('unauthorized', function(error) {
       if (error.data.type == "UnauthorizedError" || error.data.code == "invalid_token") {
         // redirect user to login page perhaps?
         console.log("User's token has expired");
       }
     });
 
-    this.socket.on("message", function(res) {
+    this.socket.on('message', function(res) {
+      debugger;
+    });
+
+    this.socket.on('room joined', function(data){
+      debugger;
+    });
+
+
+    this.socket.on('room left', function(name){
       debugger;
     });
   }
@@ -36,15 +45,17 @@ export default class WebSocketService {
     }
   }
 
-  enterRoom(name){
+  enterRoom(name, cb){
     if(this.socket) {
       this.socket.emit('join room', name);
+      this.socket.on('room joined ' + name, cb);
     }
   }
 
-  leaveRoom(name){
+  leaveRoom(name, cb){
     if(this.socket) {
       this.socket.emit('leave room', name);
+      this.socket.on('room joined ' + name, cb);
     }
   }
 }
