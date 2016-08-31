@@ -4,6 +4,8 @@ export default class ChatService {
     this.webSocketService = webSocketService;
     this.messages = [];
     this.$q = $q;
+
+    this.init();
   }
 
   enterChat(){
@@ -18,8 +20,19 @@ export default class ChatService {
 
   leaveChat(){
     this.webSocketService.leaveRoom(this.channelName, function(data){
-      debugger;
     });
+  }
+
+  sendMessage(message){
+    var deferred = this.$q.defer();
+    this.webSocketService.socket.emit('chat message', message, (resp) => {
+      deferred.resolve(resp);
+    });
+    return deferred.promise;
+  }
+
+  init(){
+    this.webSocketService.socket.on('chat new message')
   }
 }
 

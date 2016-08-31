@@ -11,5 +11,5 @@ module.exports = router;
 
 /* fonction internes */
 function getUser(req, res) {
-  res.json(_.pick(req.user, ['username', 'email', 'role']));
+  res.json(_.pick(req.user, ['id', 'username', 'email', 'role']));
 }

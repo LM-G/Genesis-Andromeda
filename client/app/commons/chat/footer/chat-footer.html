@@ -1,3 +1,6 @@
-<section class="">
-    <input class="g-chat-input" type="text" ng-model="$ctrl.message"/>
+<section>
+    <form name="test" ng-submit="$ctrl.sendMessage()">
+        <input class="g-chat-input" type="text" ng-model="$ctrl.message" maxlength="256"
+            aria-label="chat_input" placeholder="Rejoindre la discussion ..." ng-disabled="!$ctrl.parent.isLoaded"/>
+    </form>
 </section>

@@ -1,7 +1,13 @@
-<div layout="column">
+<div layout="column" layout-padding class="g-chat-message" ng-class="{'g-chat-message-from-user' : $ctrl.isFromUser}">
   <div flex="20" class="g-chat-message-header">
-    <span ng-bind="$ctrl.username"></span>
-    <span ng-bind="$ctrl.date | date : 'dd/MM/yyyy'"></span>
+    <span ng-bind="$ctrl.message.user.username"></span>
+    <span ng-bind="$ctrl.message.createdAt | date : 'hh:mm'"></span>
   </div>
-  <p class="g-chat-message-content" flex ng-bind="$ctrl.content"></p>
+  <div layout="row">
+    <div class="g-chat-avatar">todo : avatar ici</div>
+    <div class="g-chat-message-content" flex layout>
+      <div class="g-arrow-left"></div>
+      <div ng-bind="$ctrl.message.content"></div>
+    </div>
+  </div>
 </div>

@@ -2,8 +2,9 @@
  * Controls the chat view
  */
 export default class ChatController {
-  constructor($scope, User, chatService, chatContenu) {
+  constructor($scope, $document, User, chatService, chatContenu) {
     this.$scope = $scope;
+    this.$document =$document;
     this.User = User;
     this.chatService = chatService;
     this.chatContenu = chatContenu;
@@ -22,6 +23,10 @@ export default class ChatController {
     console.log('Chat controller chargé !');
   }
 
+  $onDestroy(){
+    this.chatService.leaveChat();
+  }
+
   enterChat(){
     this
       .chatService
@@ -29,18 +34,28 @@ export default class ChatController {
       .then((res) => {
         this.chatContenu.setMessages(res.data);
         this.chatContenu.setUsers(res.users);
-        /*
-        this.$scope.$apply(() => {
-
-        });*/
       })
       .finally(() => {
         this.isLoaded = true;
       });
   }
 
-  $onDestroy(){
-    this.chatService.leaveChat();
+  send(message){
+    if(message != null && message != ""){
+      var newMessage = {user : angular.copy(this.User), content: message, createdAt : new Date()};
+      this.chatContenu.addMessage(newMessage);
+      this
+        .chatService
+        .sendMessage(message)
+        .then((resp) => {
+          angular.extend(newMessage, resp);
+          this.scrollToBottom();
+        });
+    }
+  }
+
+  scrollToBottom(){
+    /* todo scroll to bottom */
   }
 }
-ChatController.$inject = ['$scope', 'User', 'chatService', 'chatContenu'];
+ChatController.$inject = ['$scope', '$document', 'User', 'chatService', 'chatContenu'];

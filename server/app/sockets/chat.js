@@ -1,6 +1,6 @@
 "use strict";
 var users = [];
-var messages = [{createdAt : '2004-01-02', user: {id : 'qsdq647qsd674', username: 'yoloman'}, content: 'Hello world'}];
+var messages = [];
 
 module.exports = {
   name : 'chat',
@@ -16,5 +16,22 @@ function onJoin(){
 }
 
 function handleMessage(message, cb){
-  console.log("chat message recu :", message);
+  var socket = this;
+
+  var saveMessage = function (){
+    var newMessage = {
+      createdAt : new Date(),
+      user: socket.user,
+      content: message
+    };
+    console.log("chat message recu :", newMessage);
+    messages.push(newMessage);
+    socket.broadcast.to('chat').emit('chat new message', newMessage);
+    if(cb){
+      cb(newMessage);
+    }
+  };
+  setTimeout(saveMessage, 100);
+
+
 }

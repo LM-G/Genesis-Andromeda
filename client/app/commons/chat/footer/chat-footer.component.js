@@ -1,8 +1,11 @@
 import ChatFooterController from './chat-footer.controller';
 
-const ChatComponent = {
+const ChatFooterComponent = {
+  require: {
+    parent: '^chat'
+  },
   controller: ChatFooterController,
   templateUrl: '/commons/chat/footer/chat-footer.html'
 };
 
-export default ChatComponent;
+export default ChatFooterComponent;

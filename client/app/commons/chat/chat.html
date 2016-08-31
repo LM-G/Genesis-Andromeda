@@ -1,7 +1,9 @@
 <div class="container g-chat" layout="column" layout-padding>
     <h1 class="md-title" translate="views.chat.title"></h1>
-    <section flex id="messages">
-        <chat-message  ng-repeat="message in $ctrl.chatContenu.messages" message="message"></chat-message>
+    <section flex id="messages" scroll-glue-bottom="glued">
+        <chat-message ng-repeat="message in $ctrl.chatContenu.messages"
+                      message="message" is-from-user="$ctrl.User.id != message.user.id">
+        </chat-message>
     </section>
 
     <!-- pour parler -->

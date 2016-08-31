@@ -71,7 +71,8 @@ function isUserInRoom(userToTest, name) {
   });
 }
 
-function handleRooms(socket, user){
+function handleRooms(socket){
+  var user = socket.user;
   socket.on('join room', function (name, cb) {
     if(isRoomValid(name)){
       var room = getRoom(name);

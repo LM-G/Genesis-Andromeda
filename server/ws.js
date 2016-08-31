@@ -36,8 +36,9 @@ module.exports = function(server) {
     }
 
     init.promise.then(function(){
+      socket.user = user;
       /* handles navigation between rooms */
-      sockets.handleRooms(socket, user);
+      sockets.handleRooms(socket);
     });
 
     /* handles disconnection event */

@@ -24,7 +24,8 @@ module.exports = {
       "angular-moment",
       "angular-dynamic-locale",
       "moment",
-      "socket.io-client"
+      "socket.io-client",
+      "angularjs-scroll-glue"
     ]
   },
   output: {

@@ -4,6 +4,7 @@ import uiRouter from 'angular-ui-router';
 import materialDesign from 'angular-material';
 import ngAnimate from 'angular-animate';
 import ngMessages from 'angular-messages';
+import scrollGlue from 'angularjs-scroll-glue';
 /* external librairies */
 import * as io from 'socket.io-client';
 /* config*/
@@ -24,6 +25,8 @@ const requires = [
   ngAnimate,
   /* *validation de form */
   ngMessages,
+  /* An AngularJs directive that automatically scrolls to the bottom of an element on changes in its scope. */
+  'luegg.directives',
   /* configuration globale de l'application générée par gulp-ng-config */
   'genesis.config',
   /* nom du module des templates en cache angular générés par gulp-angular-templatecache*/
