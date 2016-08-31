@@ -6,32 +6,28 @@ module.exports = {
   name : 'chat',
   users : users,
   onJoin : onJoin,
-  events : [
-    {name : "chat message", handler : handleMessage}
-  ]
+  init : initChatRoom
 };
 
 function onJoin(){
   return {users : users, data: messages};
 }
 
-function handleMessage(message, cb){
-  var socket = this;
-
-  var saveMessage = function (){
-    var newMessage = {
-      createdAt : new Date(),
-      user: socket.user,
-      content: message
+function initChatRoom(socket){
+  socket.on('chat message', function(message, cb){
+    var saveMessage = function (){
+      var newMessage = {
+        createdAt : new Date(),
+        user: socket.user,
+        content: message
+      };
+      messages.push(newMessage);
+      console.log('new message : ', newMessage);
+      socket.broadcast.to('chat').emit('chat new message', newMessage);
+      if(cb){
+        cb(newMessage);
+      }
     };
-    console.log("chat message recu :", newMessage);
-    messages.push(newMessage);
-    socket.broadcast.to('chat').emit('chat new message', newMessage);
-    if(cb){
-      cb(newMessage);
-    }
-  };
-  setTimeout(saveMessage, 100);
-
-
+    setTimeout(saveMessage, 100);
+  });
 }

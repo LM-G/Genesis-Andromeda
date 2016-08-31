@@ -2,8 +2,9 @@
  * Controls the chat view
  */
 export default class ChatController {
-  constructor($scope, $document, User, chatService, chatContenu) {
+  constructor($scope, $timeout, $document, User, chatService, chatContenu) {
     this.$scope = $scope;
+    this.$timeout = $timeout;
     this.$document =$document;
     this.User = User;
     this.chatService = chatService;
@@ -11,14 +12,14 @@ export default class ChatController {
 
     if(!this.chatService.webSocketService.isConnected()){
       $scope.$on('SOCKET_CONNECTED', () => {
-        this.enterChat();
+        this.init();
       })
     }
   }
 
   $onInit() {
     if(this.chatService.webSocketService.isConnected()){
-      this.enterChat();
+      this.init();
     }
     console.log('Chat controller chargé !');
   }
@@ -54,8 +55,20 @@ export default class ChatController {
     }
   }
 
+  onNewMessage(message){
+    debugger;
+  }
+
+  init(){
+    this.$timeout(() => {
+      debugger;
+      this.enterChat();
+      this.chatService.listenNewMessage(this.onNewMessage);
+    });
+  }
+
   scrollToBottom(){
     /* todo scroll to bottom */
   }
 }
-ChatController.$inject = ['$scope', '$document', 'User', 'chatService', 'chatContenu'];
+ChatController.$inject = ['$scope', '$timeout', '$document', 'User', 'chatService', 'chatContenu'];

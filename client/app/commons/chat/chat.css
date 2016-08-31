@@ -3,13 +3,9 @@
     overflow-x: hidden;
 }
 
-.g-chat chat-footer{
-    margin-top: 0.5em;
-    flex: none;
-}
-
 .g-chat .g-chat-message .g-chat-avatar{
     width: 48px;
+    border-radius: 4px;
     background-color: #BDBDBD;
     margin-right: 1em;
 }
@@ -34,6 +30,10 @@
     background-color: #EEEEEE;
 }
 
+.g-chat chat-footer{
+    margin-top: 0.5em;
+    flex: none;
+}
 
 .g-chat .g-chat-input{
     padding: 10px;

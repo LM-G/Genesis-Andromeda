@@ -17,14 +17,19 @@ module.exports = function(server) {
     handshake: true
   }));
 
+
+
   io.on('connection', function(socket){
     var init = Q.defer();
     var id = socket.decoded_token._id;
     var user = sockets.getUser(id);
+
     if(user){
       user.disconnected = false;
       init.resolve();
+
     } else {
+      /* get in the DB the user linked to the socket*/
       userService
         .getById(id)
         .then(function(data){
@@ -35,16 +40,17 @@ module.exports = function(server) {
         });
     }
 
+    /* getting the user in DB is asynchronous so if i want to manage a set of users in room, and send messages update
+     * to them, then i must initialise access room events in this promise callback */
     init.promise.then(function(){
       socket.user = user;
       /* handles navigation between rooms */
-      sockets.handleRooms(socket);
+      sockets.handleRoomAccess(socket);
     });
 
     /* handles disconnection event */
     socket.on('disconnect', function(data){
       var deferred = Q.defer();
-      var userRemoved;
       if(data == 'client namespace disconnect'){
         deferred.resolve(sockets.removeUser(id));
       } else {
@@ -57,7 +63,6 @@ module.exports = function(server) {
           }, 5000);
         }
       }
-
       /* removes user from all rooms in which he was registered */
       deferred.promise.then(function(userRemoved){
         sockets.removeUserFromAllRooms(userRemoved, function(name){
@@ -66,5 +71,9 @@ module.exports = function(server) {
         });
       });
     });
+
+
+
+
   });
 };

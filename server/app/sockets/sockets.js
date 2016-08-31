@@ -7,7 +7,7 @@ var users = [];
 var rooms = [require('./chat')];
 
 module.exports = {
-  handleRooms : handleRooms,
+  handleRoomAccess : handleRoomAccess,
   users : users,
   getUser: getUser,
   removeUser : removeUser,
@@ -17,6 +17,54 @@ module.exports = {
   getRoom : getRoom,
   removeUserFromAllRooms : removeUserFromAllRooms
 };
+
+function handleRoomAccess(socket){
+  var user = socket.user;
+  socket.on('join room', function (name, cb) {
+    if(isRoomValid(name)){
+      var room = getRoom(name);
+      if(!isUserInRoom(user, name)){
+        socket.join(name);
+        addUserToRoom(user, name);
+        socket.broadcast.to(name).emit('new user', user);
+        console.log('User ', user.id,' joins room ', name);
+      }
+      if(cb){
+        var response;
+        if(_.isFunction(room.onJoin)){
+          response = room.onJoin();
+        }
+        cb(response);
+      }
+    } else {
+      console.log('User ', user.id,' cannot join room ', name, ' : not existing');
+      socket.emit('room not existing', name);
+    }
+  });
+
+  socket.on('leave room', function (name, cb) {
+    if(isRoomValid(name)){
+      socket.leave(name);
+      removeUserFromRoom(user, name);
+      socket.broadcast.to(name).emit('user left', user);
+      console.log('User ', user.id,' left room ', name);
+    } else {
+      console.log('User ', user.id,' cannot leave room ', name, ' : not existing');
+      socket.emit('room not existing', name);
+    }
+    if(cb){
+      cb();
+    }
+  });
+
+  initRooms(socket);
+}
+
+function initRooms(socket){
+  _.forEach(rooms, function(room) {
+    room.init(socket);
+  });
+}
 
 function addUser(user){
   users.push(user);
@@ -34,6 +82,7 @@ function removeUser(id){
 }
 
 function addUserToRoom(user, name){
+
   var room = getRoom(name);
   room.users.push(user);
 }
@@ -67,51 +116,9 @@ function isRoomValid(name){
 function isUserInRoom(userToTest, name) {
   var room = getRoom(name);
   return room.users.some(function(user){
-    return user.id = userToTest.id;
+    return user.id == userToTest.id;
   });
 }
 
-function handleRooms(socket){
-  var user = socket.user;
-  socket.on('join room', function (name, cb) {
-    if(isRoomValid(name)){
-      var room = getRoom(name);
-      if(!isUserInRoom(user, name)){
-        socket.join(name);
-        addUserToRoom(user, name);
-        socket.broadcast.to(name).emit('new user', user);
-        console.log('User ', user.id,' joins room ', name);
-      }
-      /* ajout de listener sur des events customs */
-      _.forEach(room.events, function(event){
-        socket.on(event.name, event.handler);
-      });
-      if(cb){
-        var response;
-        if(_.isFunction(room.onJoin)){
-          response = room.onJoin();
-        }
-        cb(response);
-      }
-    } else {
-      console.log('User ', user.id,' cannot join room ', name, ' : not existing');
-      socket.emit('room not existing', name);
-    }
-  });
 
-  socket.on('leave room', function (name, cb) {
-    if(isRoomValid(name)){
-      socket.leave(name);
-      removeUserFromRoom(user, name);
-      socket.broadcast.to(name).emit('user left', user);
-      console.log('User ', user.id,' left room ', name);
-    } else {
-      console.log('User ', user.id,' cannot leave room ', name, ' : not existing');
-      socket.emit('room not existing', name);
-    }
-    if(cb){
-      cb();
-    }
-  });
-}
 

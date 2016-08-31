@@ -48,6 +48,15 @@ export default class WebSocketService {
       this.socket.emit('leave room', name, cb);
     }
   }
+
+  listen(name, cb){
+    var scope = this.$rootScope;
+    this.socket.on(name, function(data){
+      scope.$apply(() => {
+        cb(data)
+      });
+    });
+  }
 }
 
 WebSocketService.$inject = ['io','genesisCfg', 'commonStorage', '$rootScope'];
