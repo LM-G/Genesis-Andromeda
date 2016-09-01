@@ -27,7 +27,7 @@ function handleRoomAccess(socket){
 
       if(!isUserInRoom(user, name)){
         addUserToRoom(user, name);
-        socket.broadcast.to(name).emit('new user', user);
+        socket.broadcast.to(name).emit(name + ' user joined', user);
         console.log('User ', user.id,' joins room ', name);
       }
       if(cb){
@@ -48,7 +48,7 @@ function handleRoomAccess(socket){
     if(isRoomValid(name)){
       socket.leave(name);
       removeUserFromRoom(user, name);
-      socket.broadcast.to(name).emit('user left', user);
+      socket.broadcast.to(name).emit(name + ' user left', user);
       console.log('User ', user.id,' left room ', name);
     } else {
       console.log('User ', user.id,' cannot leave room ', name, ' : not existing');

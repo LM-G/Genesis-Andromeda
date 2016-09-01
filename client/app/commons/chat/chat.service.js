@@ -16,8 +16,10 @@ export default class ChatService {
   }
 
   leaveChat(){
-    this.webSocketService.leaveRoom(this.channelName, (data) => {
+    this.webSocketService.leaveRoom(this.channelName, () => {
       this.webSocketService.socket.off('chat new message');
+      this.webSocketService.socket.off('chat user joined');
+      this.webSocketService.socket.off('chat user left');
     });
   }
 
@@ -33,8 +35,13 @@ export default class ChatService {
     this.webSocketService.listen('chat new message', cb);
   }
 
+  listenUserJoin(cb){
+    this.webSocketService.listen('chat user joined', cb);
+  }
 
-
+  listenUserLeave(cb){
+    this.webSocketService.listen('chat user left', cb);
+  }
 }
 
 ChatService.$inject = ['webSocketService', '$q', '$rootScope'];

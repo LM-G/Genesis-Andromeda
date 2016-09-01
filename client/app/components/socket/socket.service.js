@@ -19,9 +19,10 @@ export default class WebSocketService {
       this.$rootScope.$broadcast('SOCKET_CONNECTED');
     });
 
-    this.socket.on('unauthorized', function(error) {
+    this.socket.on('unauthorized', function(error, callback) {
       if (error.data.type == "UnauthorizedError" || error.data.code == "invalid_token") {
         // redirect user to login page perhaps?
+        callback();
         console.log("User's token has expired");
       }
     });

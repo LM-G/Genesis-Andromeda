@@ -89,10 +89,11 @@
       "title": "Carte galactique"
     },
     "chat": {
-      "title": "Chat"
+      "title": "Chat général"
     }
   },
   "common" : {
-    "user" : "utilisateur{NUMBER, select, 1{} other{s}}"
+    "user" : "utilisateur{NUMBER, select, 1{} other{s}}",
+    "you" : "Vous"
   }
 }

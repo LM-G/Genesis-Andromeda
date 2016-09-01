@@ -1,3 +1,5 @@
+import _remove from 'lodash/remove';
+
 export default class ChatContenu {
   constructor() {
     this.messages = [];
@@ -6,6 +8,7 @@ export default class ChatContenu {
 
   setMessages(messages){
     this.messages = messages;
+    this.sortMessages();
   }
 
   getMessages(){
@@ -14,6 +17,7 @@ export default class ChatContenu {
 
   setUsers(users){
     this.users = users;
+    this.sortUsers()
   }
 
   addMessage(message){
@@ -21,9 +25,24 @@ export default class ChatContenu {
     this.sortMessages();
   }
 
+  addUser(user){
+    this.users.push(user);
+    this.sortUsers()
+  }
+
+  removeUser(user){
+    _remove(this.users, {id : user.id});
+  }
+
   sortMessages(){
     this.messages.sort(function(a, b){
       return new Date(a.createdAt).getTime() > new Date(b.createdAt).getTime();
+    });
+  }
+
+  sortUsers(){
+    this.users.sort(function(a, b){
+      return a.username < b.username;
     });
   }
 }

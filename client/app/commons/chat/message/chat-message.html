@@ -1,13 +1,14 @@
 <div layout="column" layout-padding class="g-chat-message" ng-class="{'g-chat-message-from-user' : $ctrl.isFromUser}">
   <div flex="20" class="g-chat-message-header">
-    <span ng-bind="$ctrl.message.user.username"></span>
-    <span ng-bind="$ctrl.message.created_at | date : 'le dd/MM/yyyy à HH:mm'"></span>
+    <span ng-bind=":: $ctrl.isFromUser ? ('common.you' | translate) : $ctrl.message.user.username | gCapitalize"></span>
+    <span class="g-date" ng-bind="::$ctrl.message.created_at | date : 'le dd/MM/yyyy à HH:mm'"></span>
   </div>
-  <div layout="row">
-    <div class="g-chat-avatar"></div>
+  <div layout="row" class="g-chat-message-row">
+    <div class="g-chat-avatar" ng-if="::!$ctrl.isFromUser"></div>
+    <div class="g-arrow g-arrow-left" ng-if="::!$ctrl.isFromUser"></div>
     <div class="g-chat-message-content" flex layout>
-      <div class="g-arrow-left"></div>
-      <div ng-bind="$ctrl.message.content"></div>
+      <div ng-bind="::$ctrl.message.content"></div>
     </div>
+    <div class="g-arrow g-arrow-right" ng-if="::$ctrl.isFromUser"></div>
   </div>
 </div>

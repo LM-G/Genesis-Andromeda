@@ -14,7 +14,8 @@ module.exports = function(server) {
   /* needs a valid jwt token to establish the connexion */
   io.use(socketioJwt.authorize({
     secret: process.env.SESSION_SECRET,
-    handshake: true
+    handshake: true,
+    callback: 5000
   }));
 
 
@@ -52,23 +53,24 @@ module.exports = function(server) {
     socket.on('disconnect', function(data){
       var deferred = Q.defer();
       if(data == 'client namespace disconnect'){
-        deferred.resolve(sockets.removeUser(id));
+        deferred.resolve();
       } else {
         if(user){
           user.disconnected = true;
           setTimeout(function () {
             if (user.disconnected) {
-              deferred.resolve(sockets.removeUser(id));
+              deferred.resolve();
             }
           }, 5000);
         }
       }
       /* removes user from all rooms in which he was registered */
-      deferred.promise.then(function(userRemoved){
-        sockets.removeUserFromAllRooms(userRemoved, function(name){
-          io.sockets.in(name).emit('user left', userRemoved);
-          console.log('User ', userRemoved.id,' left room ', name);
+      deferred.promise.then(function(){
+        sockets.removeUserFromAllRooms(user, function(name){
+          io.sockets.in(name).emit(name + ' user left', user);
+          console.log('User ', user.id,' left room ', name);
         });
+        sockets.removeUser(id)
       });
     });
 

@@ -64,10 +64,20 @@ export default class ChatController {
     this.chatContenu.addMessage(message);
   }
 
+  onUserJoin(user){
+    this.chatContenu.addUser(user);
+  }
+
+  onUserLeave(user){
+    this.chatContenu.removeUser(user);
+  }
+
   init(){
     this.$timeout(() => {
       this.enterChat();
       this.chatService.listenNewMessage((message) => { this.onNewMessage(message); });
+      this.chatService.listenUserJoin((message) => { this.onUserJoin(message); });
+      this.chatService.listenUserLeave((message) => { this.onUserLeave(message); });
     });
   }
 
