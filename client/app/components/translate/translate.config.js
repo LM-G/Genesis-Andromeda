@@ -14,6 +14,7 @@ function confTraduction($translateProvider, tmhDynamicLocaleProvider) {
     suffix: '.json'
   });
   $translateProvider
+    .addInterpolation('$translateMessageFormatInterpolation')
     .useSanitizeValueStrategy(null)
     .determinePreferredLanguage()
     .fallbackLanguage('fr');

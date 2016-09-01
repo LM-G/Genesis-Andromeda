@@ -1,3 +1,8 @@
+.g-chat .g-chat-title{
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
 .g-chat [id="messages"]{
     overflow-y: auto;
     overflow-x: hidden;

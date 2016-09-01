@@ -1,11 +1,11 @@
 /**
  * Controls the chat view
  */
+"use strict";
 export default class ChatController {
-  constructor($scope, $timeout, $document, User, chatService, chatContenu) {
+  constructor($scope, $timeout, User, chatService, chatContenu) {
     this.$scope = $scope;
     this.$timeout = $timeout;
-    this.$document =$document;
     this.User = User;
     this.chatService = chatService;
     this.chatContenu = chatContenu;
@@ -45,30 +45,42 @@ export default class ChatController {
     if(message != null && message != ""){
       var newMessage = {user : angular.copy(this.User), content: message, createdAt : new Date()};
       this.chatContenu.addMessage(newMessage);
+
       this
         .chatService
         .sendMessage(message)
         .then((resp) => {
           angular.extend(newMessage, resp);
-          this.scrollToBottom();
+          this.chatContenu.sortMessages();
         });
+
+      this.$timeout(() => {
+        this.scrollToBottom();
+      });
     }
   }
 
   onNewMessage(message){
-    debugger;
+    this.chatContenu.addMessage(message);
   }
 
   init(){
     this.$timeout(() => {
-      debugger;
       this.enterChat();
-      this.chatService.listenNewMessage(this.onNewMessage);
+      this.chatService.listenNewMessage((message) => { this.onNewMessage(message); });
     });
   }
 
-  scrollToBottom(){
-    /* todo scroll to bottom */
+  scrollToBottom(canceler){
+    if(canceler && this.alreadyScrolled){
+      return;
+    }
+    var messageDiv = document.getElementById('messages');
+    messageDiv.scrollTop = messageDiv.scrollHeight;
+    if(canceler){
+      this.alreadyScrolled = true;
+    }
   }
 }
-ChatController.$inject = ['$scope', '$timeout', '$document', 'User', 'chatService', 'chatContenu'];
+
+ChatController.$inject = ['$scope', '$timeout', 'User', 'chatService', 'chatContenu'];

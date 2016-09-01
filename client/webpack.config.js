@@ -25,7 +25,9 @@ module.exports = {
       "angular-dynamic-locale",
       "moment",
       "socket.io-client",
-      "angularjs-scroll-glue"
+      "angularjs-scroll-glue",
+      "angular-translate-interpolation-messageformat",
+      "messageformat"
     ]
   },
   output: {

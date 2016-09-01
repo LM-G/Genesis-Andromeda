@@ -1,8 +1,20 @@
 <div class="container g-chat" layout="column" layout-padding>
-    <h1 class="md-title" translate="views.chat.title"></h1>
+    <div class="md-title g-chat-title" layout="row" layout-align="start center">
+        <h2 flex="10"  translate="views.chat.title"></h2>
+        <div class="md-subhead" ng-if="$ctrl.chatContenu.users.length">
+            <span ng-bind="$ctrl.chatContenu.users.length"></span>
+            &nbsp;
+            <span translate="common.user"
+                  translate-values="{ NUMBER: {{$ctrl.chatContenu.users.length}} }"
+                  translate-interpolation="messageformat">
+            </span>
+        </div>
+    </div>
+
     <section flex id="messages" scroll-glue-bottom="glued">
-        <chat-message ng-repeat="message in $ctrl.chatContenu.messages"
-                      message="message" is-from-user="$ctrl.User.id != message.user.id">
+        <chat-message ng-repeat="message in $ctrl.chatContenu.messages track by message.createdAt"
+                      message="message" is-from-user="$ctrl.User.id != message.user.id"
+                      on-repeat-end="$ctrl.scrollToBottom(true)">
         </chat-message>
     </section>
 

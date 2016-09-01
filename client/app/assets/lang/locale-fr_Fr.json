@@ -91,5 +91,8 @@
     "chat": {
       "title": "Chat"
     }
+  },
+  "common" : {
+    "user" : "utilisateur{NUMBER, select, 1{} other{s}}"
   }
 }

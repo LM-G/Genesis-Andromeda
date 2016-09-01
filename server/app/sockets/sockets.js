@@ -22,9 +22,10 @@ function handleRoomAccess(socket){
   var user = socket.user;
   socket.on('join room', function (name, cb) {
     if(isRoomValid(name)){
+      socket.join(name);
       var room = getRoom(name);
+
       if(!isUserInRoom(user, name)){
-        socket.join(name);
         addUserToRoom(user, name);
         socket.broadcast.to(name).emit('new user', user);
         console.log('User ', user.id,' joins room ', name);

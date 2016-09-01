@@ -18,6 +18,10 @@ export default class ChatContenu {
 
   addMessage(message){
     this.messages.push(message);
+    this.sortMessages();
+  }
+
+  sortMessages(){
     this.messages.sort(function(a, b){
       return new Date(a.createdAt).getTime() > new Date(b.createdAt).getTime();
     });

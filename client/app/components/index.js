@@ -8,6 +8,7 @@ import models from './models';
 import nav from './navigation';
 import clock from './clock';
 import socket from './socket';
+import util from './util';
 
 const components = angular
   .module('genesis.components', [
@@ -19,7 +20,8 @@ const components = angular
     models,
     nav,
     clock,
-    socket
+    socket,
+    util
   ])
   .name;
 
