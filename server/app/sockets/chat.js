@@ -1,33 +1,35 @@
 "use strict";
+var path = require('path');
+var chatService = require(path.join(__base, 'app/services/chat.service'));
+
 var users = [];
-var messages = [];
 
 module.exports = {
   name : 'chat',
   users : users,
-  onJoin : onJoin,
+  join : join,
   init : initChatRoom
 };
 
-function onJoin(){
-  return {users : users, data: messages};
+function join(){
+  return chatService
+    .getByRoom('chat')
+    .then(function(messages){
+      return {
+      users : users,
+      data: messages}
+    });
 }
 
 function initChatRoom(socket){
   socket.on('chat message', function(message, cb){
-    var saveMessage = function (){
-      var newMessage = {
-        createdAt : new Date(),
-        user: socket.user,
-        content: message
-      };
-      messages.push(newMessage);
-      console.log('new message : ', newMessage);
-      socket.broadcast.to('chat').emit('chat new message', newMessage);
-      if(cb){
-        cb(newMessage);
-      }
-    };
-    setTimeout(saveMessage, 100);
+    chatService
+      .save(socket.user, message, 'chat')
+      .then(function(chatMessage){
+        socket.broadcast.to('chat').emit('chat new message', chatMessage);
+        if(cb){
+          cb(chatMessage);
+        }
+      });
   });
 }

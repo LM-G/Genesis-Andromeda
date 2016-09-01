@@ -12,7 +12,7 @@
     </div>
 
     <section flex id="messages" scroll-glue-bottom="glued">
-        <chat-message ng-repeat="message in $ctrl.chatContenu.messages track by message.createdAt"
+        <chat-message ng-repeat="message in $ctrl.chatContenu.messages track by message.id + $index"
                       message="message" is-from-user="$ctrl.User.id != message.user.id"
                       on-repeat-end="$ctrl.scrollToBottom(true)">
         </chat-message>

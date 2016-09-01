@@ -31,11 +31,12 @@ function handleRoomAccess(socket){
         console.log('User ', user.id,' joins room ', name);
       }
       if(cb){
-        var response;
-        if(_.isFunction(room.onJoin)){
-          response = room.onJoin();
+        if(_.isFunction(room.join)){
+          room.join().then(function(response){
+            cb(response);
+          });
         }
-        cb(response);
+
       }
     } else {
       console.log('User ', user.id,' cannot join room ', name, ' : not existing');

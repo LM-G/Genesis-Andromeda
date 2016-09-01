@@ -43,7 +43,7 @@ export default class ChatController {
 
   send(message){
     if(message != null && message != ""){
-      var newMessage = {user : angular.copy(this.User), content: message, createdAt : new Date()};
+      var newMessage = {user : angular.copy(this.User), content: message, created_at : new Date()};
       this.chatContenu.addMessage(newMessage);
 
       this
