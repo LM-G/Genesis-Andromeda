@@ -9,15 +9,15 @@
  */
 function confTraduction($translateProvider, tmhDynamicLocaleProvider) {
   /* configurates the app specific translations */
-  $translateProvider.useStaticFilesLoader({
-    prefix: '/lang/locale-',
-    suffix: '.json'
-  });
   $translateProvider
+    .useStaticFilesLoader({
+      prefix: '/lang/locale-',
+      suffix: '.json'
+    })
     .addInterpolation('$translateMessageFormatInterpolation')
-    .useSanitizeValueStrategy(null)
     .determinePreferredLanguage()
-    .fallbackLanguage('fr');
+    .fallbackLanguage('fr')
+    .useSanitizeValueStrategy(null);
 
   /* enable the i18n internationalization */
   tmhDynamicLocaleProvider.localeLocationPattern('/lang/i18n/angular-locale_{{locale}}.js');

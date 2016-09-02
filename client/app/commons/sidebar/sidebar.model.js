@@ -8,6 +8,9 @@ class SideBarSection{
     if(this.type == 'toggle'){
       this.pages = [];
     }
+    if(this.type == 'link'){
+      this.parent = null;
+    }
   }
 
   addPage(section){

@@ -90,6 +90,14 @@
     },
     "chat": {
       "title": "Chat général"
+    },
+    "resource": {
+      "title": "Ressources",
+      "ore" : "métal",
+      "food" : "nourriture",
+      "gaz" : "gaz",
+      "precious" : "minerai precieux",
+      "credit" : "credit"
     }
   },
   "common" : {

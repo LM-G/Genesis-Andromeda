@@ -8,6 +8,7 @@ import register from './register';
 import game from './game';
 import map from './map';
 import chat from './chat';
+import resource from './resource';
 
 /**
  * @ngdoc overview
@@ -26,7 +27,8 @@ const commons = angular
     register,
     game,
     map,
-    chat
+    chat,
+    resource
   ])
   .name;
 

@@ -1,0 +1,25 @@
+<div class="container g-resource" layout="column" layout-padding>
+    <h1 translate="views.resource.title"></h1>
+    <md-grid-list md-cols="5" md-gutter="1em" md-row-height="4:3">
+        <!-- tile minerai -->
+        <md-grid-tile class="g-tile">
+            <h2 ng-bind="'views.resource.ore' | translate | gCapitalize"></h2>
+        </md-grid-tile>
+        <!-- tile minerai precieux -->
+        <md-grid-tile class="g-tile">
+            <h2 ng-bind="'views.resource.precious' | translate | gCapitalize"></h2>
+        </md-grid-tile>
+        <!-- tile gaz -->
+        <md-grid-tile class="g-tile">
+            <h2 ng-bind="'views.resource.gaz' | translate | gCapitalize"></h2>
+        </md-grid-tile>
+        <!-- tile nourriture -->
+        <md-grid-tile class="g-tile">
+            <h2 ng-bind="'views.resource.food' | translate | gCapitalize"></h2>
+        </md-grid-tile>
+        <!-- tile argent -->
+        <md-grid-tile class="g-tile">
+            <h2 ng-bind="'views.resource.credit' | translate | gCapitalize"></h2>
+        </md-grid-tile>
+    </md-grid-list>
+</div>
