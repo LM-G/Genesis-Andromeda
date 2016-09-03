@@ -31,7 +31,11 @@ var User = new Schema({
   actif: {
     type: Boolean,
     default: true
-  }
+  },
+  resource_storages: [{
+    type:  Schema.Types.ObjectId,
+    ref : 'ResourceStorage'
+  }]
 }, {
   timestamps: {
     createdAt: 'created_at',

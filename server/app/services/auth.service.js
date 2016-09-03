@@ -7,7 +7,6 @@ var Q = require('q');
 
 var config = require(path.join(__base, 'config/config'));
 var User = require(path.join(__base, 'app/models/User'));
-var RefreshToken = require(path.join(__base, 'app/models/RefreshToken'));
 var validationUtils = require(path.join(__base, 'app/utils/validation.utils'));
 
 // Definition des limites de taille des paramètres d'authentification
@@ -89,9 +88,6 @@ function login(username, password, rememberme) {
         });
 
         result.refresh_token = refresh_token;
-
-        // stockage en base du refresh token associé à l'utilisateur
-        handleRefreshToken(user, refresh_token);
       }
       // authentication successful
       deferred.resolve(result);
@@ -99,19 +95,6 @@ function login(username, password, rememberme) {
       // authentication failed
       deferred.reject({ code: 2, loginMessage: 'Login failed, wrong credentials' });
     }
-  }
-
-  function handleRefreshToken(user, refresh_token) {
-    var userRefreshToken = new RefreshToken({
-      user: user,
-      token: refresh_token
-    });
-
-    userRefreshToken.save(function(err) {
-      if (err) {
-        console.log(err);
-      }
-    });
   }
 
   return deferred.promise;

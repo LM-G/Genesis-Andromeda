@@ -36,6 +36,7 @@ function save(user, content, room){
 
 function getByRoom(name){
   var deferred = Q.defer();
+  /* todo constantes ! */
   ChatMessage
     .find({ room : name})
     .sort({'created_at': -1})

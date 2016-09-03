@@ -4,7 +4,7 @@ var path = require('path');
 var socketio = require('socket.io');
 var socketioJwt   = require("socketio-jwt");
 
-var sockets = require(path.join(__base, 'app/sockets/sockets'));
+var socketManager = require(path.join(__base, 'app/sockets'));
 var userService = require(path.join(__base, 'app/services/user.service'));
 
 module.exports = function(server) {
@@ -23,7 +23,7 @@ module.exports = function(server) {
   io.on('connection', function(socket){
     var init = Q.defer();
     var id = socket.decoded_token._id;
-    var user = sockets.getUser(id);
+    var user = socketManager.getUser(id);
 
     if(user){
       user.disconnected = false;
@@ -35,7 +35,7 @@ module.exports = function(server) {
         .getById(id)
         .then(function(data){
           user = {id : data.id, username: data.username};
-          sockets.addUser(user);
+          socketManager.addUser(user);
           console.log('User ', id, ' connected');
           init.resolve();
         });
@@ -46,7 +46,7 @@ module.exports = function(server) {
     init.promise.then(function(){
       socket.user = user;
       /* handles navigation between rooms */
-      sockets.handleRoomAccess(socket);
+      socketManager.handleRoomAccess(socket);
     });
 
     /* handles disconnection event */
@@ -66,16 +66,12 @@ module.exports = function(server) {
       }
       /* removes user from all rooms in which he was registered */
       deferred.promise.then(function(){
-        sockets.removeUserFromAllRooms(user, function(name){
+        socketManager.removeUserFromAllRooms(user, function(name){
           io.sockets.in(name).emit(name + ' user left', user);
           console.log('User ', user.id,' left room ', name);
         });
-        sockets.removeUser(id)
+        socketManager.removeUser(id)
       });
     });
-
-
-
-
   });
 };

@@ -1,8 +1,7 @@
-function sidebarLink(SideBarContent) {
-  return {
+const sidebarLink = (SideBarContent) => ({
     restrict: 'E',
     scope: {
-      section : '='
+      section : '<'
     },
     link: (scope, element, attrs) => {
       scope.focusSection = function(id){
@@ -10,8 +9,7 @@ function sidebarLink(SideBarContent) {
       }
     },
     templateUrl: '/commons/sidebar/link/sidebar-link.html'
-  };
-}
+  });
 
 sidebarLink.$inject = ['SideBarContent'];
 
