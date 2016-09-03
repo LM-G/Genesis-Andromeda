@@ -32,9 +32,9 @@ var User = new Schema({
     type: Boolean,
     default: true
   },
-  resource_storages: [{
+  planets: [{
     type:  Schema.Types.ObjectId,
-    ref : 'ResourceStorage'
+    ref : 'Planet'
   }]
 }, {
   timestamps: {
