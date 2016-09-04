@@ -6,7 +6,7 @@ import dashboard from './dashboard';
 import sidebar from './sidebar';
 import register from './register';
 import game from './game';
-import map from './map';
+import galaxy from './galaxy';
 import chat from './chat';
 import resource from './resource';
 
@@ -26,7 +26,7 @@ const commons = angular
     sidebar,
     register,
     game,
-    map,
+    galaxy,
     chat,
     resource
   ])

@@ -1,24 +1,24 @@
 /**
  * Controls the game view
  */
-export default class MapController {
-  constructor(User, mapService) {
+export default class GalaxyController {
+  constructor(User, galaxyService) {
     this.User = User;
-    this.mapService = mapService;
+    this.galaxyService = galaxyService;
   }
 
   $onInit() {
     this.isLoaded = true;
-    console.log('Map controller chargé !');
+    console.log('Galaxy controller chargé !');
   }
 
   testAPI(){
     console.log('test api ...');
-    this.mapService
+    this.galaxyService
       .generate()
       .then((res) => {
         console.log('test api :', res);
       });
   }
 }
-MapController.$inject = ['User', 'mapService'];
+GalaxyController.$inject = ['User', 'galaxyService'];

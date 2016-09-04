@@ -1,4 +1,4 @@
-export default class MapService {
+export default class GalaxyService {
   constructor($http, $q, genesisCfg) {
     this.$http = $http;
     this.$q = $q;
@@ -14,4 +14,4 @@ export default class MapService {
   }
 }
 
-MapService.$inject = ['$http', '$q', 'genesisCfg'];
+GalaxyService.$inject = ['$http', '$q', 'genesisCfg'];

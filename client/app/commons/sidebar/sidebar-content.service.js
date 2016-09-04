@@ -20,6 +20,12 @@ const sections = [
     type : 'link'
   },
   {
+    name : 'views.galaxy.title',
+    state : 'galaxy',
+    icon : 'fa fa-globe',
+    type : 'link',
+  },
+  {
     name : 'admin',
     type : 'toggle',
     auth : 'admin'
@@ -27,12 +33,6 @@ const sections = [
     name : 'views.game.title',
     state : 'game',
     icon : 'fa fa-gamepad',
-    type : 'link',
-    parent : 'admin'
-  },{
-    name : 'views.map.title',
-    state : 'map',
-    icon : 'fa fa-globe',
     type : 'link',
     parent : 'admin'
   }
@@ -72,6 +72,7 @@ export default class SideBarContent{
         var parent = _find(this.sections, function(s){
           return s.name == item.parent;
         });
+        section.auth = parent.auth;
         parent.addPage(section);
       } else {
         this.sections.push(section);
