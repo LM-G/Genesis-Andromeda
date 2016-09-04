@@ -5,12 +5,20 @@ export default class GalaxyService {
     this.url = genesisCfg.apiUrl + '/galaxy';
   }
 
-  generate(){
+  generate(requestParams){
     return this.$http
-      .post(this.url + '/generate')
+      .post(this.url + '/generate', requestParams)
       .then((res) => {
-      return res.data;
-    });
+        return res.data;
+      });
+  }
+
+  getSystems(){
+    return this.$http
+      .get(this.url)
+      .then((res) => {
+        return res.data;
+      });
   }
 }
 

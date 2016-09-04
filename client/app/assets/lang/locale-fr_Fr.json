@@ -86,7 +86,8 @@
       "title": "Game"
     },
     "galaxy": {
-      "title": "Carte galactique"
+      "title": "Carte galactique",
+      "systems": "Liste des systèmes"
     },
     "chat": {
       "title": "Chat général"

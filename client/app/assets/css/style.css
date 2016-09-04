@@ -77,3 +77,7 @@ html, body {
   padding-bottom: 5px;
 }
 
+.g-add-button{
+  font-size: 3em;
+  color: white;
+}

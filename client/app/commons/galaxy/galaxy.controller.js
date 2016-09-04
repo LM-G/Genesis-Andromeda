@@ -2,23 +2,28 @@
  * Controls the game view
  */
 export default class GalaxyController {
-  constructor(User, galaxyService) {
+  constructor(User, galaxyService, galaxyContent) {
     this.User = User;
     this.galaxyService = galaxyService;
+    this.galaxyContent = galaxyContent;
+
+    this.getSystems = () => {
+      return galaxyContent.getSystems();
+    }
   }
 
   $onInit() {
-    this.isLoaded = true;
+    this
+      .galaxyService
+      .getSystems()
+      .then((res) => {
+        this.galaxyContent.setSystems(res);
+      })
+      .finally(() => {
+        this.isLoaded = true;
+      });
+
     console.log('Galaxy controller chargé !');
   }
-
-  testAPI(){
-    console.log('test api ...');
-    this.galaxyService
-      .generate()
-      .then((res) => {
-        console.log('test api :', res);
-      });
-  }
 }
-GalaxyController.$inject = ['User', 'galaxyService'];
+GalaxyController.$inject = ['User', 'galaxyService', 'galaxyContent'];

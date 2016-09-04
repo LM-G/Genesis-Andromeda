@@ -1,5 +1,4 @@
 import SideBarSection from './sidebar.model';
-import _forEach from 'lodash/forEach';
 import _find from 'lodash/find';
 
 const sections = [
