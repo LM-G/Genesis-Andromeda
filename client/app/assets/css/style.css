@@ -40,6 +40,11 @@ html, body {
   }
 }
 
+.g-scrollable{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 /* buttons */
 .md-button {
   font-size: 12px !important;
@@ -81,3 +86,12 @@ html, body {
   font-size: 3em;
   color: white;
 }
+
+[id="alert"] {
+  margin-bottom: 20px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  background-color: #dd2c00;
+}
+

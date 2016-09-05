@@ -1,0 +1,35 @@
+<form name="createSystemForm" ng-submit="$ctrl.createSystem(createSystemForm)" novalidate>
+    <md-toolbar>
+        <h2 class="md-title" style="color: white; margin-left:1em;">Nouveau système</h2>
+    </md-toolbar>
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Nom du Systeme</label>
+            <input name="name" ng-model="$ctrl.system.name" required>
+            <div class="help-block" ng-messages="createSystemForm.name.$error" role="alert">
+                <p ng-message="required"><span translate="form.error.required"></span></p>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="15">
+            <label>Coord X</label>
+            <input name="coordx" ng-model="$ctrl.system.coord_x" required>
+            <div class="help-block" ng-messages="createSystemForm.coordx.$error" role="alert">
+                <p ng-message="required"><span translate="form.error.required"></span></p>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="15">
+            <label>Coord Y</label>
+            <input name="coordy" ng-model="$ctrl.system.coord_y" required>
+            <div class="help-block" ng-messages="createSystemForm.coordy.$error" role="alert">
+                <p ng-message="required"><span translate="form.error.required"></span></p>
+            </div>
+        </md-input-container>
+        <div layout layout-align="center center">
+            <md-button type="submit" class="md-raised md-accent" aria-label="generate_system">
+                <i class="fa fa-plus-circle"></i>&nbsp;
+                <span>Créer</span>
+            </md-button>
+        </div>
+
+    </div>
+</form>

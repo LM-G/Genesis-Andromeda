@@ -103,6 +103,7 @@
   },
   "common" : {
     "user" : "utilisateur{NUMBER, select, 1{} other{s}}",
+    "planet" : "planète{NUMBER, select, 0{} 1{} other{s}}",
     "you" : "Vous"
   }
 }

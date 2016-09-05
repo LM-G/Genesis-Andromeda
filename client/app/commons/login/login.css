@@ -6,11 +6,3 @@
     margin: 0;
 }
 
-.g-login-modal [id="alert"] {
-    margin-bottom: 20px;
-    text-align: center;
-    cursor: pointer;
-    color: white;
-    background-color: #dd2c00;
-}
-

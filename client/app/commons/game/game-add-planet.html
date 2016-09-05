@@ -1,0 +1,31 @@
+<form name="createPlanetForm" ng-submit="$ctrl.createPlanet(createPlanetForm)" novalidate>
+    <md-toolbar>
+        <h2 class="md-title" style="color: white; margin-left:1em;">Nouvelle planète</h2>
+    </md-toolbar>
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Nom de la planète</label>
+            <input name="name" ng-model="$ctrl.planet.name" required>
+            <div class="help-block" ng-messages="createPlanetForm.name.$error" role="alert">
+                <p ng-message="required"><span translate="form.error.required"></span></p>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="30">
+            <label>Système</label>
+            <md-select name="system" ng-model="$ctrl.planet.system" required>
+                <md-option ng-repeat="s in $ctrl.getSystems()" ng-value="s">
+                    <span ng-bind="s.name + '&nbsp;(' + s.coord_x + ',&nbsp;' + s.coord_y + ')'"></span>
+                </md-option>
+            </md-select>
+            <div class="help-block" ng-messages="createPlanetForm.system.$error" role="alert">
+                <p ng-message="required"><span translate="form.error.required"></span></p>
+            </div>
+        </md-input-container>
+        <div layout layout-align="center center">
+            <md-button type="submit" class="md-raised md-accent" aria-label="generate_planet">
+                <i class="fa fa-plus-circle"></i>&nbsp;
+                <span>Créer</span>
+            </md-button>
+        </div>
+    </div>
+</form>

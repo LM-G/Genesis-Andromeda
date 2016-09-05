@@ -50,5 +50,7 @@ var System = new Schema({
   }
 });
 
+System.index({coord_x: 1, coord_y: 2}, {unique : true});
+
 
 module.exports = mongoose.model('System', System);

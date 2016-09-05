@@ -19,6 +19,6 @@ function Router($stateProvider) {
     name: 'galaxy',
     url: '/galaxy',
     template: `<galaxy layout flex></galaxy>`,
-    authLevel: 1
+    authLevel: 0
   });
 }
