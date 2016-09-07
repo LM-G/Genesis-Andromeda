@@ -1,11 +1,7 @@
 <div class="container" layout="column" layout-padding layout-wrap>
     <h1 translate="views.game.title"></h1>
-
-    <md-whiteframe class="md-whiteframe-4dp" layout-margin ng-if="$ctrl.hasError">
-        <span id="alert" class="md-block animated fadeIn" ng-bind="$ctrl.descriptionError"
-              ng-click="$ctrl.loginFailed = false" layout-wrap>
-        </span>
-    </md-whiteframe>
+    <span id="alert" class="md-block animated fadeIn" layout-wrap ng-bind="$ctrl.descriptionError"
+          ng-click="$ctrl.hasError = false" ng-if="$ctrl.hasError"></span>
     <md-whiteframe class="md-whiteframe-4dp" layout-margin>
         <div ng-include="'/commons/game/game-add-system.html'"></div>
     </md-whiteframe>

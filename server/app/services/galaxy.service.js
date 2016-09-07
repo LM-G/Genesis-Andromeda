@@ -84,6 +84,7 @@ function generateSystem(params){
   system.coord_x = params.coord_x;
   system.coord_y = params.coord_y;
   system.save(function(err, system){
+    console.log('XOXOXOXOXOXOXOXOXO', err, system);
     if(err) {
       deferred.reject(err);
     }

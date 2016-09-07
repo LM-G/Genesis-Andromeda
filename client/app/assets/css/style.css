@@ -88,7 +88,8 @@ html, body {
 }
 
 [id="alert"] {
-  margin-bottom: 20px;
+  margin: 7px;
+  font-weight: 600;
   text-align: center;
   cursor: pointer;
   color: white;

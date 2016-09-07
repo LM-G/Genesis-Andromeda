@@ -8,8 +8,8 @@ var Schema = mongoose.Schema;
 var System = new Schema({
   name: {
     type: String,
-    unique: true,
-    required: true
+    required: true,
+    trim     : true
   },
   coord_x : {
     type : Number,

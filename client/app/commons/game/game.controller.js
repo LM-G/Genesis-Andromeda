@@ -2,7 +2,8 @@
  * Controls the game view
  */
 export default class GameController {
-  constructor($mdToast, User, galaxyService, galaxyContent) {
+  constructor($animate, $mdToast, User, galaxyService, galaxyContent) {
+    this.$animate = $animate;
     this.$mdToast = $mdToast;
     this.User = User;
     this.galaxyService = galaxyService;
@@ -16,6 +17,7 @@ export default class GameController {
   }
 
   $onInit() {
+    this.$animate.enabled(false);
     this
       .galaxyService
       .getSystems()
@@ -77,4 +79,4 @@ export default class GameController {
     );
   }
 }
-GameController.$inject = ['$mdToast', 'User', 'galaxyService', 'galaxyContent'];
+GameController.$inject = ['$animate', '$mdToast', 'User', 'galaxyService', 'galaxyContent'];
