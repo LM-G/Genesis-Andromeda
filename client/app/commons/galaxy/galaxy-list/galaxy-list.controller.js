@@ -13,6 +13,16 @@ export default class GalaxyController {
   }
 
   $onInit() {
+    this
+      .galaxyService
+      .getSystems()
+      .then((res) => {
+        this.galaxyContent.setSystems(res);
+      })
+      .finally(() => {
+        this.isLoaded = true;
+      });
+
     console.log('Galaxy controller chargé !');
   }
 }

@@ -20,7 +20,7 @@ const sections = [
   },
   {
     name : 'views.galaxy.title',
-    state : 'galaxy',
+    state : 'galaxy.list',
     icon : 'fa fa-globe',
     type : 'link',
   },

@@ -1,26 +1,4 @@
 <div class="container" layout="column" layout-padding>
     <h1 translate="views.galaxy.title"></h1>
-    <md-subheader class="md-no-sticky">
-        <span translate="views.galaxy.systems"></span>
-    </md-subheader>
-    <md-list class="g-scrollable" flex>
-        <md-list-item class="md-3-line" ng-repeat="s in $ctrl.getSystems()" ng-click="null">
-            <div flex layout="row" layout-align="space-around center" layout-padding>
-                <img ng-src="img/solar-system.png"/>
-                <div class="md-list-item-text" layout="column">
-                    <h3 ng-bind="s.name" style="font-weight: bold"></h3>
-                    <h4 ng-bind="'(' + s.coord_x + ',&nbsp;' + s.coord_y +')'"></h4>
-                    <p>
-                        <span ng-bind="s.planets.length"></span>&nbsp;
-                        <span translate="common.planet"
-                              translate-values="{ NUMBER: {{s.planets.length}} }"
-                              translate-interpolation="messageformat">
-                        </span>
-                    </p>
-                    <p ng-bind="s.description"></p>
-                </div>
-            </div>
-            <md-divider ng-if="!$last"></md-divider>
-        </md-list-item>
-    </md-list>
+    <div layout flex ui-view></div>
 </div>
